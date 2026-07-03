@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USÉLESS SEOUL — SEOUL, BOTTLED.</title>
+  <meta name="description" content="서울의 네 장면을 병 안에 봉인한 블랙 아카이브. USÉLESS SEOUL — DO NOT DRINK." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080806'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23E6DED0' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="assets/css/motion.css?v=4" />
+</head>
+<body>
+  <!-- 인트로 로더 -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <span class="loader__mark">USÉLESS SEOUL</span>
+    <span class="loader__bar"><i></i></span>
+  </div>
+
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- 섹션 전환용 암전 오버레이 -->
+  <div class="blackout" id="blackout" aria-hidden="true"><span class="blackout__cap" id="blackoutCap"></span></div>
+
+  <header class="topbar" id="topbar">
+    <a href="#top" class="topbar__brand">USÉLESS<span>SEOUL</span></a>
+    <nav class="topbar__nav">
+      <a href="#scenes">SCENES</a><a href="#object">OBJECT</a><a href="#shop">SHOP</a>
+    </nav>
+  </header>
+
+  <!-- HERO — DO NOT DRINK -->
+  <section class="ringstage" id="top">
+    <div class="ringstage__pin">
+      <div class="ringstage__bg" id="heroBg" style="background-image:url('assets/img/scene/hangang_env.webp')" aria-hidden="true"></div>
+      <div class="hero" id="hero">
+        <div class="hero__copy">
+          <p class="kicker" id="heroKicker">USÉLESS SEOUL · SCENT ARCHIVE</p>
+          <h1 class="hero__title">SEOUL,<br /><em>BOTTLED.</em></h1>
+          <p class="hero__kr">서울의 네 장면을 병 안에 봉인합니다.<br />Four scenes. Four scents.</p>
+          <p class="hero__warn">DO&nbsp;NOT&nbsp;DRINK.</p>
+          <div class="hero__cue"><span>SCROLL</span><i></i></div>
+        </div>
+        <figure class="hero__bottle" id="heroBottle"><img src="assets/img/cutout/seongsu.png" alt="USÉLESS SEOUL — DO NOT DRINK" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE ARCHIVE — 4 chapters -->
+  <div class="scenes" id="scenes">
+
+    <article class="scene" data-theme="hangang" data-gate="SCENE 01 — HANGANG">
+      <div class="scene__media">
+        <div class="scene__bg" style="background-image:url('assets/img/scene/hangang_env.webp')" aria-hidden="true"></div>
+        <figure class="scene__photo"><img decoding="async" src="assets/img/editorial/hangang.jpg" loading="eager" alt="여름밤 한강 — 창가에 놓인 USÉLESS SEOUL" /></figure>
+        <div class="scene__copy scene__copy--l">
+          <p class="archcap">SCENE 01 / HANGANG<br />22:48 · SUMMER AIR</p>
+          <h2 class="scene__en">HANGANG<br />SUMMER<br />NIGHT</h2>
+          <p class="scene__kr">여름밤 한강</p>
+          <p class="scene__note">젖은 콘크리트.<br />강바람.<br />녹지 않는 밤.</p>
+          <p class="scene__meta">wet concrete · river wind · white musk</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene" data-theme="seongsu" data-gate="SCENE 02 — SEONGSU FIG">
+      <div class="scene__media">
+        <div class="scene__bg" style="background-image:url('assets/img/scene/seongsu_env.webp')" aria-hidden="true"></div>
+        <figure class="scene__photo"><img decoding="async" src="assets/img/editorial/seongsu.jpg" loading="eager" alt="성수 무화과 — 스톤 테이블 위 DO NOT DRINK" /></figure>
+        <div class="scene__copy scene__copy--r">
+          <p class="archcap">SCENE 02 / SEONGSU<br />15:10 · WARM CONCRETE</p>
+          <h2 class="scene__en">SEONGSU<br />FIG</h2>
+          <p class="scene__kr">성수 무화과</p>
+          <p class="scene__note">벽돌과 금속.<br />덜 익은 초록.<br />무화과의 껍질.</p>
+          <p class="scene__meta">green fig leaf · café wood · musk</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene" data-theme="hotel" data-gate="SCENE 03 — HOTEL BLANKET">
+      <div class="scene__media">
+        <div class="scene__bg" style="background-image:url('assets/img/scene/hotel_env.webp')" aria-hidden="true"></div>
+        <figure class="scene__photo"><img decoding="async" src="assets/img/editorial/hotel.jpg" loading="eager" alt="호텔 블랭킷 — 침실 협탁 위 USÉLESS SEOUL" /></figure>
+        <div class="scene__copy scene__copy--r">
+          <p class="archcap">SCENE 03 / HOTEL<br />09:30 · FOLDED LINEN</p>
+          <h2 class="scene__en">HOTEL<br />BLANKET</h2>
+          <p class="scene__kr">호텔 블랭킷</p>
+          <p class="scene__note">접힌 리넨.<br />낮은 조도.<br />정리된 공기.</p>
+          <p class="scene__meta">aldehyde clean · linen · soft cedar</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene" data-theme="tea" data-gate="SCENE 04 — AFTERNOON TEA">
+      <div class="scene__media">
+        <div class="scene__bg" style="background-image:url('assets/img/scene/tea_env.webp')" aria-hidden="true"></div>
+        <figure class="scene__photo"><img decoding="async" src="assets/img/editorial/tea.jpg" loading="eager" alt="애프터눈 티 — 찻잔 곁 DO NOT DRINK" /></figure>
+        <div class="scene__copy scene__copy--l">
+          <p class="archcap">SCENE 04 / TEA<br />16:20 · THIN STEAM</p>
+          <h2 class="scene__en">AFTERNOON<br />TEA</h2>
+          <p class="scene__kr">애프터눈 티</p>
+          <p class="scene__note">찻물의 가장자리.<br />얇은 증기.<br />테이블의 그림자.</p>
+          <p class="scene__meta">bergamot · black tea · white musk</p>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- OBJECT STUDY -->
+  <section class="object" id="object">
+    <div class="object__inner">
+      <figure class="object__fig reveal"><img src="assets/img/cutout/flask.png" alt="USÉLESS SEOUL 향 오브제 — DO NOT DRINK" /></figure>
+      <div class="object__cap">
+        <p class="archcap reveal">OBJECT STUDY / 00</p>
+        <h2 class="object__title reveal">DO NOT<br /><em>DRINK.</em></h2>
+        <p class="object__kr reveal">예쁜 디퓨저가 아니라, 마시면 안 되는 서울의 향. 쓸모없어 보이는데 갖고 싶은 오브제.</p>
+        <ul class="object__list">
+          <li class="reveal"><span>01</span> 두꺼운 유리 — 빛을 머금는 무게</li>
+          <li class="reveal"><span>02</span> 약제상 캡 — 봉인된 한 장면</li>
+          <li class="reveal"><span>03</span> 라벨 각인 — DO NOT DRINK · IT'S USÉLESS</li>
+          <li class="reveal"><span>04</span> 바닥 그림자 — 놓인 자리가 곧 풍경</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP — Select your scene -->
+  <section class="shop" id="shop">
+    <header class="head reveal">
+      <p class="archcap">SELECT YOUR SCENE</p>
+      <h2 class="head__title">장면을 고르다</h2>
+    </header>
+    <ul class="shop__list">
+      <li class="shop__row reveal" data-theme="hangang"><span class="shop__no">01</span><span class="shop__kr">여름밤 한강</span><span class="shop__en">HANGANG SUMMER NIGHT</span><span class="shop__cta">SELECT</span></li>
+      <li class="shop__row reveal" data-theme="seongsu"><span class="shop__no">02</span><span class="shop__kr">성수 무화과</span><span class="shop__en">SEONGSU FIG</span><span class="shop__cta">SELECT</span></li>
+      <li class="shop__row reveal" data-theme="hotel"><span class="shop__no">03</span><span class="shop__kr">호텔 블랭킷</span><span class="shop__en">HOTEL BLANKET</span><span class="shop__cta">SELECT</span></li>
+      <li class="shop__row reveal" data-theme="tea"><span class="shop__no">04</span><span class="shop__kr">애프터눈 티</span><span class="shop__en">AFTERNOON TEA</span><span class="shop__cta">SELECT</span></li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <p class="foot__decl reveal">서울의 장면을 향으로.<br /><em>USE, LESS.</em></p>
+    <div class="foot__meta reveal">
+      <p>MATERIAL — 리드 디퓨저 · 알코올 베이스 향료</p>
+      <p>USE — 환기되는 실내, 직사광선 피해 보관</p>
+      <p>SAFETY — DO NOT DRINK. 어린이·반려동물 주의</p>
+    </div>
+    <div class="foot__links reveal">
+      <a href="https://www.instagram.com/useless_seoul/" target="_blank" rel="noopener">@useless_seoul</a>
+      <a href="https://uselessseoul.com" target="_blank" rel="noopener">uselessseoul.com</a>
+    </div>
+    <p class="foot__legal">© 2026 USÉLESS SEOUL · 시제품 단계 · 표시된 향·용기는 시안 기준이며 변동될 수 있습니다.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/motion.js?v=4"></script>
+</body>
+</html>
