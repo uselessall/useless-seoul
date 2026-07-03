@@ -8,8 +8,19 @@ const CART_KEY = "useless_cart_v1";
 
 /* ---------- 장바구니 (클라이언트 상태 — 어댑터 교체와 무관하게 로컬 유지) ---------- */
 function cartGet() {
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-  catch { return []; }
+  /* 손상 내성: JSON 깨짐·배열 아닌 값·id 없는 항목·비정상 qty(음수/문자/과대)를 전부 정규화 */
+  let items;
+  try { items = JSON.parse(localStorage.getItem(CART_KEY)); } catch { return []; }
+  if (!Array.isArray(items)) return [];
+  return items
+    .filter((it) => it && typeof it === "object" && typeof it.id === "string")
+    .map((it) => ({ id: it.id, qty: Math.min(Math.max(1, it.qty | 0), 99) }));
+}
+/* 제품 정본에 없는 id를 카트에서 제거 (라인업 변경·데이터 변조 자가 치유 — PRODUCT_MAP 로드 후 호출) */
+function cartPrune() {
+  const items = cartGet();
+  const valid = items.filter((it) => PRODUCT_MAP[it.id]);
+  if (valid.length !== items.length) cartSave(valid);
 }
 function cartSave(items) {
   localStorage.setItem(CART_KEY, JSON.stringify(items));
@@ -55,9 +66,9 @@ async function renderAuthLink() {
 /* ---------- 제품 카드 그리드 ([data-product-grid] — 정본은 Store.getProducts() 하나) ---------- */
 function renderProductGrids(products) {
   document.querySelectorAll("[data-product-grid]").forEach((grid) => {
-    grid.innerHTML = products.map((p) => `
+    grid.innerHTML = products.map((p, i) => `
     <article class="product reveal">
-      <a class="product__img" href="${p.url}"><img src="${p.img}" alt="${p.alt}" loading="lazy" /></a>
+      <a class="product__img" href="${p.url}"><img src="${p.img}" alt="${p.alt}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} /></a>
       <div class="product__info">
         <p class="product__code">${p.code}</p>
         <h3 class="product__name"><a href="${p.url}">${p.name} <span>${p.en}</span></a></h3>
@@ -160,10 +171,12 @@ function renderCartPage() {
   document.getElementById("cartTotal").textContent = won(cartTotal());
   wrap.querySelectorAll("[data-inc]").forEach((b) => b.addEventListener("click", () => {
     const it = cartGet().find((x) => x.id === b.dataset.inc);
+    if (!it) { renderCartPage(); return; }
     cartSetQty(b.dataset.inc, Math.min(it.qty + 1, 99)); renderCartPage();
   }));
   wrap.querySelectorAll("[data-dec]").forEach((b) => b.addEventListener("click", () => {
     const it = cartGet().find((x) => x.id === b.dataset.dec);
+    if (!it) { renderCartPage(); return; }
     cartSetQty(b.dataset.dec, it.qty - 1); renderCartPage();
   }));
   wrap.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => {
@@ -267,17 +280,18 @@ async function renderMyPage() {
     wrap.innerHTML = `<p class="order__empty">주문 내역이 없습니다. <a href="shop.html">SHOP 보러 가기 →</a></p>`;
     return;
   }
+  /* 손상 내성: 필드 누락 주문 레코드도 렌더가 안 죽게 폴백 */
   wrap.innerHTML = orders.map((o) => `
     <article class="order">
       <header class="order__head">
-        <p class="order__id">${o.orderId}</p>
-        <p class="order__date">${o.createdAt.slice(0, 10)}</p>
-        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status] || o.status}</p>
+        <p class="order__id">${o.orderId || "?"}</p>
+        <p class="order__date">${String(o.createdAt || "").slice(0, 10)}</p>
+        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status] || o.status || "?"}</p>
       </header>
       <ul class="order__items">
-        ${o.items.map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won(it.price * it.qty)}</span></li>`).join("")}
+        ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
-      <p class="order__total"><span>합계</span><span>${won(o.total)}</span></p>
+      <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
       ${o.status === "awaiting_deposit" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: [입금계좌 확인필요] · 입금 확인 후 배송이 시작됩니다.</p>` : ""}
     </article>`).join("");
 }
@@ -293,18 +307,19 @@ async function renderAdminPage() {
     return;
   }
   const STATUSES = Object.keys(Store.ORDER_STATUS);
+  /* 손상 내성: 필드 누락 주문 레코드도 렌더가 안 죽게 폴백 (mypage와 동일 원칙) */
   wrap.innerHTML = orders.map((o) => `
-    <article class="order order--admin" data-oid="${o.orderId}">
+    <article class="order order--admin" data-oid="${o.orderId || ""}">
       <header class="order__head">
-        <p class="order__id">${o.orderId}</p>
-        <p class="order__date">${o.createdAt.slice(0, 16).replace("T", " ")}</p>
-        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status]}</p>
+        <p class="order__id">${o.orderId || "?"}</p>
+        <p class="order__date">${String(o.createdAt || "").slice(0, 16).replace("T", " ")}</p>
+        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status] || o.status || "?"}</p>
       </header>
-      <p class="order__meta">${o.receiver} · ${o.phone} · ${o.addr}${o.memo ? " · 메모: " + o.memo : ""} · <span>${o.userEmail}</span></p>
+      <p class="order__meta">${o.receiver || "?"} · ${o.phone || "?"} · ${o.addr || "?"}${o.memo ? " · 메모: " + o.memo : ""} · <span>${o.userEmail || "?"}</span></p>
       <ul class="order__items">
-        ${o.items.map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won(it.price * it.qty)}</span></li>`).join("")}
+        ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
-      <p class="order__total"><span>합계</span><span>${won(o.total)}</span></p>
+      <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
       <div class="order__actions">
         <select data-status="${o.orderId}" aria-label="주문 상태 변경">
           ${STATUSES.map((s) => `<option value="${s}" ${s === o.status ? "selected" : ""}>${Store.ORDER_STATUS[s]}</option>`).join("")}
@@ -325,13 +340,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 제품 로드 + 카드 그리드 렌더를 reveal 관찰보다 먼저 — 렌더된 카드도 IO에 잡히게
   const products = await Store.getProducts();
   PRODUCT_MAP = Object.fromEntries(products.map((p) => [p.id, p]));
+  cartPrune(); // 정본에 없는 상품 id 제거 — 이후 렌더는 전부 유효 항목만 본다
   renderProductGrids(products);
   hydrateProductPage();
 
+  // 숨김(.pre)은 뷰포트 아래 요소에만 부여 — 첫 화면은 JS 도착 전부터 보임(FCP/LCP가 JS에 안 묶임)
   const io = new IntersectionObserver((es) => {
-    es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    es.forEach((e) => { if (e.isIntersecting) { e.target.classList.remove("pre"); e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  document.querySelectorAll(".reveal").forEach((el) => {
+    if (el.getBoundingClientRect().top > innerHeight * 0.92) { el.classList.add("pre"); io.observe(el); }
+    else el.classList.add("in");
+  });
 
   const nav = document.getElementById("nav");
   if (nav) addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), { passive: true });

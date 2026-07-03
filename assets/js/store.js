@@ -22,10 +22,10 @@ window.Store = (() => {
       hook: "체크아웃 사십 분 전, 이불 속.", notes: "알데하이드 클린 · 화이트 코튼 · 소프트 시더",
       spec: "다크브라운 원통 · 500ml", img: "assets/img/hotel.jpg",   alt: "호텔 블랭킷 — 다크브라운 원통 500ml", url: "product-hotel.html" },
     { id: "seongsu", name: "성수 무화과", en: "Seongsu Fig",          code: "S-200-SF", price: 42000,
-      hook: "잘못 든 골목에서 만난 오후.", notes: "그린 피그 리프 · 크리미 무화과 · 머스크",
+      hook: "잘못 든 골목에서 만난 오후.", notes: "그린 피그 리프 · 크리미 무화과 · 화이트 머스크",
       spec: "약병형 · 200ml",          img: "assets/img/seongsu.jpg", alt: "성수 무화과 — 약병형 200ml", url: "product-seongsu.html" },
     { id: "tea",     name: "애프터눈 티", en: "Afternoon Tea",        code: "S-200-AT", price: 42000,
-      hook: "할 일을 미룬 채 우린 홍차.", notes: "베르가못 · 홍차 · 화이트티",
+      hook: "할 일을 미룬 채 우린 홍차.", notes: "베르가못 · 홍차 · 머스크",
       spec: "투명 위스키병형 · 200ml", img: "assets/img/tea.jpg",     alt: "애프터눈 티 — 투명 위스키병형 200ml", url: "product-tea.html" },
   ];
 
@@ -42,7 +42,8 @@ window.Store = (() => {
     cancelled: "취소됨",
   };
 
-  const read = (k) => { try { return JSON.parse(localStorage.getItem(k)) || []; } catch { return []; } };
+  /* 손상 내성: JSON 깨짐·배열 아닌 값(객체/숫자/문자열)이 저장돼 있어도 빈 배열로 폴백 */
+  const read = (k) => { try { const v = JSON.parse(localStorage.getItem(k)); return Array.isArray(v) ? v : []; } catch { return []; } };
   const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
 
   /* 비밀번호: 평문 저장 금지 — SHA-256 해시 흉내(솔트 포함).

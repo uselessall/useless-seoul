@@ -7,6 +7,7 @@
   <meta name="description" content="주문 관리(내부용)." />
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23111111' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <!-- 폰트 CSS 비동기 로드(렌더블로킹 해소) — JS off는 noscript 폴백 -->
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -15,9 +16,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=10" />
-  <script src="assets/js/store.js?v=10" defer></script>
-  <script src="assets/js/site.js?v=10" defer></script>
+  <link rel="stylesheet" href="assets/css/clean.css?v=16" />
+  <script src="assets/js/store.js?v=16" defer></script>
+  <script src="assets/js/site.js?v=16" defer></script>
 </head>
 <body>
 
@@ -28,6 +29,7 @@
   </header>
 
   <main id="main" tabindex="-1" class="page" style="max-width:860px;">
+    <noscript><p class="nojs-note">이 페이지는 JavaScript가 필요합니다. 브라우저 설정에서 JavaScript를 켠 뒤 다시 열어주세요.</p></noscript>
     <header class="page-head reveal">
       <h1>Orders</h1>
       <p>주문 <span id="adminCount">0</span>건 — 입금 확인·배송 상태 관리 (내부용, 링크 없음 · URL 직접 진입 전용). 지금은 이 브라우저의 로컬 데이터만 보입니다. 내일 Supabase 연결 시 전체 주문으로 대체됩니다.</p>
