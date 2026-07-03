@@ -1,0 +1,352 @@
+/* USÉLESS SEOUL — 공통 스크립트 (내비 + reveal + 장바구니 + 회원/주문 UI)
+   데이터 접근은 전부 window.Store 어댑터 경유 (assets/js/store.js — 내일 Supabase 구현체로 교체).
+   실결제 없음 — 무통장입금 mock. 가격은 전부 표시용. */
+
+let PRODUCT_MAP = {}; // Store.getProducts() 캐시 (id → product)
+const won = (n) => "₩" + n.toLocaleString("ko-KR");
+const CART_KEY = "useless_cart_v1";
+
+/* ---------- 장바구니 (클라이언트 상태 — 어댑터 교체와 무관하게 로컬 유지) ---------- */
+function cartGet() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+  catch { return []; }
+}
+function cartSave(items) {
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+  cartBadge();
+}
+function cartAdd(id, qty = 1) {
+  if (!PRODUCT_MAP[id]) return;
+  const items = cartGet();
+  const hit = items.find((it) => it.id === id);
+  if (hit) hit.qty = Math.min(hit.qty + qty, 99);
+  else items.push({ id, qty: Math.min(qty, 99) });
+  cartSave(items);
+}
+function cartSetQty(id, qty) {
+  let items = cartGet();
+  const hit = items.find((it) => it.id === id);
+  if (!hit) return;
+  hit.qty = qty;
+  if (hit.qty < 1) items = items.filter((it) => it.id !== id);
+  cartSave(items);
+}
+function cartRemove(id) { cartSave(cartGet().filter((it) => it.id !== id)); }
+function cartClear() { cartSave([]); }
+function cartTotal() { return cartGet().reduce((s, it) => s + (PRODUCT_MAP[it.id]?.price || 0) * it.qty, 0); }
+function cartCount() { return cartGet().reduce((s, it) => s + it.qty, 0); }
+
+/* ---------- 헤더: 카트 배지 + 로그인 상태 ---------- */
+function cartBadge() {
+  const n = cartCount();
+  document.querySelectorAll("[data-cart-count]").forEach((el) => {
+    el.textContent = n;
+    el.classList.toggle("on", n > 0);
+  });
+}
+async function renderAuthLink() {
+  const el = document.getElementById("navAuth");
+  if (!el) return;
+  const user = await Store.currentUser();
+  if (user) { el.textContent = "MY"; el.href = "mypage.html"; el.title = user.email; }
+  else { el.textContent = "LOGIN"; el.href = "login.html"; el.removeAttribute("title"); }
+}
+
+/* ---------- 제품 카드 그리드 ([data-product-grid] — 정본은 Store.getProducts() 하나) ---------- */
+function renderProductGrids(products) {
+  document.querySelectorAll("[data-product-grid]").forEach((grid) => {
+    grid.innerHTML = products.map((p) => `
+    <article class="product reveal">
+      <a class="product__img" href="${p.url}"><img src="${p.img}" alt="${p.alt}" loading="lazy" /></a>
+      <div class="product__info">
+        <p class="product__code">${p.code}</p>
+        <h3 class="product__name"><a href="${p.url}">${p.name} <span>${p.en}</span></a></h3>
+        <p class="product__hook">${p.hook}</p>
+        <p class="product__notes">${p.notes}</p>
+        <p class="product__spec">${p.spec}</p>
+        <p class="product__price">${won(p.price)} <span class="mock">표시용</span></p>
+        <button type="button" class="product__add" data-add="${p.id}">장바구니 담기</button>
+      </div>
+    </article>`).join("");
+  });
+}
+
+/* ---------- 제품 상세 하이드레이션 ([data-product-page="id"])
+   상세 4장의 정적 마크업은 no-JS/SEO 폴백 — 로드 후 Store 정본값으로 덮어쓴다.
+   내일 StoreSupabase 전환 시 상세 페이지도 DB 값을 자동 추종. ---------- */
+function hydrateProductPage() {
+  const root = document.querySelector("[data-product-page]");
+  if (!root) return;
+  const p = PRODUCT_MAP[root.dataset.productPage];
+  if (!p) return;
+  const set = (key, val) => {
+    const el = root.querySelector(`[data-pd="${key}"]`);
+    if (el && val) el.textContent = val;
+  };
+  set("code", p.code);
+  set("name", p.name);
+  set("en", p.en);
+  set("hook", p.hook);
+  set("spec", p.spec + " · 리드 스틱 포함");
+  const priceEl = root.querySelector('[data-pd="price"]');
+  if (priceEl) priceEl.innerHTML = `${won(p.price)} <span class="mock">표시용</span>`;
+  const [top, mid, base] = p.notes.split("·").map((s) => s.trim());
+  set("note-top", top);
+  set("note-mid", mid);
+  set("note-base", base);
+  const img = root.querySelector(".pd__img img");
+  if (img) { img.src = p.img; img.alt = p.alt; }
+}
+
+/* ---------- 담기 버튼 (data-add="id" [data-qty-from="#sel"]) ---------- */
+function bindAddButtons() {
+  document.querySelectorAll("[data-add]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = btn.dataset.add;
+      const qtyEl = btn.dataset.qtyFrom ? document.querySelector(btn.dataset.qtyFrom) : null;
+      const qty = qtyEl ? Math.max(1, parseInt(qtyEl.value, 10) || 1) : 1;
+      cartAdd(id, qty);
+      const orig = btn.textContent;
+      btn.textContent = "담았습니다";
+      btn.disabled = true;
+      setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 900);
+      if (btn.dataset.then === "checkout") location.href = "checkout.html";
+      if (btn.dataset.then === "cart") location.href = "cart.html";
+    });
+  });
+}
+
+/* ---------- 폼 에러 표시 공통 ---------- */
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg || "";
+  el.hidden = !msg;
+}
+
+/* ---------- 장바구니 페이지 ---------- */
+function renderCartPage() {
+  const wrap = document.getElementById("cartList");
+  if (!wrap) return;
+  const items = cartGet();
+  const empty = document.getElementById("cartEmpty");
+  const box = document.getElementById("cartBox");
+  if (!items.length) {
+    empty.hidden = false; box.hidden = true;
+    return;
+  }
+  empty.hidden = true; box.hidden = false;
+  wrap.innerHTML = items.map((it) => {
+    const p = PRODUCT_MAP[it.id];
+    return `
+    <div class="cart__row" data-row="${it.id}">
+      <a class="cart__img" href="${p.url}"><img src="${p.img}" alt="${p.name}" /></a>
+      <div class="cart__info">
+        <p class="cart__code">${p.code}</p>
+        <a class="cart__name" href="${p.url}">${p.name}</a>
+        <p class="cart__spec">${p.spec}</p>
+        <p class="cart__unit">${won(p.price)} <span class="mock">표시용</span></p>
+      </div>
+      <div class="cart__qty">
+        <button type="button" data-dec="${it.id}" aria-label="수량 줄이기">−</button>
+        <span>${it.qty}</span>
+        <button type="button" data-inc="${it.id}" aria-label="수량 늘리기">+</button>
+      </div>
+      <p class="cart__sum">${won(p.price * it.qty)}</p>
+      <button type="button" class="cart__del" data-del="${it.id}" aria-label="삭제">삭제</button>
+    </div>`;
+  }).join("");
+  document.getElementById("cartTotal").textContent = won(cartTotal());
+  wrap.querySelectorAll("[data-inc]").forEach((b) => b.addEventListener("click", () => {
+    const it = cartGet().find((x) => x.id === b.dataset.inc);
+    cartSetQty(b.dataset.inc, Math.min(it.qty + 1, 99)); renderCartPage();
+  }));
+  wrap.querySelectorAll("[data-dec]").forEach((b) => b.addEventListener("click", () => {
+    const it = cartGet().find((x) => x.id === b.dataset.dec);
+    cartSetQty(b.dataset.dec, it.qty - 1); renderCartPage();
+  }));
+  wrap.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => {
+    cartRemove(b.dataset.del); renderCartPage();
+  }));
+}
+
+/* ---------- 체크아웃 (무통장입금 mock — 로그인 필요) ---------- */
+async function renderCheckoutPage() {
+  const list = document.getElementById("coItems");
+  if (!list) return;
+  const items = cartGet();
+  if (!items.length) { location.replace("cart.html"); return; }
+
+  const user = await Store.currentUser();
+  if (!user) {
+    document.getElementById("coMain").hidden = true;
+    document.getElementById("coLogin").hidden = false;
+    return;
+  }
+  const who = document.getElementById("coUser");
+  if (who) who.textContent = `${user.name} (${user.email})`;
+
+  list.innerHTML = items.map((it) => {
+    const p = PRODUCT_MAP[it.id];
+    return `<li><span>${p.name} × ${it.qty}</span><span>${won(p.price * it.qty)}</span></li>`;
+  }).join("");
+  document.getElementById("coTotal").textContent = won(cartTotal());
+
+  document.getElementById("coForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showErr("coErr", "");
+    try {
+      const order = await Store.createOrder({
+        items: cartGet(),
+        receiver: document.getElementById("coName").value,
+        phone: document.getElementById("coPhone").value,
+        addr: document.getElementById("coAddr").value,
+        memo: document.getElementById("coMemo").value,
+      });
+      cartClear();
+      document.getElementById("doneName").textContent = order.receiver;
+      document.getElementById("doneOrderId").textContent = order.orderId;
+      document.getElementById("doneTotal").textContent = won(order.total);
+      document.getElementById("coMain").hidden = true;
+      document.getElementById("coDone").hidden = false;
+      scrollTo({ top: 0 });
+    } catch (err) { showErr("coErr", err.message); }
+  });
+}
+
+/* ---------- 회원가입 / 로그인 ---------- */
+function bindSignupPage() {
+  const form = document.getElementById("signupForm");
+  if (!form) return;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showErr("authErr", "");
+    const pw = document.getElementById("suPw").value;
+    if (pw !== document.getElementById("suPw2").value) { showErr("authErr", "비밀번호가 서로 다릅니다."); return; }
+    try {
+      await Store.signUp({
+        email: document.getElementById("suEmail").value,
+        password: pw,
+        name: document.getElementById("suName").value,
+      });
+      location.href = "mypage.html";
+    } catch (err) { showErr("authErr", err.message); }
+  });
+}
+function bindLoginPage() {
+  const form = document.getElementById("loginForm");
+  if (!form) return;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    showErr("authErr", "");
+    try {
+      await Store.signIn({
+        email: document.getElementById("liEmail").value,
+        password: document.getElementById("liPw").value,
+      });
+      const back = new URLSearchParams(location.search).get("back");
+      location.href = back === "checkout" ? "checkout.html" : "mypage.html";
+    } catch (err) { showErr("authErr", err.message); }
+  });
+}
+
+/* ---------- 마이페이지 (주문조회) ---------- */
+async function renderMyPage() {
+  const wrap = document.getElementById("myOrders");
+  if (!wrap) return;
+  const user = await Store.currentUser();
+  if (!user) { location.replace("login.html"); return; }
+  document.getElementById("myWho").textContent = `${user.name} · ${user.email}`;
+  document.getElementById("myLogout").addEventListener("click", async () => {
+    await Store.signOut();
+    location.href = "index.html";
+  });
+  const orders = await Store.myOrders();
+  if (!orders.length) {
+    wrap.innerHTML = `<p class="order__empty">주문 내역이 없습니다. <a href="shop.html">SHOP 보러 가기 →</a></p>`;
+    return;
+  }
+  wrap.innerHTML = orders.map((o) => `
+    <article class="order">
+      <header class="order__head">
+        <p class="order__id">${o.orderId}</p>
+        <p class="order__date">${o.createdAt.slice(0, 10)}</p>
+        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status] || o.status}</p>
+      </header>
+      <ul class="order__items">
+        ${o.items.map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won(it.price * it.qty)}</span></li>`).join("")}
+      </ul>
+      <p class="order__total"><span>합계</span><span>${won(o.total)}</span></p>
+      ${o.status === "awaiting_deposit" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: [입금계좌 확인필요] · 입금 확인 후 배송이 시작됩니다.</p>` : ""}
+    </article>`).join("");
+}
+
+/* ---------- 관리자 (로컬 데이터 — URL 직접 진입 전용) ---------- */
+async function renderAdminPage() {
+  const wrap = document.getElementById("adminOrders");
+  if (!wrap) return;
+  const orders = await Store.listOrders();
+  document.getElementById("adminCount").textContent = orders.length;
+  if (!orders.length) {
+    wrap.innerHTML = `<p class="order__empty">주문이 없습니다.</p>`;
+    return;
+  }
+  const STATUSES = Object.keys(Store.ORDER_STATUS);
+  wrap.innerHTML = orders.map((o) => `
+    <article class="order order--admin" data-oid="${o.orderId}">
+      <header class="order__head">
+        <p class="order__id">${o.orderId}</p>
+        <p class="order__date">${o.createdAt.slice(0, 16).replace("T", " ")}</p>
+        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status]}</p>
+      </header>
+      <p class="order__meta">${o.receiver} · ${o.phone} · ${o.addr}${o.memo ? " · 메모: " + o.memo : ""} · <span>${o.userEmail}</span></p>
+      <ul class="order__items">
+        ${o.items.map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won(it.price * it.qty)}</span></li>`).join("")}
+      </ul>
+      <p class="order__total"><span>합계</span><span>${won(o.total)}</span></p>
+      <div class="order__actions">
+        <select data-status="${o.orderId}" aria-label="주문 상태 변경">
+          ${STATUSES.map((s) => `<option value="${s}" ${s === o.status ? "selected" : ""}>${Store.ORDER_STATUS[s]}</option>`).join("")}
+        </select>
+        <button type="button" class="btn" data-apply="${o.orderId}">상태 변경</button>
+      </div>
+    </article>`).join("");
+  wrap.querySelectorAll("[data-apply]").forEach((b) => b.addEventListener("click", async () => {
+    const oid = b.dataset.apply;
+    const sel = wrap.querySelector(`[data-status="${oid}"]`);
+    await Store.updateOrderStatus(oid, sel.value);
+    renderAdminPage();
+  }));
+}
+
+/* ---------- 공통 초기화 ---------- */
+document.addEventListener("DOMContentLoaded", async () => {
+  // 제품 로드 + 카드 그리드 렌더를 reveal 관찰보다 먼저 — 렌더된 카드도 IO에 잡히게
+  const products = await Store.getProducts();
+  PRODUCT_MAP = Object.fromEntries(products.map((p) => [p.id, p]));
+  renderProductGrids(products);
+  hydrateProductPage();
+
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  const nav = document.getElementById("nav");
+  if (nav) addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), { passive: true });
+
+  const navToggle = document.getElementById("navToggle");
+  if (navToggle) document.querySelectorAll("#navMenu a").forEach((a) =>
+    a.addEventListener("click", () => { navToggle.checked = false; }));
+
+  cartBadge();
+  renderAuthLink();
+  bindAddButtons();
+  renderCartPage();
+  renderCheckoutPage();
+  bindSignupPage();
+  bindLoginPage();
+  renderMyPage();
+  renderAdminPage();
+});

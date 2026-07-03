@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — USÉLESS SEOUL</title>
+  <meta name="description" content="페이지를 찾을 수 없습니다 — USÉLESS SEOUL" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23111111' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- 폰트 CSS 비동기 로드(렌더블로킹 해소) — JS off는 noscript 폴백 -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  </noscript>
+  <!--
+    GitHub Pages 404는 어떤 깨진 경로에서도 이 파일을 그대로 서빙한다.
+    → 상대경로 CSS/JS/이미지가 중첩 경로에서 깨지므로 이 페이지는 자급자족(인라인 스타일, 외부 자산 0).
+    링크 base는 아래 스크립트가 보정. 배포 도메인 확정 시 BASE 상수 교체: [배포URL 확인필요]
+  -->
+  <style>
+    :root { --ink: #111; --paper: #fff; --line: #e5e5e5; --gray: #888; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+      background: var(--paper); color: var(--ink);
+      min-height: 100vh; display: flex; flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 64px; border-bottom: 1px solid var(--line);
+    }
+    .nav__brand { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; }
+    .nav__menu { display: flex; gap: 28px; font-size: 12.5px; letter-spacing: 0.14em; font-weight: 600; }
+    .wrap {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 80px 24px;
+    }
+    .code {
+      font-family: "Instrument Serif", Georgia, serif; font-style: italic;
+      font-size: clamp(96px, 18vw, 200px); line-height: 1; letter-spacing: 0.02em;
+    }
+    .title { font-size: 17px; font-weight: 700; margin-top: 28px; letter-spacing: -0.01em; }
+    .copy { font-size: 14px; color: var(--gray); margin-top: 10px; line-height: 1.8; }
+    .copy em { font-style: normal; color: var(--ink); }
+    .btns { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: 14px 34px; font-size: 12.5px;
+      letter-spacing: 0.14em; font-weight: 700; border: 1px solid var(--ink);
+    }
+    .btn--fill { background: var(--ink); color: var(--paper); }
+    .btn--fill:hover { background: #333; }
+    .btn--ghost:hover { background: #f5f5f5; }
+    .foot {
+      border-top: 1px solid var(--line); padding: 28px 24px; text-align: center;
+      font-size: 11.5px; color: var(--gray); letter-spacing: 0.06em;
+    }
+    @media (max-width: 640px) { .nav__menu { gap: 18px; } }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="/" class="nav__brand" data-base-link="index.html">USÉLESS SEOUL</a>
+    <nav class="nav__menu" aria-label="주 메뉴">
+      <a href="/" data-base-link="shop.html">SHOP</a>
+      <a href="/" data-base-link="story.html">STORY</a>
+      <a href="/" data-base-link="faq.html">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <p class="code">404</p>
+    <h1 class="title">이 페이지는 존재하지 않습니다.</h1>
+    <p class="copy">
+      길을 잘못 든 것도 나쁘지 않습니다만,<br />
+      여기엔 <em>정말로</em> 아무것도 없습니다. 쓸모없음에도 정도가 있죠.
+    </p>
+    <div class="btns">
+      <a href="/" class="btn btn--fill" data-base-link="index.html">홈으로</a>
+      <a href="/" class="btn btn--ghost" data-base-link="shop.html">SHOP 보기</a>
+    </div>
+  </main>
+
+  <footer class="foot">© USÉLESS SEOUL — 가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다.</footer>
+
+  <script>
+    // 배포 도메인 확정 시 절대경로로 교체: var BASE = "https://[배포URL 확인필요]/";
+    // 미확정 동안은 휴리스틱: *.github.io 프로젝트 페이지면 /<repo>/ 가 루트, 그 외(커스텀 도메인·로컬)는 /.
+    (function () {
+      var BASE = "";
+      if (!BASE) {
+        if (/\.github\.io$/.test(location.hostname)) {
+          var seg = location.pathname.split("/")[1] || "";
+          BASE = "/" + (seg ? seg + "/" : "");
+        } else {
+          BASE = "/";
+        }
+      }
+      document.querySelectorAll("[data-base-link]").forEach(function (a) {
+        a.href = BASE + a.getAttribute("data-base-link");
+      });
+    })();
+  </script>
+</body>
+</html>
