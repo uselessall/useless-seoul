@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>호텔 블랭킷 — USÉLESS SEOUL</title>
-  <meta name="description" content="호텔 블랭킷 (Hotel Blanket) — 체크아웃 사십 분 전, 이불 속. USÉLESS SEOUL 리드 디퓨저." />
+  <meta name="description" content="호텔 블랭킷 (Hotel Blanket) — 체크인 직후, 침구에 스민 그 냄새. USÉLESS SEOUL 리드 디퓨저." />
   <meta property="og:type" content="product" />
   <meta property="og:title" content="호텔 블랭킷 — USÉLESS SEOUL" />
-  <meta property="og:description" content="체크아웃 사십 분 전, 이불 속." />
-  <meta property="og:image" content="assets/img/hotel.jpg" />
+  <meta property="og:description" content="체크인 직후, 침구에 스민 그 냄새." />
+  <meta property="og:image" content="assets/img/hotel.svg" />
   <!-- 배포 후 필수: og:image를 절대경로로, og:url 추가 — https://[배포URL 확인필요]/... (상대경로 og:image는 카카오톡·트위터 등 공유 카드에서 무시됨) -->
   <meta name="twitter:card" content="summary_large_image" />
   <!-- 구조화 데이터: 가격이 mock이라 offers는 의도적 생략(허위 가격 노출 방지) — 실판매 오픈 시 offers(price·availability) 추가 + image 절대경로 교체 [배포URL 확인필요] -->
@@ -18,13 +18,13 @@
   "@type": "Product",
   "name": "호텔 블랭킷",
   "alternateName": "Hotel Blanket",
-  "sku": "S-500-HB",
+  "sku": "UL-D01",
   "brand": {
     "@type": "Brand",
     "name": "USÉLESS SEOUL"
   },
-  "description": "체크아웃 사십 분 전, 이불 속. USÉLESS SEOUL 리드 디퓨저 — 다크브라운 원통 · 500ml.",
-  "image": "assets/img/hotel.jpg",
+  "description": "체크인 직후, 침구에 스민 그 냄새. USÉLESS SEOUL 리드 디퓨저 — 끌로에 투명 유리 · 200ml.",
+  "image": "assets/img/hotel.svg",
   "category": "Home Fragrance > Reed Diffuser"
 }
   </script>
@@ -40,9 +40,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=16" />
-  <script src="assets/js/store.js?v=16" defer></script>
-  <script src="assets/js/site.js?v=16" defer></script>
+  <link rel="stylesheet" href="assets/css/clean.css?v=25" />
+  <script src="assets/js/store.js?v=25" defer></script>
+  <script src="assets/js/site.js?v=25" defer></script>
 </head>
 <body>
 
@@ -63,71 +63,146 @@
     </div>
   </header>
 
-  <main id="main" tabindex="-1" class="page">
-    <p class="crumb reveal"><a href="index.html">HOME</a> / <a href="shop.html">SHOP</a> / 호텔 블랭킷</p>
+  <main id="main" tabindex="-1">
 
-    <div class="pd" data-product-page="hotel">
-      <figure class="pd__img reveal">
-        <img src="assets/img/hotel.jpg" alt="호텔 블랭킷 — 다크브라운 원통 · 500ml" />
-      </figure>
-
-      <div class="pd__body reveal">
-        <p class="pd__code" data-pd="code">S-500-HB</p>
-        <h1 class="pd__name" data-pd="name">호텔 블랭킷</h1>
-        <p class="pd__en" data-pd="en">Hotel Blanket</p>
-        <p class="pd__hook" data-pd="hook">체크아웃 사십 분 전, 이불 속.</p>
-        <!-- 가격 mock — 확정 전 표시용 (정본: 20_active_ops/_디퓨저_현재정본.md) -->
-        <p class="pd__price" data-pd="price">₩68,000 <span class="mock">표시용</span></p>
-        <p class="pd__spec" data-pd="spec">다크브라운 원통 · 500ml · 리드 스틱 포함</p>
-
-        <div class="pd__story">
-          <p>낯선 도시의 아침 열 시. 체크아웃까지 사십 분, 이불 속에서 버티는 중. 여행에서 제일 기억에 남은 건 결국 이 순간이었다.</p>
-          <p class="pd__sub">Check-out at eleven. Not moving until ten fifty.</p>
-        </div>
-
-        <div class="pyr">
-          <p class="pyr__title">NOTE PYRAMID</p>
-          <div class="pyr__row"><b>TOP</b><span data-pd="note-top">알데하이드 클린</span></div>
-          <div class="pyr__row"><b>MID</b><span data-pd="note-mid">화이트 코튼</span></div>
-          <div class="pyr__row"><b>BASE</b><span data-pd="note-base">소프트 시더</span></div>
-        </div>
-
-        <div class="pd__buy">
-          <span class="qty"><input type="number" id="qty" value="1" min="1" max="99" inputmode="numeric" aria-label="수량" /></span>
-          <button type="button" class="btn" data-add="hotel" data-qty-from="#qty">장바구니 담기</button>
-          <button type="button" class="btn btn--solid" data-add="hotel" data-qty-from="#qty" data-then="checkout">바로 구매</button>
-          <noscript><p class="nojs-note" style="margin:10px 0 0;">장바구니·구매 버튼은 JavaScript가 필요합니다.</p></noscript>
-        </div>
-        <p class="pd__note">결제는 오픈 준비 중 — 주문·가격은 목업입니다. · DO NOT DRINK</p>
+    <!-- ① 풀블리드 히어로 — 장면 비주얼 + 한 줄 카피 -->
+    <section class="pdhero" aria-label="호텔 블랭킷 장면">
+      <figure class="pdhero__bg"><img src="assets/img/scene/hotel_env.webp" alt="호텔 블랭킷 — 아침 빛이 드는 침구" fetchpriority="high" /></figure>
+      <div class="pdhero__text">
+        <p class="pdhero__en">Hotel Blanket</p>
+        <p class="pdhero__line">체크인 직후, 침구에 스민 그 냄새.</p>
       </div>
-    </div>
-    <!-- 크로스셀 — 정적 마크업(no-JS/SEO 폴백), 값은 store.js 정본과 동일 -->
+    </section>
+
+    <div class="page page--pd">
+      <p class="crumb reveal"><a href="index.html">HOME</a> / <a href="shop.html">SHOP</a> / 호텔 블랭킷</p>
+
+      <div class="pdwrap" data-product-page="hotel">
+
+        <figure class="pd__img reveal">
+          <img src="assets/img/hotel.svg" alt="호텔 블랭킷 — 리드 디퓨저 200ml" />
+        </figure>
+
+        <!-- ② 구매 박스 (데스크톱 sticky) -->
+        <aside class="pdside">
+          <div class="pdbox reveal">
+            <p class="pd__code" data-pd="code">UL-D01</p>
+            <h1 class="pd__name" data-pd="name">호텔 블랭킷</h1>
+            <p class="pd__en" data-pd="en">Hotel Blanket</p>
+            <p class="pd__hook" data-pd="hook">체크인 직후, 침구에 스민 그 냄새.</p>
+            <!-- 가격 mock — 확정 전 표시용 (정본: 20_active_ops/_디퓨저_현재정본.md) -->
+            <p class="pd__price" data-pd="price">₩35,000 <span class="mock">표시용</span></p>
+            <p class="pd__spec" data-pd="spec">끌로에 투명 유리 · 200ml · 리드 스틱 포함</p>
+            <div class="pd__buy">
+              <span class="qty"><input type="number" id="qty" value="1" min="1" max="99" inputmode="numeric" aria-label="수량" /></span>
+              <button type="button" class="btn" data-add="hotel" data-qty-from="#qty">장바구니 담기</button>
+              <button type="button" class="btn btn--solid" data-add="hotel" data-qty-from="#qty" data-then="checkout">바로 구매</button>
+              <noscript><p class="nojs-note" style="margin:10px 0 0;">장바구니·구매 버튼은 JavaScript가 필요합니다.</p></noscript>
+            </div>
+            <p class="pd__note">결제는 오픈 준비 중 — 주문·가격은 목업입니다. · DO NOT DRINK</p>
+          </div>
+        </aside>
+
+        <div class="pdmain">
+          <!-- ④ 장면 스토리 -->
+          <section class="pdsec reveal" aria-label="장면 스토리">
+            <h2 class="pdsec__title">THE SCENE <span>장면</span></h2>
+            <div class="pdstory">
+              <p>낯선 도시의 아침. 커튼 틈으로 들어온 빛이 방을 반으로 가른다. 체크아웃까지 사십 분.</p>
+              <p>가야 할 곳도, 봐야 할 것도 아직 없다. 이불은 무겁고, 시간은 잠깐 남의 것 같다.</p>
+              <p>여행의 하이라이트는 늘 일정표 밖에 있었다. 아무 일도 일어나지 않는 방, 그 안의 공기. 우리는 그 사십 분을 가장 오래 기억하게 된다.</p>
+              <p>호텔 블랭킷은 그 이불 속을 담는다. 방금 정돈된 클린 노트로 시작해, 이불 속 라벤더의 숨을 지나, 머스크로 내려앉는 아침.</p>
+              <p class="pd__sub">Forty minutes before checkout.</p>
+            </div>
+          </section>
+
+          <!-- ③ 향 노트 피라미드 -->
+          <section class="pdsec reveal" aria-label="향 노트">
+            <h2 class="pdsec__title">NOTE PYRAMID <span>향 노트</span></h2>
+            <div class="pyr">
+              <div class="pyr__row"><b>TOP</b><span data-pd="note-top">클린</span></div>
+              <div class="pyr__row"><b>MID</b><span data-pd="note-mid">라벤더</span></div>
+              <div class="pyr__row"><b>BASE</b><span data-pd="note-base">머스크</span></div>
+            </div>
+          </section>
+
+          <!-- ⑤ 공간·사용 안내 -->
+      <section class="pdsec reveal" aria-label="공간·사용 안내">
+        <h2 class="pdsec__title">HOW TO PLACE <span>공간·사용 안내</span></h2>
+        <div class="pduse">
+          <div class="pduse__item"><b>어디에 두나요</b><p>침실·현관·책상 옆처럼 가까운 공간에 맞는 200ml입니다. 코 높이보다 조금 낮은 위치에 두면 향이 은은하게 올라옵니다.</p></div>
+          <div class="pduse__item"><b>사용법</b><p>동봉된 블랙 리드 스틱(8가닥)을 병에 꽂으면 발향이 시작됩니다. 향이 약해지면 스틱을 뒤집어 주세요. 꽂는 스틱 개수로 발향 세기를 조절할 수 있습니다.</p></div>
+          <div class="pduse__item"><b>지속기간</b><p>[확인필요] — 시제품 테스트 후 확정해 표기합니다.</p></div>
+          <div class="pduse__item"><b>주의</b><p>직사광선·화기 근처를 피해 주세요. 액이 가구·직물에 닿으면 얼룩이 될 수 있습니다. 그리고 — 마시지 마세요. DO NOT DRINK.</p></div>
+        </div>
+      </section>
+
+          <!-- ⑥ 스펙 표 -->
+      <section class="pdsec reveal" aria-label="제품 스펙">
+        <h2 class="pdsec__title">SPECIFICATIONS <span>스펙</span></h2>
+        <table class="spec">
+          <tbody>
+          <tr><th scope="row">용량</th><td>200ml</td></tr>
+          <tr><th scope="row">용기</th><td>끌로에 그랜드 스퀘어 투명 유리</td></tr>
+          <tr><th scope="row">향 노트</th><td>TOP 클린 · MID 라벤더 · BASE 머스크</td></tr>
+          <tr><th scope="row">리드 스틱</th><td>블랙 리드 스틱 8가닥 동봉</td></tr>
+          <tr><th scope="row">전성분</th><td>[확인필요] — 전성분 확정 후 표기</td></tr>
+          <tr><th scope="row">제조판매원</th><td>[확인필요]</td></tr>
+          <tr><th scope="row">사용기한</th><td>[확인필요]</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+          <!-- ⑦ 배송·교환·환불 -->
+      <section class="pdsec reveal" aria-label="배송·교환·환불">
+        <h2 class="pdsec__title">SHIPPING &amp; RETURNS <span>배송·교환·환불</span></h2>
+        <div class="pduse">
+          <div class="pduse__item"><b>배송</b><p>배송비·출고 일정은 오픈 시 확정해 안내합니다. [확인필요]</p></div>
+          <div class="pduse__item"><b>교환·환불</b><p>미개봉 제품은 수령 후 관련 법이 정한 기한 내 교환·환불이 가능합니다. 세부 규정은 전자상거래법 기준으로 확정 전입니다 — 전문가 검토 필요.</p></div>
+          <div class="pduse__item"><b>개봉 후</b><p>향 제품 특성상 개봉 후에는 교환·환불이 제한될 수 있습니다. [확인필요]</p></div>
+        </div>
+        <p class="pdsec__more"><a href="faq.html">자세한 안내는 FAQ에서 →</a></p>
+      </section>
+
+          <!-- ⑧ 리뷰 (빈 상태 — 가짜 리뷰 금지) -->
+      <section class="pdsec reveal" aria-label="리뷰">
+        <h2 class="pdsec__title">REVIEWS <span>(0)</span></h2>
+        <div class="pdrev">
+          <p class="pdrev__line">아직 리뷰가 없습니다.</p>
+          <p class="pdrev__hint">첫 번째 장면을 남겨주세요 — 리뷰 작성은 오픈 준비 중입니다.</p>
+        </div>
+      </section>
+        </div>
+      </div>
+
+    <!-- ⑨ 크로스셀 — 정적 마크업(no-JS/SEO 폴백), 값은 store.js 정본과 동일 -->
     <section class="xsell reveal" aria-label="다른 장면 추천">
       <p class="xsell__title">다른 장면 <span>Other Scenes</span></p>
       <div class="xsell__grid">
         <a class="xsell__card" href="product-hangang.html">
-          <span class="xsell__img"><img src="assets/img/hangang.jpg" alt="여름밤 한강 — 스모크블랙 원통 500ml" loading="lazy" /></span>
-          <span class="xsell__code">S-500-HG</span>
+          <span class="xsell__img"><img src="assets/img/hangang.svg" alt="여름밤 한강 — 리드 디퓨저 200ml" loading="lazy" /></span>
+          <span class="xsell__code">UL-D03</span>
           <span class="xsell__name">여름밤 한강 <em>Hangang Summer Night</em></span>
-          <span class="xsell__hook">막차를 보내고 남은 밤의 향.</span>
-          <span class="xsell__price">₩68,000 <span class="mock">표시용</span></span>
+          <span class="xsell__hook">밤 10시 한강 벤치, 선선한 잔향.</span>
+          <span class="xsell__price">₩35,000 <span class="mock">표시용</span></span>
         </a>
         <a class="xsell__card" href="product-seongsu.html">
-          <span class="xsell__img"><img src="assets/img/seongsu.jpg" alt="성수 무화과 — 약병형 200ml" loading="lazy" /></span>
-          <span class="xsell__code">S-200-SF</span>
+          <span class="xsell__img"><img src="assets/img/seongsu.svg" alt="성수 무화과 — 리드 디퓨저 200ml" loading="lazy" /></span>
+          <span class="xsell__code">UL-D02</span>
           <span class="xsell__name">성수 무화과 <em>Seongsu Fig</em></span>
-          <span class="xsell__hook">잘못 든 골목에서 만난 오후.</span>
-          <span class="xsell__price">₩42,000 <span class="mock">표시용</span></span>
+          <span class="xsell__hook">성수동 카페 골목, 우드 베이스 과육향.</span>
+          <span class="xsell__price">₩35,000 <span class="mock">표시용</span></span>
         </a>
         <a class="xsell__card" href="product-tea.html">
-          <span class="xsell__img"><img src="assets/img/tea.jpg" alt="애프터눈 티 — 투명 위스키병형 200ml" loading="lazy" /></span>
-          <span class="xsell__code">S-200-AT</span>
+          <span class="xsell__img"><img src="assets/img/tea.svg" alt="애프터눈 티 — 출시 예정" loading="lazy" /></span>
+          <span class="xsell__code">COMING SOON</span>
           <span class="xsell__name">애프터눈 티 <em>Afternoon Tea</em></span>
           <span class="xsell__hook">할 일을 미룬 채 우린 홍차.</span>
-          <span class="xsell__price">₩42,000 <span class="mock">표시용</span></span>
+          <span class="xsell__price">출시 예정 <span class="mock">COMING SOON</span></span>
         </a>
       </div>
     </section>
+    </div>
   </main>
 
   <footer class="foot">

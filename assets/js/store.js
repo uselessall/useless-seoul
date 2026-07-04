@@ -13,20 +13,23 @@
    ⚠️ 전 데이터 mock — 실결제·실배송 없음. 가격은 표시용.
 */
 window.Store = (() => {
-  /* ---------- 제품 정본 (가격 mock — 정본: 20_active_ops/_디퓨저_현재정본.md) ---------- */
+  /* ---------- 제품 정본 (파일럿 3종 + 출시 예정 1종 — 승준 개정 2026-07-04 05:15)
+     소스: 10_outputs/2026-07-02_유슬레스_리드디퓨저_상품제안서_가격표.md (SKU·노트·카피 이 문서 그대로)
+     판매 = 200ml 3종 · ₩35,000 (표시용 mock). 애프터눈 티 = coming_soon (구매 불가).
+     status: "on_sale" | "coming_soon" — coming_soon은 카트 담기·주문 전부 차단. ---------- */
   const PRODUCTS = [
-    { id: "hangang", name: "여름밤 한강", en: "Hangang Summer Night", code: "S-500-HG", price: 68000,
-      hook: "막차를 보내고 남은 밤의 향.", notes: "레몬필 · 강바람 워터리 · 화이트 머스크",
-      spec: "스모크블랙 원통 · 500ml", img: "assets/img/hangang.jpg", alt: "여름밤 한강 — 스모크블랙 원통 500ml", url: "product-hangang.html" },
-    { id: "hotel",   name: "호텔 블랭킷", en: "Hotel Blanket",        code: "S-500-HB", price: 68000,
-      hook: "체크아웃 사십 분 전, 이불 속.", notes: "알데하이드 클린 · 화이트 코튼 · 소프트 시더",
-      spec: "다크브라운 원통 · 500ml", img: "assets/img/hotel.jpg",   alt: "호텔 블랭킷 — 다크브라운 원통 500ml", url: "product-hotel.html" },
-    { id: "seongsu", name: "성수 무화과", en: "Seongsu Fig",          code: "S-200-SF", price: 42000,
-      hook: "잘못 든 골목에서 만난 오후.", notes: "그린 피그 리프 · 크리미 무화과 · 화이트 머스크",
-      spec: "약병형 · 200ml",          img: "assets/img/seongsu.jpg", alt: "성수 무화과 — 약병형 200ml", url: "product-seongsu.html" },
-    { id: "tea",     name: "애프터눈 티", en: "Afternoon Tea",        code: "S-200-AT", price: 42000,
+    { id: "hotel",   name: "호텔 블랭킷", en: "Hotel Blanket",        code: "UL-D01", price: 35000, status: "on_sale",
+      hook: "체크인 직후, 침구에 스민 그 냄새.", notes: "클린 · 라벤더 · 머스크",
+      spec: "끌로에 투명 유리 · 200ml", img: "assets/img/hotel.svg",   alt: "호텔 블랭킷 — 리드 디퓨저 200ml", url: "product-hotel.html" },
+    { id: "seongsu", name: "성수 무화과", en: "Seongsu Fig",          code: "UL-D02", price: 35000, status: "on_sale",
+      hook: "성수동 카페 골목, 우드 베이스 과육향.", notes: "과육 · 우디 · 앰버",
+      spec: "끌로에 투명 유리 · 200ml", img: "assets/img/seongsu.svg", alt: "성수 무화과 — 리드 디퓨저 200ml", url: "product-seongsu.html" },
+    { id: "hangang", name: "여름밤 한강", en: "Hangang Summer Night", code: "UL-D03", price: 35000, status: "on_sale",
+      hook: "밤 10시 한강 벤치, 선선한 잔향.", notes: "우디 · 머스크 · 아쿠아",
+      spec: "끌로에 투명 유리 · 200ml", img: "assets/img/hangang.svg", alt: "여름밤 한강 — 리드 디퓨저 200ml", url: "product-hangang.html" },
+    { id: "tea",     name: "애프터눈 티", en: "Afternoon Tea",        code: "COMING SOON", price: null, status: "coming_soon",
       hook: "할 일을 미룬 채 우린 홍차.", notes: "베르가못 · 홍차 · 머스크",
-      spec: "투명 위스키병형 · 200ml", img: "assets/img/tea.jpg",     alt: "애프터눈 티 — 투명 위스키병형 200ml", url: "product-tea.html" },
+      spec: "출시 예정", img: "assets/img/tea.svg",     alt: "애프터눈 티 — 출시 예정", url: "product-tea.html" },
   ];
 
   const USERS_KEY = "useless_users_v1";
@@ -96,12 +99,18 @@ window.Store = (() => {
     const user = await currentUser();
     if (!user) throw new Error("로그인이 필요합니다.");
     if (!items || !items.length) throw new Error("주문할 상품이 없습니다.");
+    /* 입력 검증 — trim 후 판정 (공백만 입력 차단). Supabase 전환 시 서버측 검증으로 이관. */
+    receiver = String(receiver || "").trim();
+    phone = String(phone || "").trim();
+    addr = String(addr || "").trim();
     if (!receiver || !phone || !addr) throw new Error("수령인·연락처·주소를 입력해 주세요.");
+    if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(phone)) throw new Error("연락처 형식이 올바르지 않습니다. 예: 010-0000-0000");
     let total = 0;
     const lines = [];
     for (const it of items) {
       const p = PRODUCTS.find((x) => x.id === it.id);
-      if (!p) continue;
+      if (!p || p.status !== "on_sale") continue; // 출시 예정(coming_soon) 상품은 주문 불가
+
       const qty = Math.min(Math.max(1, it.qty | 0), 99);
       total += p.price * qty;
       lines.push({ id: p.id, name: p.name, code: p.code, price: p.price, qty });

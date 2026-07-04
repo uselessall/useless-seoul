@@ -5,6 +5,9 @@
 let PRODUCT_MAP = {}; // Store.getProducts() 캐시 (id → product)
 const won = (n) => "₩" + n.toLocaleString("ko-KR");
 const CART_KEY = "useless_cart_v1";
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (ch) => ({
+  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+}[ch]));
 
 /* ---------- 장바구니 (클라이언트 상태 — 어댑터 교체와 무관하게 로컬 유지) ---------- */
 function cartGet() {
@@ -16,10 +19,10 @@ function cartGet() {
     .filter((it) => it && typeof it === "object" && typeof it.id === "string")
     .map((it) => ({ id: it.id, qty: Math.min(Math.max(1, it.qty | 0), 99) }));
 }
-/* 제품 정본에 없는 id를 카트에서 제거 (라인업 변경·데이터 변조 자가 치유 — PRODUCT_MAP 로드 후 호출) */
+/* 제품 정본에 없는 id·비판매(coming_soon) 상품을 카트에서 제거 (라인업 변경·데이터 변조 자가 치유 — PRODUCT_MAP 로드 후 호출) */
 function cartPrune() {
   const items = cartGet();
-  const valid = items.filter((it) => PRODUCT_MAP[it.id]);
+  const valid = items.filter((it) => PRODUCT_MAP[it.id] && PRODUCT_MAP[it.id].status === "on_sale");
   if (valid.length !== items.length) cartSave(valid);
 }
 function cartSave(items) {
@@ -27,7 +30,8 @@ function cartSave(items) {
   cartBadge();
 }
 function cartAdd(id, qty = 1) {
-  if (!PRODUCT_MAP[id]) return;
+  if (!PRODUCT_MAP[id] || PRODUCT_MAP[id].status !== "on_sale") return; // 출시 예정 상품은 담기 불가
+
   const items = cartGet();
   const hit = items.find((it) => it.id === id);
   if (hit) hit.qty = Math.min(hit.qty + qty, 99);
@@ -66,7 +70,9 @@ async function renderAuthLink() {
 /* ---------- 제품 카드 그리드 ([data-product-grid] — 정본은 Store.getProducts() 하나) ---------- */
 function renderProductGrids(products) {
   document.querySelectorAll("[data-product-grid]").forEach((grid) => {
-    grid.innerHTML = products.map((p, i) => `
+    grid.innerHTML = products.map((p, i) => {
+      const onSale = p.status === "on_sale";
+      return `
     <article class="product reveal">
       <a class="product__img" href="${p.url}"><img src="${p.img}" alt="${p.alt}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} /></a>
       <div class="product__info">
@@ -75,10 +81,13 @@ function renderProductGrids(products) {
         <p class="product__hook">${p.hook}</p>
         <p class="product__notes">${p.notes}</p>
         <p class="product__spec">${p.spec}</p>
-        <p class="product__price">${won(p.price)} <span class="mock">표시용</span></p>
-        <button type="button" class="product__add" data-add="${p.id}">장바구니 담기</button>
+        <p class="product__price">${onSale ? `${won(p.price)} <span class="mock">표시용</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
+        ${onSale
+          ? `<button type="button" class="product__add" data-add="${p.id}">장바구니 담기</button>`
+          : `<button type="button" class="product__add" disabled aria-disabled="true">출시 예정</button>`}
       </div>
-    </article>`).join("");
+    </article>`;
+    }).join("");
   });
 }
 
@@ -94,13 +103,26 @@ function hydrateProductPage() {
     const el = root.querySelector(`[data-pd="${key}"]`);
     if (el && val) el.textContent = val;
   };
+  const onSale = p.status === "on_sale";
   set("code", p.code);
   set("name", p.name);
   set("en", p.en);
   set("hook", p.hook);
-  set("spec", p.spec + " · 리드 스틱 포함");
+  set("spec", onSale ? p.spec + " · 블랙 리드 스틱 8가닥 포함" : p.spec);
   const priceEl = root.querySelector('[data-pd="price"]');
-  if (priceEl) priceEl.innerHTML = `${won(p.price)} <span class="mock">표시용</span>`;
+  if (priceEl) priceEl.innerHTML = onSale
+    ? `${won(p.price)} <span class="mock">표시용</span>`
+    : `출시 예정 <span class="mock">COMING SOON</span>`;
+  if (!onSale) {
+    /* 출시 예정 상품: 담기·바로구매 전부 비활성 (이 카드만 예외적으로 허용되는 비활성) */
+    root.querySelectorAll("[data-add]").forEach((b) => {
+      b.disabled = true; b.setAttribute("aria-disabled", "true");
+      b.textContent = b.dataset.then === "checkout" ? "출시 예정 — COMING SOON" : "출시 예정";
+      delete b.dataset.add;
+    });
+    const qty = root.querySelector('input[aria-label="수량"]');
+    if (qty) qty.disabled = true;
+  }
   const [top, mid, base] = p.notes.split("·").map((s) => s.trim());
   set("note-top", top);
   set("note-mid", mid);
@@ -209,12 +231,16 @@ async function renderCheckoutPage() {
   document.getElementById("coForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     showErr("coErr", "");
+    const receiver = document.getElementById("coName").value.trim();
+    const phone = document.getElementById("coPhone").value.trim();
+    const addr = document.getElementById("coAddr").value.trim();
+    if (!receiver) { showErr("coErr", "받는 분 이름을 입력해 주세요."); document.getElementById("coName").focus(); return; }
+    if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(phone)) { showErr("coErr", "연락처 형식을 확인해 주세요. 예: 010-0000-0000"); document.getElementById("coPhone").focus(); return; }
+    if (!addr) { showErr("coErr", "배송지 주소를 입력해 주세요."); document.getElementById("coAddr").focus(); return; }
     try {
       const order = await Store.createOrder({
         items: cartGet(),
-        receiver: document.getElementById("coName").value,
-        phone: document.getElementById("coPhone").value,
-        addr: document.getElementById("coAddr").value,
+        receiver, phone, addr,
         memo: document.getElementById("coMemo").value,
       });
       cartClear();
@@ -281,19 +307,22 @@ async function renderMyPage() {
     return;
   }
   /* 손상 내성: 필드 누락 주문 레코드도 렌더가 안 죽게 폴백 */
-  wrap.innerHTML = orders.map((o) => `
+  wrap.innerHTML = orders.map((o) => {
+    const statusKey = Store.ORDER_STATUS[o.status] ? o.status : "unknown";
+    return `
     <article class="order">
       <header class="order__head">
-        <p class="order__id">${o.orderId || "?"}</p>
-        <p class="order__date">${String(o.createdAt || "").slice(0, 10)}</p>
-        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status] || o.status || "?"}</p>
+        <p class="order__id">${esc(o.orderId || "?")}</p>
+        <p class="order__date">${esc(String(o.createdAt || "").slice(0, 10))}</p>
+        <p class="order__status st-${statusKey}">${esc(Store.ORDER_STATUS[o.status] || o.status || "?")}</p>
       </header>
       <ul class="order__items">
-        ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
+        ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${esc(it.name)} × ${esc(it.qty)}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
       <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
       ${o.status === "awaiting_deposit" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: [입금계좌 확인필요] · 입금 확인 후 배송이 시작됩니다.</p>` : ""}
-    </article>`).join("");
+    </article>`;
+  }).join("");
 }
 
 /* ---------- 관리자 (로컬 데이터 — URL 직접 진입 전용) ---------- */
@@ -308,28 +337,33 @@ async function renderAdminPage() {
   }
   const STATUSES = Object.keys(Store.ORDER_STATUS);
   /* 손상 내성: 필드 누락 주문 레코드도 렌더가 안 죽게 폴백 (mypage와 동일 원칙) */
-  wrap.innerHTML = orders.map((o) => `
-    <article class="order order--admin" data-oid="${o.orderId || ""}">
+  wrap.innerHTML = orders.map((o) => {
+    const oid = String(o.orderId || "");
+    const statusKey = Store.ORDER_STATUS[o.status] ? o.status : "unknown";
+    return `
+    <article class="order order--admin" data-oid="${esc(oid)}">
       <header class="order__head">
-        <p class="order__id">${o.orderId || "?"}</p>
-        <p class="order__date">${String(o.createdAt || "").slice(0, 16).replace("T", " ")}</p>
-        <p class="order__status st-${o.status}">${Store.ORDER_STATUS[o.status] || o.status || "?"}</p>
+        <p class="order__id">${esc(o.orderId || "?")}</p>
+        <p class="order__date">${esc(String(o.createdAt || "").slice(0, 16).replace("T", " "))}</p>
+        <p class="order__status st-${statusKey}">${esc(Store.ORDER_STATUS[o.status] || o.status || "?")}</p>
       </header>
-      <p class="order__meta">${o.receiver || "?"} · ${o.phone || "?"} · ${o.addr || "?"}${o.memo ? " · 메모: " + o.memo : ""} · <span>${o.userEmail || "?"}</span></p>
+      <p class="order__meta">${esc(o.receiver || "?")} · ${esc(o.phone || "?")} · ${esc(o.addr || "?")}${o.memo ? " · 메모: " + esc(o.memo) : ""} · <span>${esc(o.userEmail || "?")}</span></p>
       <ul class="order__items">
-        ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${it.name} × ${it.qty}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
+        ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${esc(it.name)} × ${esc(it.qty)}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
       <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
       <div class="order__actions">
-        <select data-status="${o.orderId}" aria-label="주문 상태 변경">
+        <select data-status="${esc(oid)}" aria-label="주문 상태 변경">
           ${STATUSES.map((s) => `<option value="${s}" ${s === o.status ? "selected" : ""}>${Store.ORDER_STATUS[s]}</option>`).join("")}
         </select>
-        <button type="button" class="btn" data-apply="${o.orderId}">상태 변경</button>
+        <button type="button" class="btn" data-apply="${esc(oid)}">상태 변경</button>
       </div>
-    </article>`).join("");
+    </article>`;
+  }).join("");
   wrap.querySelectorAll("[data-apply]").forEach((b) => b.addEventListener("click", async () => {
     const oid = b.dataset.apply;
-    const sel = wrap.querySelector(`[data-status="${oid}"]`);
+    const sel = b.closest("[data-oid]")?.querySelector("[data-status]");
+    if (!sel) return;
     await Store.updateOrderStatus(oid, sel.value);
     renderAdminPage();
   }));

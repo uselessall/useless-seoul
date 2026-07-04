@@ -18,9 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=16" />
-  <script src="assets/js/store.js?v=16" defer></script>
-  <script src="assets/js/site.js?v=16" defer></script>
+  <link rel="stylesheet" href="assets/css/clean.css?v=25" />
+  <script src="assets/js/store.js?v=25" defer></script>
+  <script src="assets/js/site.js?v=25" defer></script>
 </head>
 <body>
 
@@ -64,7 +64,7 @@
           <label for="coName">받는 분</label>
           <input type="text" id="coName" required placeholder="이름" autocomplete="name" />
           <label for="coPhone">연락처</label>
-          <input type="tel" id="coPhone" required placeholder="010-0000-0000" autocomplete="tel" />
+          <input type="tel" id="coPhone" required placeholder="010-0000-0000" autocomplete="tel" inputmode="tel" maxlength="13" pattern="0[0-9\-]{8,12}" title="0으로 시작하는 전화번호 (숫자·하이픈), 예: 010-0000-0000" />
           <label for="coAddr">배송지</label>
           <input type="text" id="coAddr" required placeholder="주소" autocomplete="street-address" />
           <label for="coMemo">배송 메모 (선택)</label>
