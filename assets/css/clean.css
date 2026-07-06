@@ -658,3 +658,23 @@ em { font-style: italic; }
   .buy--duo .buy__inner { text-align: center; }
   .buy__spin { max-width: 280px; }
 }
+
+/* ---- SCENT STORY — 나선 파티클 스크롤 씬 ---- */
+#scent-story { height: 260vh; position: relative; background: #fff; }
+.scent-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+#scene3d-root { position: absolute; inset: 0; }
+.scent-copy {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+  font-size: clamp(1.3rem, 3vw, 2.2rem); font-weight: 600; letter-spacing: -0.01em;
+  color: var(--ink); opacity: 0; white-space: nowrap; pointer-events: none;
+}
+.scent-copy--last { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 4vw, 3rem); }
+.scent-bottle {
+  position: absolute; left: 50%; bottom: 6svh; transform: translateX(-50%);
+  width: clamp(220px, 30vw, 380px); aspect-ratio: 1/1; opacity: 0; pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) { #scent-story { display: none; } }
+/* scent-story 다크 구간 — 카피 색 자동 반전 */
+.scent-sticky { transition: background 0.15s linear; }
+#scent-story .scent-copy { transition: color 0.3s; }
+#scent-story.is-dark .scent-copy { color: #f4f4f4; }

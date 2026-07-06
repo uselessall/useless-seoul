@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=39" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=40" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/store.js?v=37" defer></script>
   <script src="assets/js/site.js?v=37" defer></script>
@@ -62,6 +62,18 @@
       <h1 class="hero__title reveal">SEOUL,<br /><em>BOTTLED.</em></h1>
       <p class="hero__sub reveal">가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다.<br />그 시간의 공기를 병에 담은 리드 디퓨저 — 파일럿 3종.</p>
       <a class="btn btn--solid reveal" href="shop.html">SHOP — 파일럿 3종 보기</a>
+    </div>
+  </section>
+
+
+  <!-- ★ SCENT STORY — 향 입자 나선 스크롤 씬 (R3F 번들, 구간 근접 시에만 로드) -->
+  <section id="scent-story" aria-label="향이 병에 담기는 과정 연출">
+    <div class="scent-sticky">
+      <div id="scene3d-root"></div>
+      <p class="scent-copy" data-story-copy data-from="0.02" data-to="0.34">공기 중에 흩어져 있던 향.</p>
+      <p class="scent-copy" data-story-copy data-from="0.32" data-to="0.66">가장 쓸모없던 시간의 입자들.</p>
+      <p class="scent-copy scent-copy--last" data-story-copy data-from="0.68" data-to="1.02">병에 담다.</p>
+      <figure class="scent-bottle" data-spin data-spin-base="assets/3d/spin/f" data-spin-count="40" data-spin-auto="1" aria-hidden="true"></figure>
     </div>
   </section>
 
@@ -149,5 +161,21 @@
     <p class="foot__legal">© 2026 USÉLESS SEOUL · 시제품 단계 — 표시된 가격·사양은 목업이며 변경될 수 있습니다.</p>
   </footer>
 
+  <script>
+  /* scene3d(R3F 번들 ~295KB gzip) — 스크롤 스토리 구간 근접 시에만 다운로드 */
+  (function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var s = document.getElementById("scent-story");
+    if (!s || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (e) {
+      if (!e[0].isIntersecting) return;
+      io.disconnect();
+      var sc = document.createElement("script");
+      sc.src = "assets/js/scene3d-dist/scene3d.js?v=1";
+      document.body.appendChild(sc);
+    }, { rootMargin: "900px 0px" });
+    io.observe(s);
+  })();
+  </script>
 </body>
 </html>
