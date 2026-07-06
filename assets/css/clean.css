@@ -672,9 +672,6 @@ em { font-style: italic; }
 .scent-bottle {
   position: absolute; left: 50%; bottom: 6svh; transform: translateX(-50%);
   width: clamp(220px, 30vw, 380px); aspect-ratio: 1/1; opacity: 0; pointer-events: none;
-  /* 사각 박스 경계 제거 — 가장자리 원형 페이드 (실루엣이 어둠에 녹게) */
-  -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 55%, #000 55%, transparent 78%);
-  mask-image: radial-gradient(ellipse 72% 72% at 50% 55%, #000 55%, transparent 78%);
 }
 @media (prefers-reduced-motion: reduce) { #scent-story { display: none; } }
 /* scent-story 다크 구간 — 배경·카피 색은 JS가 같은 진행도로 연속 보간 (스텝 전환 금지) */
