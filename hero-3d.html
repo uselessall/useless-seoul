@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D HERO LAB — USÉLESS SEOUL</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    /* 유슬레스 클린 톤 그대로 — 화이트 지배 + 블랙 텍스트 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --ink: #111; --paper: #fff; --grey: #767676; --line: #e5e5e5;
+      --serif: "Instrument Serif", "Times New Roman", serif;
+      --sans: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
+    .lab-note {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+      padding: 10px 20px; font-size: 12px; letter-spacing: .08em;
+      background: var(--ink); color: #fff; text-align: center;
+    }
+    .hero3d {
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      min-height: 100vh; max-width: 1280px; margin: 0 auto; padding: 80px 40px 40px;
+      gap: 40px;
+    }
+    #stage {
+      width: 100%; aspect-ratio: 1/1; max-height: 78vh;
+      cursor: grab; touch-action: none; position: relative;
+    }
+    #stage:active { cursor: grabbing; }
+    #stage canvas { display: block; width: 100% !important; height: 100% !important; }
+    .stage-hint {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      font-size: 11px; letter-spacing: .14em; color: var(--grey); pointer-events: none;
+      text-transform: uppercase;
+    }
+    .hero3d__text h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(56px, 7vw, 104px); line-height: .95; letter-spacing: -.01em;
+    }
+    .hero3d__text h1 em { font-style: italic; }
+    .hero3d__text p { margin-top: 28px; font-size: 16px; line-height: 1.75; color: #333; }
+    .btn {
+      display: inline-block; margin-top: 36px; padding: 16px 34px;
+      background: var(--ink); color: #fff; text-decoration: none;
+      font-size: 13px; letter-spacing: .12em;
+    }
+    .swatches { margin-top: 40px; display: flex; gap: 10px; align-items: center; }
+    .swatches span { font-size: 11px; letter-spacing: .1em; color: var(--grey); margin-right: 6px; }
+    .swatch {
+      width: 34px; height: 34px; border: 1px solid var(--line); background: #fff;
+      cursor: pointer; font-size: 10px; letter-spacing: .02em; color: var(--ink);
+    }
+    .swatch.on { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink) inset; }
+    @media (max-width: 900px) {
+      .hero3d { grid-template-columns: 1fr; padding-top: 70px; text-align: center; }
+      #stage { max-height: 52vh; order: -1; }
+      .swatches { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lab-note">3D HERO LAB — 내부 검수용 프로토타입 (Three.js · 마우스 드래그 회전)</div>
+
+  <section class="hero3d">
+    <div id="stage" aria-label="리드 디퓨저 3D 미리보기">
+      <div class="stage-hint">drag to rotate</div>
+    </div>
+    <div class="hero3d__text">
+      <h1>SEOUL,<br /><em>BOTTLED.</em></h1>
+      <p>가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다.<br />그 시간의 공기를 병에 담은 리드 디퓨저 — 파일럿 3종.</p>
+      <div class="swatches">
+        <span>CAP</span>
+        <button class="swatch on" data-cap="#0d0d0d" title="무광 블랙">BLK</button>
+        <button class="swatch" data-cap="#b9b9b9" title="무광 실버">SLV</button>
+      </div>
+      <a class="btn" href="shop.html">SHOP — 파일럿 3종 보기</a>
+    </div>
+  </section>
+
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  } }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+
+    const stage = document.getElementById("stage");
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    camera.position.set(0, 2.2, 9.5);
+    camera.lookAt(0, 1.4, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    stage.prepend(renderer.domElement);
+
+    /* ---- 라이팅: 화이트 스튜디오 (소프트박스 3점) ---- */
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6);
+    key.position.set(4, 6, 6);
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.9);
+    rim.position.set(-5, 4, -4);
+    scene.add(rim);
+    const fill = new THREE.DirectionalLight(0xffffff, 0.5);
+    fill.position.set(0, -2, 5);
+    scene.add(fill);
+
+    /* 유리 반사용 environment — 그라디언트 룸 (외부 HDR 없이 자체 생성) */
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envScene = new THREE.Scene();
+    envScene.background = new THREE.Color(0xf2f2f2);
+    const panel = new THREE.Mesh(
+      new THREE.PlaneGeometry(10, 10),
+      new THREE.MeshBasicMaterial({ color: 0xffffff })
+    );
+    panel.position.set(0, 4, -6); envScene.add(panel);
+    const dark = new THREE.Mesh(
+      new THREE.PlaneGeometry(14, 8),
+      new THREE.MeshBasicMaterial({ color: 0x555555 })
+    );
+    dark.position.set(-7, 2, 4); dark.rotation.y = Math.PI / 2.3; envScene.add(dark);
+    scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+
+    /* ---- 제품: 끌로에 Grand Square 투명 200ml + 메탈캡 + 리드스틱 8가닥 ---- */
+    const bottle = new THREE.Group();
+
+    // 사각 유리 바디 (라운드 엣지 박스 근사 — 세그먼트 박스)
+    const glassGeo = new THREE.BoxGeometry(2.0, 2.3, 2.0, 4, 4, 4);
+    // 모서리 살짝 둥글리기: 정점을 구면 방향으로 미세 보간
+    const pos = glassGeo.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const v = new THREE.Vector3().fromBufferAttribute(pos, i);
+      const r = 0.12;
+      const cx = Math.max(Math.abs(v.x) - (0.95 - r), 0) * Math.sign(v.x);
+      const cz = Math.max(Math.abs(v.z) - (0.95 - r), 0) * Math.sign(v.z);
+      if (cx !== 0 && cz !== 0) {
+        const len = Math.hypot(cx, cz);
+        const s = r / len;
+        v.x -= cx * (1 - s); v.z -= cz * (1 - s);
+        pos.setXYZ(i, v.x, v.y, v.z);
+      }
+    }
+    glassGeo.computeVertexNormals();
+    /* 흰 배경 위 유리 — transmission 대신 저불투명 + 강한 클리어코트가 웹에서 유리감이 산다 */
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf4f6f7, metalness: 0, roughness: 0.02,
+      transparent: true, opacity: 0.18, side: THREE.DoubleSide,
+      clearcoat: 1, clearcoatRoughness: 0.03,
+      envMapIntensity: 2.2, depthWrite: false,
+    });
+    const glass = new THREE.Mesh(glassGeo, glassMat);
+    glass.position.y = 1.15;
+    glass.renderOrder = 3; // 라벨·향액 위에 마지막으로 그려 유리막 느낌
+    bottle.add(glass);
+
+    // 향액 (병 안 70% — 살짝 스모키한 투명 액체)
+    const liquid = new THREE.Mesh(
+      new THREE.BoxGeometry(1.76, 1.55, 1.76),
+      new THREE.MeshPhysicalMaterial({
+        color: 0xe9e4d8, metalness: 0, roughness: 0.35,
+        transparent: true, opacity: 0.45, envMapIntensity: 0.8,
+      })
+    );
+    liquid.position.y = 0.88;
+    bottle.add(liquid);
+
+    // 넥 + 무광 메탈캡
+    const capMat = new THREE.MeshStandardMaterial({ color: 0x0d0d0d, metalness: 0.85, roughness: 0.55 });
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.28, 48), capMat);
+    neck.position.y = 2.44;
+    bottle.add(neck);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.34, 48), capMat);
+    cap.position.y = 2.72;
+    bottle.add(cap);
+
+    // 리드 스틱 8가닥 (블랙 4mm×30cm 비율) — pivot을 병목(y=2.75)에 두고 위로 벌어지게
+    const stickMat = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.9 });
+    const stickLen = 3.6;
+    const stickGeo = new THREE.CylinderGeometry(0.026, 0.026, stickLen, 8);
+    stickGeo.translate(0, stickLen / 2 - 0.6, 0); // pivot = 스틱 하단 근처
+    for (let i = 0; i < 8; i++) {
+      const s = new THREE.Mesh(stickGeo, stickMat);
+      const a = (i / 8) * Math.PI * 2 + 0.4;
+      const tilt = 0.10 + (i % 4) * 0.05;
+      s.position.set(Math.cos(a) * 0.09, 2.55, Math.sin(a) * 0.09);
+      s.rotation.z = -Math.cos(a) * tilt;
+      s.rotation.x = Math.sin(a) * tilt;
+      bottle.add(s);
+    }
+
+    // 라벨 (크림지 — 앞면)
+    const labelCanvas = document.createElement("canvas");
+    labelCanvas.width = 512; labelCanvas.height = 340;
+    const lc = labelCanvas.getContext("2d");
+    lc.fillStyle = "#f6f1e6"; lc.fillRect(0, 0, 512, 340);
+    lc.strokeStyle = "#d8d2c4"; lc.lineWidth = 4; lc.strokeRect(6, 6, 500, 328);
+    lc.fillStyle = "#111";
+    lc.textAlign = "center";
+    lc.font = "600 54px -apple-system, sans-serif"; lc.letterSpacing = "10px";
+    lc.fillText("USÉLESS", 256, 130);
+    lc.font = "300 30px -apple-system, sans-serif"; lc.letterSpacing = "14px";
+    lc.fillText("SEOUL", 256, 190);
+    lc.font = "300 20px -apple-system, sans-serif"; lc.letterSpacing = "2px";
+    lc.fillStyle = "#777";
+    lc.fillText("REED DIFFUSER · 200ml", 256, 265);
+    const labelTex = new THREE.CanvasTexture(labelCanvas);
+    labelTex.colorSpace = THREE.SRGBColorSpace;
+    const label = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.28, 0.85),
+      new THREE.MeshStandardMaterial({ map: labelTex, roughness: 0.85, polygonOffset: true, polygonOffsetFactor: -2 })
+    );
+    label.position.set(0, 1.05, 1.03);
+    label.renderOrder = 2;
+    bottle.add(label);
+
+    // 바닥 소프트 섀도 (원형 그라디언트 스프라이트)
+    const shadowCanvas = document.createElement("canvas");
+    shadowCanvas.width = shadowCanvas.height = 256;
+    const sc = shadowCanvas.getContext("2d");
+    const grad = sc.createRadialGradient(128, 128, 10, 128, 128, 120);
+    grad.addColorStop(0, "rgba(0,0,0,0.28)");
+    grad.addColorStop(1, "rgba(0,0,0,0)");
+    sc.fillStyle = grad; sc.fillRect(0, 0, 256, 256);
+    const shadowTex = new THREE.CanvasTexture(shadowCanvas);
+    const shadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(4.2, 4.2),
+      new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })
+    );
+    shadow.rotation.x = -Math.PI / 2;
+    shadow.position.y = 0.001;
+    bottle.add(shadow);
+
+    scene.add(bottle);
+
+    /* ---- 인터랙션: 드래그 회전 + 관성 + idle 자동 회전 ---- */
+    let targetRotY = 0.12, rotY = 0.12, targetRotX = 0, rotX = 0;
+    let dragging = false, lastX = 0, lastY = 0, idleTimer = 0;
+    const onDown = (x, y) => { dragging = true; lastX = x; lastY = y; idleTimer = 0; };
+    const onMove = (x, y) => {
+      if (!dragging) return;
+      targetRotY += (x - lastX) * 0.008;
+      targetRotX = Math.max(-0.5, Math.min(0.5, targetRotX + (y - lastY) * 0.004));
+      lastX = x; lastY = y;
+    };
+    stage.addEventListener("pointerdown", e => { stage.setPointerCapture(e.pointerId); onDown(e.clientX, e.clientY); });
+    stage.addEventListener("pointermove", e => onMove(e.clientX, e.clientY));
+    stage.addEventListener("pointerup", () => dragging = false);
+    stage.addEventListener("pointercancel", () => dragging = false);
+
+    /* 캡 색 스와치 */
+    document.querySelectorAll(".swatch").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".swatch").forEach(b => b.classList.remove("on"));
+        btn.classList.add("on");
+        capMat.color.set(btn.dataset.cap);
+        capMat.needsUpdate = true;
+      });
+    });
+
+    /* ---- 리사이즈 + 렌더 루프 ---- */
+    function resize() {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    new ResizeObserver(resize).observe(stage);
+    resize();
+
+    const clock = new THREE.Clock();
+    function tick() {
+      const dt = clock.getDelta();
+      if (!dragging) {
+        idleTimer += dt;
+        if (idleTimer > 8) targetRotY += dt * 0.15; // idle 자동 회전
+        targetRotX *= 0.98;
+      }
+      rotY += (targetRotY - rotY) * 0.08;
+      rotX += (targetRotX - rotX) * 0.08;
+      bottle.rotation.y = rotY;
+      bottle.rotation.x = rotX;
+      bottle.position.y = Math.sin(clock.elapsedTime * 0.8) * 0.03; // 미세 플로팅
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
+</body>
+</html>
