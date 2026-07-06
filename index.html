@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=43" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=44" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/store.js?v=37" defer></script>
   <script src="assets/js/site.js?v=37" defer></script>
@@ -70,9 +70,9 @@
   <section id="scent-story" aria-label="향이 병에 담기는 과정 연출">
     <div class="scent-sticky">
       <div id="scene3d-root"></div>
-      <p class="scent-copy" data-story-copy data-from="0.02" data-to="0.34">공기 중에 흩어져 있던 향.</p>
-      <p class="scent-copy" data-story-copy data-from="0.32" data-to="0.66">가장 쓸모없던 시간의 입자들.</p>
-      <p class="scent-copy scent-copy--last" data-story-copy data-from="0.68" data-to="1.02">병에 담다.</p>
+      <p class="scent-copy" data-story-copy data-from="0.03" data-to="0.3">공기 중에 흩어져 있던 향.</p>
+      <p class="scent-copy" data-story-copy data-from="0.3" data-to="0.6">가장 쓸모없던 시간의 입자들.</p>
+      <p class="scent-copy scent-copy--last" data-story-copy data-from="0.72" data-to="1.02">병에 담다.</p>
       <figure class="scent-bottle" data-spin data-spin-base="assets/3d/spin/f" data-spin-count="40" data-spin-auto="1" aria-hidden="true"></figure>
     </div>
   </section>
@@ -173,7 +173,7 @@
       if (!e[0].isIntersecting) return;
       io.disconnect();
       var sc = document.createElement("script");
-      sc.src = "assets/js/scene3d-dist/scene3d.js?v=8";
+      sc.src = "assets/js/scene3d-dist/scene3d.js?v=10";
       document.body.appendChild(sc);
     }, { rootMargin: "900px 0px" });
     io.observe(s);

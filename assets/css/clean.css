@@ -660,7 +660,7 @@ em { font-style: italic; }
 }
 
 /* ---- SCENT STORY — 나선 파티클 스크롤 씬 ---- */
-#scent-story { height: 260vh; position: relative; background: #fff; }
+#scent-story { height: 420vh; position: relative; background: #fff; }
 .scent-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
 #scene3d-root { position: absolute; inset: 0; }
 .scent-copy {
