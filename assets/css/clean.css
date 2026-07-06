@@ -675,6 +675,12 @@ em { font-style: italic; }
 }
 @media (prefers-reduced-motion: reduce) { #scent-story { display: none; } }
 /* scent-story 다크 구간 — 카피 색 자동 반전 */
-.scent-sticky { transition: background 0.15s linear; }
+.scent-sticky { transition: background 0.45s ease; }
 #scent-story .scent-copy { transition: color 0.3s; }
 #scent-story.is-dark .scent-copy { color: #f4f4f4; }
+
+/* 4 Scents 스크롤 핀 — 구간 동안 카드 병 회전 */
+.lineup-pin { height: 280vh; position: relative; }
+.lineup-pin .lineup { position: sticky; top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.lineup-pin .spin-hover-canvas { opacity: 1; } /* 핀 구간에선 스핀 캔버스 상시 표시 */
+@media (prefers-reduced-motion: reduce) { .lineup-pin { height: auto; } }

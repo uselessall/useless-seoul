@@ -24,7 +24,8 @@
   function loadFrames(base, N, onFirst) {
     var key = base + "|" + N;
     if (cache[key]) {
-      if (cache[key].some(function (im) { return im.complete && im.naturalWidth; })) onFirst();
+      // 동기 콜백이면 호출측 frames 변수 할당 전에 draw가 돌 수 있음 — 항상 비동기로
+      if (cache[key].some(function (im) { return im.complete && im.naturalWidth; })) setTimeout(onFirst, 0);
       else cache[key][0].addEventListener("load", onFirst, { once: true });
       return cache[key];
     }
@@ -162,6 +163,7 @@
     state.canvas.classList.add("spin-hover-canvas");
     var ctx = state.canvas.getContext("2d");
     var frames = loadFrames(BASE_DEFAULT, N_DEFAULT, function () {});
+    state.size = size; state.drawNow = function () { drawFrame(ctx, state.canvas, frames, N_DEFAULT, state.idx); };
     function size() {
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       state.canvas.width = box.clientWidth * dpr;
@@ -188,6 +190,47 @@
     hovered.set(box, hoverMount(box));
     box.dispatchEvent(new Event("mouseenter"));
   });
+
+  /* ---- 4 Scents 스크롤 핀 — 구간 진행도만큼 카드 병 회전 ---- */
+  function pinLoop() {
+    var pin = document.getElementById("lineup-pin");
+    if (!pin) return;
+    var states = null;
+    function ensure() {
+      var boxes = pin.querySelectorAll(".product__img");
+      if (!boxes.length) return null;
+      var arr = [];
+      boxes.forEach(function (box, k) {
+        if (!hovered.has(box)) hovered.set(box, hoverMount(box));
+        var st = hovered.get(box);
+        if (!st.canvas.parentNode) { box.appendChild(st.canvas); }
+        box.classList.add("spin-hovering");
+        st._pinOffset = k * 10;         // 카드마다 위상 오프셋
+        arr.push(st);
+      });
+      return arr;
+    }
+    var raf = 0;
+    function step() {
+      var r = pin.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      var total = r.height - vh;
+      var pr = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+      var inview = r.top < vh && r.bottom > 0;
+      if (inview) {
+        if (!states) states = ensure();
+        if (states) states.forEach(function (st) {
+          st.size();                     // 카드가 JS 렌더라 크기 늦게 잡힘 — 매회 보정
+          st.target = pr * 80 + st._pinOffset;   // 스크롤 전체에 두 바퀴
+          st.idx += (st.target - st.idx) * 0.12;
+          st.drawNow();
+        });
+      }
+      raf = requestAnimationFrame(step);
+    }
+    step();
+  }
+  pinLoop();
 
   function init() { document.querySelectorAll("[data-spin]").forEach(mount); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
