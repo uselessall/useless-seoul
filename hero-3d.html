@@ -6,66 +6,36 @@
   <title>3D HERO LAB — USÉLESS SEOUL</title>
   <meta name="robots" content="noindex" />
   <style>
-    /* 유슬레스 클린 톤 — 화이트 지배 + 블랙 텍스트. 360°는 실사 프레임 스크럽(픽셀 전부 실사). */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --ink: #111; --paper: #fff; --grey: #767676; --line: #e5e5e5;
-      --serif: "Instrument Serif", "Times New Roman", serif;
-      --sans: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
-    }
-    body { font-family: var(--sans); background: var(--paper); color: var(--ink); }
-    .lab-note {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 10;
-      padding: 10px 20px; font-size: 12px; letter-spacing: .08em;
-      background: var(--ink); color: #fff; text-align: center;
-    }
-    .hero3d {
-      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
-      min-height: 100vh; max-width: 1280px; margin: 0 auto; padding: 80px 40px 40px;
-      gap: 40px;
-    }
-    #stage {
-      width: 100%; aspect-ratio: 1/1; max-height: 78vh;
-      cursor: grab; touch-action: none; position: relative;
-      user-select: none; -webkit-user-select: none;
-    }
-    #stage:active { cursor: grabbing; }
-    #stage canvas { display: block; width: 100%; height: 100%; }
-    .stage-hint {
-      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-      font-size: 11px; letter-spacing: .14em; color: var(--grey); pointer-events: none;
-      text-transform: uppercase; transition: opacity .4s;
-    }
-    .stage-hint.off { opacity: 0; }
-    .stage-load {
-      position: absolute; inset: 0; display: grid; place-items: center;
-      font-size: 11px; letter-spacing: .14em; color: var(--grey); text-transform: uppercase;
-    }
-    .hero3d__text h1 {
-      font-family: var(--serif); font-weight: 400;
-      font-size: clamp(56px, 7vw, 104px); line-height: .95; letter-spacing: -.01em;
-    }
-    .hero3d__text h1 em { font-style: italic; }
-    .hero3d__text p { margin-top: 28px; font-size: 16px; line-height: 1.75; color: #333; }
-    .btn {
-      display: inline-block; margin-top: 36px; padding: 16px 34px;
-      background: var(--ink); color: #fff; text-decoration: none;
-      font-size: 13px; letter-spacing: .12em;
-    }
-    @media (max-width: 900px) {
-      .hero3d { grid-template-columns: 1fr; padding-top: 70px; text-align: center; }
-      #stage { max-height: 52vh; order: -1; }
-    }
+    :root { --ink:#111; --grey:#767676;
+      --serif:"Instrument Serif","Times New Roman",serif;
+      --sans:"Pretendard Variable",Pretendard,-apple-system,sans-serif; }
+    body { font-family: var(--sans); background: #fff; color: var(--ink); }
+    .lab-note { position: fixed; top:0; left:0; right:0; z-index:10; padding:10px 20px;
+      font-size:12px; letter-spacing:.08em; background:var(--ink); color:#fff; text-align:center; }
+    .hero3d { display:grid; grid-template-columns:1fr 1fr; align-items:center;
+      min-height:100vh; max-width:1280px; margin:0 auto; padding:80px 40px 40px; gap:40px; }
+    #hero3d-lab-root { width:100%; aspect-ratio:1/1; max-height:78vh; position:relative;
+      cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none;
+      background: radial-gradient(ellipse 90% 70% at 50% 42%, #f7f7f8 0%, #ececee 68%, #e4e4e6 100%); }
+    #hero3d-lab-root:active { cursor:grabbing; }
+    .stage-hint { position:absolute; bottom:12px; left:50%; transform:translateX(-50%);
+      font-size:11px; letter-spacing:.14em; color:var(--grey); pointer-events:none; text-transform:uppercase; }
+    .hero3d__text h1 { font-family:var(--serif); font-weight:400;
+      font-size:clamp(56px,7vw,104px); line-height:.95; letter-spacing:-.01em; }
+    .hero3d__text h1 em { font-style:italic; }
+    .hero3d__text p { margin-top:28px; font-size:16px; line-height:1.75; color:#333; }
+    .btn { display:inline-block; margin-top:36px; padding:16px 34px; background:var(--ink);
+      color:#fff; text-decoration:none; font-size:13px; letter-spacing:.12em; }
+    @media (max-width:900px){ .hero3d{grid-template-columns:1fr; padding-top:70px; text-align:center;}
+      #hero3d-lab-root{max-height:52vh; order:-1;} }
   </style>
 </head>
 <body>
-  <div class="lab-note">3D HERO LAB — 실사 360° 스크럽 (드래그로 회전 · Higgsfield 턴테이블 40프레임)</div>
-
+  <div class="lab-note">3D HERO LAB v2 — 진짜 3D 병 (R3F·Draco GLB·스튜디오 라이팅·마우스 패럴랙스·드래그)</div>
   <section class="hero3d">
-    <div id="stage" aria-label="리드 디퓨저 360도 실사 미리보기">
-      <canvas id="spin"></canvas>
-      <div class="stage-load" id="loadNote">LOADING 360°</div>
-      <div class="stage-hint" id="hint">drag to rotate</div>
+    <div id="hero3d-lab-root" aria-label="리드 디퓨저 3D — 마우스를 움직이거나 드래그">
+      <span class="stage-hint">move mouse / drag</span>
     </div>
     <div class="hero3d__text">
       <h1>SEOUL,<br /><em>BOTTLED.</em></h1>
@@ -73,94 +43,6 @@
       <a class="btn" href="shop.html">SHOP — 파일럿 3종 보기</a>
     </div>
   </section>
-
-  <script>
-  (function () {
-    "use strict";
-    var N = 40; // 프레임 수 (assets/3d/spin/f00..f39.jpg — 1회전)
-    var stage = document.getElementById("stage");
-    var canvas = document.getElementById("spin");
-    var ctx = canvas.getContext("2d");
-    var hint = document.getElementById("hint");
-    var loadNote = document.getElementById("loadNote");
-
-    var frames = new Array(N);
-    var loaded = 0;
-    var idx = 0;          // 현재 프레임 (실수 — 관성용)
-    var vel = 0;          // 프레임 속도
-    var dragging = false;
-    var lastX = 0;
-    var idleMs = 0;
-    var touched = false;
-
-    function pad(n) { return (n < 10 ? "0" : "") + n; }
-
-    for (let i = 0; i < N; i++) {
-      var im = new Image();
-      im.decoding = "async";
-      im.src = "assets/3d/spin/f" + pad(i + 1) + ".jpg"; // 파일명 f01..f40
-      im.onload = function () {
-        loaded++;
-        if (loaded === 1) draw();               // 첫 장 즉시
-        if (loaded === N) loadNote.style.display = "none";
-      };
-      frames[i] = im;
-    }
-
-    function resize() {
-      var w = stage.clientWidth, h = stage.clientHeight;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      draw();
-    }
-    window.addEventListener("resize", resize);
-
-    function draw() {
-      var i = ((Math.round(idx) % N) + N) % N;
-      var im = frames[i];
-      if (!im || !im.complete || !im.naturalWidth) return;
-      var cw = canvas.width, ch = canvas.height;
-      ctx.clearRect(0, 0, cw, ch);
-      // cover-fit (정사각 소스 → 정사각 스테이지라 사실상 1:1)
-      var s = Math.min(cw / im.naturalWidth, ch / im.naturalHeight);
-      var dw = im.naturalWidth * s, dh = im.naturalHeight * s;
-      ctx.drawImage(im, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
-    }
-
-    stage.addEventListener("pointerdown", function (e) {
-      stage.setPointerCapture(e.pointerId);
-      dragging = true; lastX = e.clientX; vel = 0; idleMs = 0;
-      if (!touched) { touched = true; hint.classList.add("off"); }
-    });
-    stage.addEventListener("pointermove", function (e) {
-      if (!dragging) return;
-      var dx = e.clientX - lastX;
-      lastX = e.clientX;
-      var step = dx * (N / stage.clientWidth) * 1.4; // 한 번 가로지르면 ~1.4회전
-      idx += step;
-      vel = step;
-      draw();
-    });
-    function up() { dragging = false; }
-    stage.addEventListener("pointerup", up);
-    stage.addEventListener("pointercancel", up);
-
-    var last = performance.now();
-    function tick(now) {
-      var dt = now - last; last = now;
-      if (!dragging) {
-        idleMs += dt;
-        if (Math.abs(vel) > 0.01) {         // 관성
-          idx += vel; vel *= 0.92; draw();
-        } else if (idleMs > 8000) {          // 8초 무입력 → 천천히 자동 회전
-          idx += dt * 0.006; draw();
-        }
-      }
-      requestAnimationFrame(tick);
-    }
-    resize();
-    requestAnimationFrame(tick);
-  })();
-  </script>
+  <script src="assets/js/scene3d-dist/scene3d.js?v=7" defer></script>
 </body>
 </html>
