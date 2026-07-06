@@ -23,12 +23,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=38" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=39" />
   <!-- SHOP 대표 실사 컷 선발견 -->
   <link rel="preload" as="image" href="assets/img/live/product-hero-clean.png" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/store.js?v=37" defer></script>
   <script src="assets/js/site.js?v=37" defer></script>
+  <script src="assets/js/spin.js?v=2" defer></script>
 </head>
 <body>
 
@@ -65,6 +66,13 @@
         <span>판매 3종 · 200ml · ₩35,000 mock</span>
       </div>
     </section>
+
+    <!-- 3병 위상 밴드 — 같은 실사 스핀, 시작 프레임만 다르게 (상시 슬로 회전) -->
+    <div class="spinband" aria-hidden="true">
+      <div data-spin data-spin-auto="1" data-spin-offset="0"></div>
+      <div data-spin data-spin-auto="1" data-spin-offset="13"></div>
+      <div data-spin data-spin-auto="1" data-spin-offset="27"></div>
+    </div>
 
     <!-- 카드는 site.js가 Store.getProducts()로 렌더 — 제품 정본은 store.js 한 곳 (가격 전부 mock) -->
     <h2 class="sr-only">전체 제품</h2>
