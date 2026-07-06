@@ -610,3 +610,17 @@ em { font-style: italic; }
 .product__info { display: flex; flex-direction: column; flex: 1; }
 .product__add { margin-top: auto; }
 .product__price { margin-bottom: 0.8rem; }
+
+/* ---- 실사 360° 스핀 (spin.js) ---- */
+[data-spin] { position: relative; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+[data-spin]:active { cursor: grabbing; }
+[data-spin] .spin-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+[data-spin] img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.spin-hint {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; letter-spacing: .16em; color: #999; pointer-events: none;
+  transition: opacity .4s;
+}
+[data-spin].spin-touched .spin-hint { opacity: 0; }
+.hero__img--spin { aspect-ratio: 1/1; overflow: hidden; }
+.pdwrap .pd__img--spin, .pd__img--spin { aspect-ratio: 1/1; overflow: hidden; position: relative; }
