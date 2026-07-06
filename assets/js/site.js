@@ -1,13 +1,24 @@
 /* USÉLESS SEOUL — 공통 스크립트 (내비 + reveal + 장바구니 + 회원/주문 UI)
-   데이터 접근은 전부 window.Store 어댑터 경유 (assets/js/store.js — 내일 Supabase 구현체로 교체).
+   데이터 접근은 전부 window.Store 어댑터 경유 (assets/js/store.js — 현재 StoreSupabase 구현체).
    실결제 없음 — 무통장입금 mock. 가격은 전부 표시용. */
 
 let PRODUCT_MAP = {}; // Store.getProducts() 캐시 (id → product)
-const won = (n) => "₩" + n.toLocaleString("ko-KR");
+const priceNumber = (v) => {
+  const n = Number(v);
+  return Number.isFinite(n) && n >= 0 ? n : 0;
+};
+const won = (n) => "₩" + priceNumber(n).toLocaleString("ko-KR");
 const CART_KEY = "useless_cart_v1";
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (ch) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
 }[ch]));
+const safeRelativeUrl = (v, fallback = "#") => {
+  const s = String(v ?? "").trim();
+  if (!s || /[\u0000-\u001F\u007F]/.test(s)) return fallback;
+  const compact = s.replace(/\s/g, "").toLowerCase();
+  if (/^[a-z][a-z0-9+.-]*:/i.test(s) || compact.startsWith("//")) return fallback;
+  return s;
+};
 
 /* ---------- 장바구니 (클라이언트 상태 — 어댑터 교체와 무관하게 로컬 유지) ---------- */
 function cartGet() {
@@ -33,9 +44,10 @@ function cartAdd(id, qty = 1) {
   if (!PRODUCT_MAP[id] || PRODUCT_MAP[id].status !== "on_sale") return; // 출시 예정 상품은 담기 불가
 
   const items = cartGet();
+  qty = Math.min(Math.max(1, qty | 0), 99);
   const hit = items.find((it) => it.id === id);
   if (hit) hit.qty = Math.min(hit.qty + qty, 99);
-  else items.push({ id, qty: Math.min(qty, 99) });
+  else items.push({ id, qty });
   cartSave(items);
 }
 function cartSetQty(id, qty) {
@@ -48,7 +60,7 @@ function cartSetQty(id, qty) {
 }
 function cartRemove(id) { cartSave(cartGet().filter((it) => it.id !== id)); }
 function cartClear() { cartSave([]); }
-function cartTotal() { return cartGet().reduce((s, it) => s + (PRODUCT_MAP[it.id]?.price || 0) * it.qty, 0); }
+function cartTotal() { return cartGet().reduce((s, it) => s + priceNumber(PRODUCT_MAP[it.id]?.price) * it.qty, 0); }
 function cartCount() { return cartGet().reduce((s, it) => s + it.qty, 0); }
 
 /* ---------- 헤더: 카트 배지 + 로그인 상태 ---------- */
@@ -72,18 +84,20 @@ function renderProductGrids(products) {
   document.querySelectorAll("[data-product-grid]").forEach((grid) => {
     grid.innerHTML = products.map((p, i) => {
       const onSale = p.status === "on_sale";
+      const url = esc(safeRelativeUrl(p.url, "shop.html"));
+      const img = esc(safeRelativeUrl(p.img, "assets/img/live/scene-tea.jpg"));
       return `
     <article class="product reveal">
-      <a class="product__img" href="${p.url}"><img src="${p.img}" alt="${p.alt}" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} /></a>
+      <a class="product__img" href="${url}"><img src="${img}" alt="${esc(p.alt)}" ${i === 0 ? 'fetchpriority="high"' : 'decoding="async"'} /></a>
       <div class="product__info">
-        <p class="product__code">${p.code}</p>
-        <h3 class="product__name"><a href="${p.url}">${p.name} <span>${p.en}</span></a></h3>
-        <p class="product__hook">${p.hook}</p>
-        <p class="product__notes">${p.notes}</p>
-        <p class="product__spec">${p.spec}</p>
+        <p class="product__code">${esc(p.code)}</p>
+        <h3 class="product__name"><a href="${url}">${esc(p.name)} <span>${esc(p.en)}</span></a></h3>
+        <p class="product__hook">${esc(p.hook)}</p>
+        <p class="product__notes">${esc(p.notes)}</p>
+        <p class="product__spec">${esc(p.spec)}</p>
         <p class="product__price">${onSale ? `${won(p.price)} <span class="mock">표시용</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
         ${onSale
-          ? `<button type="button" class="product__add" data-add="${p.id}">장바구니 담기</button>`
+          ? `<button type="button" class="product__add" data-add="${esc(p.id)}">장바구니 담기</button>`
           : `<button type="button" class="product__add" disabled aria-disabled="true">출시 예정</button>`}
       </div>
     </article>`;
@@ -128,7 +142,7 @@ function hydrateProductPage() {
   set("note-mid", mid);
   set("note-base", base);
   const img = root.querySelector(".pd__img img");
-  if (img) { img.src = p.img; img.alt = p.alt; }
+  if (img) { img.src = safeRelativeUrl(p.img, img.getAttribute("src") || "assets/img/live/scene-tea.jpg"); img.alt = p.alt; }
 }
 
 /* ---------- 담기 버튼 (data-add="id" [data-qty-from="#sel"]) ---------- */
@@ -172,22 +186,24 @@ function renderCartPage() {
   empty.hidden = true; box.hidden = false;
   wrap.innerHTML = items.map((it) => {
     const p = PRODUCT_MAP[it.id];
+    const url = esc(safeRelativeUrl(p.url, "shop.html"));
+    const img = esc(safeRelativeUrl(p.img, "assets/img/live/scene-tea.jpg"));
     return `
-    <div class="cart__row" data-row="${it.id}">
-      <a class="cart__img" href="${p.url}"><img src="${p.img}" alt="${p.name}" /></a>
+    <div class="cart__row" data-row="${esc(it.id)}">
+      <a class="cart__img" href="${url}"><img src="${img}" alt="${esc(p.name)}" /></a>
       <div class="cart__info">
-        <p class="cart__code">${p.code}</p>
-        <a class="cart__name" href="${p.url}">${p.name}</a>
-        <p class="cart__spec">${p.spec}</p>
+        <p class="cart__code">${esc(p.code)}</p>
+        <a class="cart__name" href="${url}">${esc(p.name)}</a>
+        <p class="cart__spec">${esc(p.spec)}</p>
         <p class="cart__unit">${won(p.price)} <span class="mock">표시용</span></p>
       </div>
       <div class="cart__qty">
-        <button type="button" data-dec="${it.id}" aria-label="수량 줄이기">−</button>
+      <button type="button" data-dec="${esc(it.id)}" aria-label="수량 줄이기">−</button>
         <span>${it.qty}</span>
-        <button type="button" data-inc="${it.id}" aria-label="수량 늘리기">+</button>
+        <button type="button" data-inc="${esc(it.id)}" aria-label="수량 늘리기">+</button>
       </div>
-      <p class="cart__sum">${won(p.price * it.qty)}</p>
-      <button type="button" class="cart__del" data-del="${it.id}" aria-label="삭제">삭제</button>
+      <p class="cart__sum">${won(priceNumber(p.price) * it.qty)}</p>
+      <button type="button" class="cart__del" data-del="${esc(it.id)}" aria-label="삭제">삭제</button>
     </div>`;
   }).join("");
   document.getElementById("cartTotal").textContent = won(cartTotal());
@@ -224,7 +240,7 @@ async function renderCheckoutPage() {
 
   list.innerHTML = items.map((it) => {
     const p = PRODUCT_MAP[it.id];
-    return `<li><span>${p.name} × ${it.qty}</span><span>${won(p.price * it.qty)}</span></li>`;
+    return `<li><span>${esc(p.name)} × ${it.qty}</span><span>${won(priceNumber(p.price) * it.qty)}</span></li>`;
   }).join("");
   document.getElementById("coTotal").textContent = won(cartTotal());
 
@@ -264,11 +280,15 @@ function bindSignupPage() {
     const pw = document.getElementById("suPw").value;
     if (pw !== document.getElementById("suPw2").value) { showErr("authErr", "비밀번호가 서로 다릅니다."); return; }
     try {
-      await Store.signUp({
+      const result = await Store.signUp({
         email: document.getElementById("suEmail").value,
         password: pw,
         name: document.getElementById("suName").value,
       });
+      if (result && result.emailConfirmationRequired) {
+        showErr("authErr", "확인 메일을 보냈습니다. 이메일 인증 후 로그인해 주세요.");
+        return;
+      }
       location.href = "mypage.html";
     } catch (err) { showErr("authErr", err.message); }
   });
@@ -320,12 +340,12 @@ async function renderMyPage() {
         ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${esc(it.name)} × ${esc(it.qty)}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
       <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
-      ${o.status === "awaiting_deposit" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: [입금계좌 확인필요] · 입금 확인 후 배송이 시작됩니다.</p>` : ""}
+      ${o.status === "awaiting_payment" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: 우리은행 1002-454-250728 예금주 백승준 · 입금 확인 후 배송이 시작됩니다.</p>` : ""}
     </article>`;
   }).join("");
 }
 
-/* ---------- 관리자 (로컬 데이터 — URL 직접 진입 전용) ---------- */
+/* ---------- 관리자 (Supabase/RLS 기준 — URL 직접 진입 전용) ---------- */
 async function renderAdminPage() {
   const wrap = document.getElementById("adminOrders");
   if (!wrap) return;
@@ -378,14 +398,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderProductGrids(products);
   hydrateProductPage();
 
-  // 숨김(.pre)은 뷰포트 아래 요소에만 부여 — 첫 화면은 JS 도착 전부터 보임(FCP/LCP가 JS에 안 묶임)
-  const io = new IntersectionObserver((es) => {
-    es.forEach((e) => { if (e.isIntersecting) { e.target.classList.remove("pre"); e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll(".reveal").forEach((el) => {
-    if (el.getBoundingClientRect().top > innerHeight * 0.92) { el.classList.add("pre"); io.observe(el); }
-    else el.classList.add("in");
-  });
+  // 클린 커머스 방향: 콘텐츠는 즉시 보이게 둔다. 스크롤 연출은 제거해 full-page 캡처·느린 환경에서도 빈 섹션이 생기지 않게 한다.
+  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
 
   const nav = document.getElementById("nav");
   if (nav) addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), { passive: true });

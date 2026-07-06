@@ -16,9 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=25" />
-  <script src="assets/js/store.js?v=25" defer></script>
-  <script src="assets/js/site.js?v=25" defer></script>
+  <link rel="stylesheet" href="assets/css/clean.css?v=37" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/store.js?v=37" defer></script>
+  <script src="assets/js/site.js?v=37" defer></script>
 </head>
 <body>
 
@@ -32,7 +33,7 @@
     <noscript><p class="nojs-note">이 페이지는 JavaScript가 필요합니다. 브라우저 설정에서 JavaScript를 켠 뒤 다시 열어주세요.</p></noscript>
     <header class="page-head reveal">
       <h1>Orders</h1>
-      <p>주문 <span id="adminCount">0</span>건 — 입금 확인·배송 상태 관리 (내부용, 링크 없음 · URL 직접 진입 전용). 지금은 이 브라우저의 로컬 데이터만 보입니다. 내일 Supabase 연결 시 전체 주문으로 대체됩니다.</p>
+      <p>주문 <span id="adminCount">0</span>건 — 입금 확인·배송 완료 상태 관리 (내부용, 링크 없음 · URL 직접 진입 전용). 현재 Supabase RLS 기준으로 접근 가능한 주문만 보입니다.</p>
     </header>
     <section class="reveal" id="adminOrders"></section>
   </main>

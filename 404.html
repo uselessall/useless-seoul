@@ -94,7 +94,7 @@
     // 배포 도메인 확정 시 절대경로로 교체: var BASE = "https://[배포URL 확인필요]/";
     // 미확정 동안은 휴리스틱: *.github.io 프로젝트 페이지면 /<repo>/ 가 루트, 그 외(커스텀 도메인·로컬)는 /.
     (function () {
-      var BASE = "";
+      var BASE = "https://uselessall.github.io/useless-seoul/";
       if (!BASE) {
         if (/\.github\.io$/.test(location.hostname)) {
           var seg = location.pathname.split("/")[1] || "";

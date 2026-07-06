@@ -8,8 +8,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="FAQ — USÉLESS SEOUL" />
   <meta property="og:description" content="배송·교환·환불·사용법 자주 묻는 질문." />
-  <meta property="og:image" content="assets/img/hangang.svg" />
-  <!-- 배포 후 필수: og:image를 절대경로로, og:url 추가 — https://[배포URL 확인필요]/... (상대경로 og:image는 카카오톡·트위터 등 공유 카드에서 무시됨) -->
+  <meta property="og:image" content="https://uselessall.github.io/useless-seoul/assets/img/live/product-hangang.jpg" />
+  <meta property="og:url" content="https://uselessall.github.io/useless-seoul/faq.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23111111' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -23,9 +23,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=25" />
-  <script src="assets/js/store.js?v=25" defer></script>
-  <script src="assets/js/site.js?v=25" defer></script>
+  <link rel="stylesheet" href="assets/css/clean.css?v=37" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/store.js?v=37" defer></script>
+  <script src="assets/js/site.js?v=37" defer></script>
 </head>
 <body>
 
@@ -126,11 +127,11 @@
       </details>
       <details class="faq__item">
         <summary>결제 수단은 무엇을 지원하나요?</summary>
-        <p>오픈 초기에는 무통장입금으로 시작할 예정이며, 입금 계좌는 주문 완료 화면에서 안내합니다. [입금계좌 확인필요] 카드 등 다른 결제 수단은 순차 도입 예정입니다.</p>
+        <p>오픈 초기에는 무통장입금으로 시작할 예정입니다. 입금 계좌는 우리은행 1002-454-250728 예금주 백승준입니다. 카드 등 다른 결제 수단은 순차 도입 예정입니다.</p>
       </details>
       <details class="faq__item">
         <summary>회원가입 없이 주문할 수 있나요?</summary>
-        <p>현재는 주문 조회를 위해 로그인 후 주문하는 구조입니다. 입력하신 정보는 이 브라우저(localStorage)에만 저장되며 외부로 전송되지 않습니다.</p>
+        <p>현재는 주문 조회를 위해 로그인 후 주문하는 구조입니다. 회원 정보는 Supabase Auth에, 주문자·배송 정보는 주문 조회와 입금 확인을 위해 Supabase DB에 저장됩니다.</p>
       </details>
     </div>
   </main>
@@ -144,7 +145,7 @@
       <a href="faq.html">FAQ</a>
       <a href="https://www.instagram.com/useless_seoul/" target="_blank" rel="noopener">@useless_seoul</a>
     </div>
-    <p class="foot__legal">© 2026 USELESS SEOUL · 시제품 단계 — 표시된 가격·사양은 목업이며 변경될 수 있습니다.</p>
+    <p class="foot__legal">© 2026 USÉLESS SEOUL · 시제품 단계 — 표시된 가격·사양은 목업이며 변경될 수 있습니다.</p>
   </footer>
 
 </body>

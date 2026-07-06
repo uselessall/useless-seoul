@@ -1,0 +1,7 @@
+# USÉLESS SEOUL — robots.txt
+# 비공개성 페이지는 각 문서의 meta robots(noindex)로 제어한다.
+# 크롤러가 noindex 태그를 읽어야 하므로 여기서 Disallow하지 않는다(경로 노출 회피 겸).
+User-agent: *
+Allow: /
+
+Sitemap: https://uselessall.github.io/useless-seoul/sitemap.xml

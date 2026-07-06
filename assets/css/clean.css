@@ -109,6 +109,13 @@ em { font-style: italic; }
   padding: clamp(20px, 3vw, 38px);
 }
 .hero__img img { width: 100%; height: 100%; object-fit: contain; }
+.hero__img--live {
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  background: #f4f4f4;
+  position: relative;
+}
+.hero__img--live img { object-fit: cover; }
 .hero__title {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(3.2rem, 7.5vw, 6.8rem); line-height: 0.98; letter-spacing: -0.01em;
@@ -167,7 +174,7 @@ em { font-style: italic; }
   aspect-ratio: 3/4; overflow: hidden;
   padding: clamp(10px, 1.4vw, 18px);
 }
-.product__img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s ease; }
+.product__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .product:hover .product__img img { transform: scale(1.03); }
 .product__info { padding: 1.1rem 0.1rem 0; }
 /* 스켈레톤 — JS 렌더 전 카드 자리(CLS 방지). info 높이는 실측값 근사 */
@@ -284,6 +291,7 @@ em { font-style: italic; }
   .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 90px; gap: 2rem; }
   .next__list { grid-template-columns: 1fr; }
   .hero__img { order: -1; aspect-ratio: 4/5; max-height: 60svh; }
+  .hero__img.hero__img--live { aspect-ratio: 1 / 1; }
   .lineup__grid { grid-template-columns: repeat(2, 1fr); }
   .story, .story--flip { grid-template-columns: 1fr; gap: 1.4rem; }
   .story--flip .story__img { order: 0; }
@@ -325,6 +333,24 @@ em { font-style: italic; }
 .crumb { font-size: 0.74rem; letter-spacing: 0.1em; color: var(--ink-mute); margin-bottom: 1.6rem; }
 .crumb a:hover { color: var(--ink); }
 
+/* SHOP 대표 실사 컷 — product-hero-clean.png(1024 square) 비율 고정 */
+.shop-visual {
+  margin: 0 0 clamp(2rem, 5vh, 3.5rem);
+  display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(260px, 0.58fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.shop-visual__img { margin: 0; aspect-ratio: 1 / 1; overflow: hidden; background: #f4f4f4; position: relative; }
+.shop-visual__img img { width: 100%; height: 100%; object-fit: cover; }
+.shop-visual__copy {
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.shop-visual__copy p { font-size: 0.72rem; letter-spacing: 0.16em; color: var(--ink-mute); }
+.shop-visual__copy h2 { margin-top: 0.7rem; font-size: clamp(1.5rem, 3.2vw, 2.4rem); line-height: 1.24; letter-spacing: -0.02em; }
+.shop-visual__copy span { margin-top: 1rem; font-size: 0.82rem; color: var(--ink-soft); }
+
 /* ---------- 제품 카드 담기 버튼 ---------- */
 .product__add {
   margin-top: 0.8rem; width: 100%; cursor: pointer;
@@ -340,10 +366,9 @@ em { font-style: italic; }
 .pd { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
 .pd__img {
   background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%);
-  aspect-ratio: 4/5; overflow: hidden; position: sticky; top: 90px;
-  padding: clamp(16px, 2.4vw, 30px);
+  aspect-ratio: 1/1; overflow: hidden; position: sticky; top: 90px;
 }
-.pd__img img { width: 100%; height: 100%; object-fit: contain; }
+.pd__img img { width: 100%; height: 100%; object-fit: cover; }
 .pd__code { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--ink-mute); }
 .pd__name { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.25; margin-top: 0.4rem; }
 .pd__en { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1rem; color: var(--ink-soft); margin-top: 0.2rem; }
@@ -386,8 +411,8 @@ em { font-style: italic; }
   padding: 1.3rem 0; border-top: 1px solid var(--line);
 }
 .cart__row:last-child { border-bottom: 1px solid var(--line); }
-.cart__img { background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%); aspect-ratio: 3/4; overflow: hidden; padding: 8px; }
-.cart__img img { width: 100%; height: 100%; object-fit: contain; }
+.cart__img { background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%); aspect-ratio: 3/4; overflow: hidden; }
+.cart__img img { width: 100%; height: 100%; object-fit: cover; }
 .cart__code { font-size: 0.66rem; letter-spacing: 0.12em; color: var(--ink-mute); }
 .cart__name { font-weight: 600; font-size: 0.98rem; }
 .cart__spec { font-size: 0.76rem; color: var(--ink-mute); margin-top: 0.15rem; }
@@ -430,6 +455,8 @@ em { font-style: italic; }
 @media (max-width: 900px) {
   .pd { grid-template-columns: 1fr; }
   .pd__img { position: static; }
+  .shop-visual { grid-template-columns: 1fr; border-bottom: 0; }
+  .shop-visual__copy { padding: 1.2rem 0 0; }
   .co { grid-template-columns: 1fr; }
   .co__summary { position: static; }
   .cart__row { grid-template-columns: 72px 1fr auto; grid-template-rows: auto auto; }
@@ -443,7 +470,13 @@ em { font-style: italic; }
 .nav__auth { font-size: 0.76rem; letter-spacing: 0.14em; color: var(--ink); }
 .nav--admin { justify-content: flex-start; }
 
-.form-err { margin-top: 1rem; font-size: 0.82rem; color: #b3261e; }
+.form-err {
+  margin-top: 1rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--ink);
+  font-size: 0.82rem;
+  color: var(--ink);
+}
 
 .page--auth { max-width: 520px; }
 .auth .page-head { margin-bottom: 1.6rem; }
@@ -461,10 +494,9 @@ em { font-style: italic; }
 .order__id { font-size: 0.82rem; letter-spacing: 0.08em; font-weight: 700; }
 .order__date { font-size: 0.76rem; color: var(--ink-mute); }
 .order__status { margin-left: auto; font-size: 0.7rem; letter-spacing: 0.1em; padding: 0.25rem 0.7rem; border: 1px solid var(--ink); }
-.order__status.st-awaiting_deposit { background: #fff; color: var(--ink); }
-.order__status.st-deposit_confirmed, .order__status.st-shipping { background: var(--ink); color: #fff; }
-.order__status.st-delivered { background: #f2f2f0; border-color: var(--line); color: var(--ink-soft); }
-.order__status.st-cancelled { border-color: var(--line); color: var(--ink-mute); text-decoration: line-through; }
+.order__status.st-awaiting_payment { background: #fff; color: var(--ink); }
+.order__status.st-paid { background: var(--ink); color: #fff; }
+.order__status.st-done { background: #f2f2f0; border-color: var(--line); color: var(--ink-soft); }
 .order__meta { margin-top: 0.7rem; font-size: 0.8rem; color: var(--ink-soft); }
 .order__meta span { color: var(--ink-mute); }
 .order__items { margin-top: 1rem; border-top: 1px solid var(--line); }
@@ -496,8 +528,8 @@ em { font-style: italic; }
 .xsell__title span { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0.02em; color: var(--ink-mute); margin-left: 6px; }
 .xsell__grid { margin-top: 1.4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.8rem); }
 .xsell__card { display: block; }
-.xsell__img { display: block; background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%); aspect-ratio: 3/4; overflow: hidden; padding: clamp(8px, 1.2vw, 14px); }
-.xsell__img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s ease; }
+.xsell__img { display: block; background: linear-gradient(180deg, #fafafa 0%, #f1f1f1 100%); aspect-ratio: 3/4; overflow: hidden; }
+.xsell__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .xsell__card:hover .xsell__img img { transform: scale(1.03); }
 .xsell__code { display: block; margin-top: 0.8rem; font-size: 0.66rem; letter-spacing: 0.14em; color: var(--ink-mute); }
 .xsell__name { display: block; margin-top: 0.2rem; font-size: 0.95rem; font-weight: 600; }
