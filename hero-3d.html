@@ -98,7 +98,7 @@
     for (let i = 0; i < N; i++) {
       var im = new Image();
       im.decoding = "async";
-      im.src = "assets/3d/spin/f" + pad(i) + ".jpg";
+      im.src = "assets/3d/spin/f" + pad(i + 1) + ".jpg"; // 파일명 f01..f40
       im.onload = function () {
         loaded++;
         if (loaded === 1) draw();               // 첫 장 즉시
