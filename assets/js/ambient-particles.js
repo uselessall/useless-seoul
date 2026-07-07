@@ -69,17 +69,17 @@
           /* 커서 반발 (antigravity 느낌 — 부드럽게 밀려남) */
           var dx = p.x - mouse.x, dy = p.y - mouse.y;
           var d2 = dx * dx + dy * dy;
-          var R = 150;
+          var R = 210;
           if (d2 < R * R && d2 > 0.01) {
             var d = Math.sqrt(d2);
-            var f = (1 - d / R) * 2.4;
+            var f = (1 - d / R) * 4.2;
             p.vx += (dx / d) * f * dt;
             p.vy += (dy / d) * f * dt;
           }
           /* 홈 복원 + 감쇠 */
           p.vx += (tx - p.x) * 0.012 * dt;
           p.vy += (ty - p.y) * 0.012 * dt;
-          p.vx *= 0.92; p.vy *= 0.92;
+          p.vx *= 0.9; p.vy *= 0.9;
           p.x += p.vx * dt; p.y += p.vy * dt;
 
           /* 색종이 조각 렌더 (속도 따라 기울기 살짝) */
@@ -87,7 +87,7 @@
           ctx.translate(p.x, p.y);
           ctx.rotate(p.rot + p.vx * 0.05);
           ctx.fillStyle = p.c;
-          ctx.globalAlpha = 0.75;
+          ctx.globalAlpha = 0.85;
           ctx.fillRect(-p.r / 2, -p.len / 2, p.r, p.len);
           ctx.restore();
         }
