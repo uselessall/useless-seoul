@@ -681,3 +681,36 @@ em { font-style: italic; }
 .lineup-pin .lineup { position: sticky; top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
 .lineup-pin .spin-hover-canvas { opacity: 1; } /* 핀 구간에선 스핀 캔버스 상시 표시 */
 @media (prefers-reduced-motion: reduce) { .lineup-pin { height: auto; } }
+
+/* ---- 오버사이즈 타이포 밴드 (HAL 문법 — 스크롤 수평 흐름) ---- */
+.typo-band {
+  overflow: hidden; white-space: nowrap;
+  padding: clamp(3rem, 9vh, 7rem) 0 clamp(2rem, 5vh, 4rem);
+  background: #fff;
+}
+.typo-band__word {
+  display: inline-block; will-change: transform;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(90px, 17vw, 240px); line-height: 0.9; letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.typo-band__word--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+  text-stroke: 1.5px var(--ink);
+}
+
+/* ---- 섹션 리듬 — 다크 블록 라운드 마스크 (HAL 리듬) ---- */
+.film {
+  border-radius: clamp(22px, 3vw, 44px);
+  max-width: calc(100% - clamp(16px, 3vw, 48px));
+  margin: 0 auto clamp(3rem, 8vh, 6rem);
+}
+#scent-story .scent-sticky { border-radius: 0; }
+#scent-story { margin-bottom: clamp(2rem, 6vh, 5rem); }
+.buy--duo {
+  background: var(--bg-soft);
+  border-radius: clamp(22px, 3vw, 44px);
+  max-width: min(var(--maxw), calc(100% - clamp(16px, 3vw, 48px)));
+  margin-bottom: clamp(3rem, 8vh, 6rem);
+}
