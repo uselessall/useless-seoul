@@ -8,9 +8,13 @@
   var bands = [];
   function init() {
     document.querySelectorAll(".typo-band").forEach(function (band) {
-      var word = band.querySelector(".typo-band__word");
-      if (!word) return;
-      bands.push({ band: band, word: word, dir: parseFloat(band.getAttribute("data-typo-dir") || "1") });
+      band.querySelectorAll(".typo-band__word").forEach(function (word) {
+        bands.push({
+          band: band, word: word,
+          dir: parseFloat(word.getAttribute("data-typo-dir") || band.getAttribute("data-typo-dir") || "1"),
+          speed: parseFloat(word.getAttribute("data-typo-speed") || "1"),
+        });
+      });
     });
     if (bands.length) requestAnimationFrame(tick);
   }
@@ -23,8 +27,9 @@
       var p = 1 - (r.top + r.height / 2) / (vh + r.height); // 0..1
       /* 단어 폭만큼 화면을 가로지름 — 중앙(p=0.5)에서 단어 중앙 정렬 */
       var over = b.word.offsetWidth - b.band.offsetWidth;   // 넘치는 폭
-      var x = -(over > 0 ? over : 0) * p;
-      if (b.dir < 0) x = -(over > 0 ? over : 0) * (1 - p);
+      var pp = 0.5 + (p - 0.5) * b.speed;                    // 레이어 속도 차 (중앙 기준)
+      var x = -(over > 0 ? over : 0) * pp;
+      if (b.dir < 0) x = -(over > 0 ? over : 0) * (1 - pp);
       b.word.style.transform = "translateX(" + x + "px)";
     });
     requestAnimationFrame(tick);
