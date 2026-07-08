@@ -36,6 +36,7 @@
     awaiting_payment: "입금 대기",
     paid: "입금 확인",
     done: "배송 완료",
+    cancelled: "주문 취소",
   };
 
   const normEmail = (e) => String(e || "").trim().toLowerCase();
@@ -153,6 +154,47 @@
      주의: anon+RLS에선 남의 주문 못 봄. admin.html 전체 조회는 관리자 로그인(useless_orders에 admin 정책 추가) 또는
      별도 관리자 페이지에서 처리 예정. 지금은 본인 주문만 반환(RLS 준수). 전체 관리 = 후속 gate. */
   async function listOrders() { return myOrders(); }
+
+  /* 입금 전(awaiting_payment) 본인 주문 취소 — RLS: 본인 행 + 해당 상태만 update 허용 필요 */
+  async function cancelMyOrder(orderId) {
+    const user = await currentUser();
+    if (!user) throw new Error("로그인이 필요합니다.");
+    const { data, error } = await sb().from("useless_orders")
+      .update({ status: "cancelled" })
+      .eq("order_no", orderId).eq("user_id", user.id).eq("status", "awaiting_payment")
+      .select().single();
+    if (error) throw new Error("취소 실패: " + error.message);
+    return data;
+  }
+
+  /* ---------- 리뷰 (useless_reviews 테이블 — SQL 마이그레이션 문서 참조) ---------- */
+  async function listReviews(productId) {
+    try {
+      const { data, error } = await sb().from("useless_reviews")
+        .select("id,product_id,author_name,rating,body,created_at")
+        .eq("product_id", productId)
+        .order("created_at", { ascending: false })
+        .limit(50);
+      if (error) return [];   // 테이블 미생성 등 — 빈 상태로 우아하게
+      return data || [];
+    } catch (e) { return []; }
+  }
+
+  async function addReview({ productId, rating, body }) {
+    const user = await currentUser();
+    if (!user) throw new Error("리뷰 작성에는 로그인이 필요합니다.");
+    rating = Math.min(5, Math.max(1, rating | 0));
+    body = String(body || "").trim();
+    if (body.length < 5) throw new Error("리뷰는 5자 이상 적어주세요.");
+    if (body.length > 1000) throw new Error("리뷰는 1000자 이내로 적어주세요.");
+    const { data, error } = await sb().from("useless_reviews").insert({
+      product_id: productId, user_id: user.id,
+      author_name: (user.name || user.email || "익명").split("@")[0],
+      rating, body,
+    }).select().single();
+    if (error) throw new Error("리뷰 저장 실패: " + error.message);
+    return data;
+  }
   async function updateOrderStatus(orderId, status) {
     if (!ORDER_STATUS[status]) throw new Error("알 수 없는 주문 상태: " + status);
     const { data, error } = await sb().from("useless_orders")
@@ -161,5 +203,5 @@
     return { orderId: data.order_no, status: data.status };
   }
 
-  window.Store = { getProducts, getProduct, signUp, signIn, signOut, currentUser, createOrder, myOrders, listOrders, updateOrderStatus, ORDER_STATUS };
+  window.Store = { getProducts, getProduct, signUp, signIn, signOut, currentUser, createOrder, myOrders, listOrders, updateOrderStatus, cancelMyOrder, listReviews, addReview, ORDER_STATUS };
 })();

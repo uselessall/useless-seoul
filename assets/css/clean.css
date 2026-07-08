@@ -737,3 +737,22 @@ em { font-style: italic; }
   filter: grayscale(1) contrast(0.92) brightness(1.05);
 }
 @media (prefers-reduced-motion: reduce) { .pdhero__bg video { display: none; } }
+
+/* ---- 리뷰 + 주문취소 ---- */
+.pdrev__item { border-top: 1px solid var(--line); padding: 1.1rem 0; }
+.pdrev__item header { display: flex; gap: 12px; align-items: baseline; font-size: 0.82rem; }
+.pdrev__stars { color: var(--ink); letter-spacing: 2px; }
+.pdrev__author { font-weight: 600; }
+.pdrev__date { color: var(--ink-mute); }
+.pdrev__body { margin-top: 0.5rem; font-size: 0.95rem; line-height: 1.8; white-space: pre-wrap; }
+.pdrev__write { display: grid; gap: 10px; margin-top: 1.4rem; max-width: 560px; }
+.pdrev__rating { width: 140px; padding: 8px 10px; border: 1px solid var(--line); font-size: 0.9rem; }
+.pdrev__text { padding: 12px; border: 1px solid var(--line); font-family: inherit; font-size: 0.95rem; resize: vertical; }
+.pdrev__submit { justify-self: start; }
+.pdrev__msg { font-size: 0.85rem; color: var(--ink-mute); min-height: 1.2em; }
+.order__cancel {
+  margin-top: 0.8rem; padding: 9px 18px; font-size: 0.8rem; letter-spacing: 0.05em;
+  background: #fff; border: 1px solid var(--ink); cursor: pointer;
+}
+.order__cancel:hover { background: var(--ink); color: #fff; }
+.order__status.st-cancelled { color: var(--ink-mute); text-decoration: line-through; }

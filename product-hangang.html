@@ -40,10 +40,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=50" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=51" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=37" defer></script>
-  <script src="assets/js/site.js?v=37" defer></script>
+  <script src="assets/js/store.js?v=38" defer></script>
+  <script src="assets/js/site.js?v=38" defer></script>
   <script src="assets/js/spin.js?v=3" defer></script>
 </head>
 <body>
@@ -171,9 +171,10 @@
           <!-- ⑧ 리뷰 (빈 상태 — 가짜 리뷰 금지) -->
       <section class="pdsec reveal" aria-label="리뷰">
         <h2 class="pdsec__title">REVIEWS <span>(0)</span></h2>
-        <div class="pdrev">
-          <p class="pdrev__line">아직 리뷰가 없습니다.</p>
-          <p class="pdrev__hint">첫 번째 장면을 남겨주세요 — 리뷰 작성은 오픈 준비 중입니다.</p>
+        <div class="pdrev" data-reviews="hangang">
+          <div class="pdrev__list"></div>
+          <p class="pdrev__empty"><span class="pdrev__line">아직 리뷰가 없습니다.</span><br /><span class="pdrev__hint">첫 번째 장면을 남겨주세요.</span></p>
+          <div class="pdrev__form"></div>
         </div>
       </section>
         </div>

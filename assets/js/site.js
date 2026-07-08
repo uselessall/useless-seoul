@@ -340,9 +340,86 @@ async function renderMyPage() {
         ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${esc(it.name)} × ${esc(it.qty)}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
       <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
-      ${o.status === "awaiting_payment" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: 우리은행 1002-454-250728 예금주 백승준 · 입금 확인 후 배송이 시작됩니다.</p>` : ""}
+      ${o.status === "awaiting_payment" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: 우리은행 1002-454-250728 예금주 백승준 · 입금 확인 후 배송이 시작됩니다.</p>
+      <button class="order__cancel" data-cancel-order="${esc(o.orderId)}">입금 전 주문 취소</button>` : ""}
     </article>`;
   }).join("");
+
+  /* 입금 전 취소 */
+  wrap.addEventListener("click", async (e) => {
+    const btn = e.target.closest("[data-cancel-order]");
+    if (!btn) return;
+    if (!confirm("이 주문을 취소할까요? (입금 전에만 가능합니다)")) return;
+    btn.disabled = true;
+    try {
+      await Store.cancelMyOrder(btn.getAttribute("data-cancel-order"));
+      location.reload();
+    } catch (err) {
+      alert(err.message || "취소에 실패했습니다.");
+      btn.disabled = false;
+    }
+  });
+}
+
+/* ---------- 리뷰 (상세페이지) ---------- */
+async function renderReviews() {
+  const box = document.querySelector("[data-reviews]");
+  if (!box) return;
+  const productId = box.getAttribute("data-reviews");
+  const listEl = box.querySelector(".pdrev__list");
+  const emptyEl = box.querySelector(".pdrev__empty");
+  const formEl = box.querySelector(".pdrev__form");
+
+  async function refresh() {
+    const reviews = await Store.listReviews(productId);
+    if (!reviews.length) {
+      if (emptyEl) emptyEl.style.display = "";
+      if (listEl) listEl.innerHTML = "";
+      return;
+    }
+    if (emptyEl) emptyEl.style.display = "none";
+    const stars = (n) => "★".repeat(n) + "☆".repeat(5 - n);
+    listEl.innerHTML = reviews.map((r) => `
+      <article class="pdrev__item">
+        <header><span class="pdrev__stars">${stars(Math.min(5, Math.max(1, r.rating|0)))}</span>
+        <span class="pdrev__author">${esc(r.author_name || "익명")}</span>
+        <span class="pdrev__date">${esc(String(r.created_at || "").slice(0, 10))}</span></header>
+        <p class="pdrev__body">${esc(r.body || "")}</p>
+      </article>`).join("");
+  }
+  await refresh();
+
+  /* 작성 폼 — 로그인 시 노출 */
+  const user = await Store.currentUser();
+  if (formEl) {
+    if (!user) {
+      formEl.innerHTML = `<p class="pdrev__hint"><a href="login.html">로그인</a> 후 첫 장면을 남길 수 있습니다.</p>`;
+    } else {
+      formEl.innerHTML = `
+        <div class="pdrev__write">
+          <select class="pdrev__rating" aria-label="별점">
+            <option value="5">★★★★★</option><option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option>
+          </select>
+          <textarea class="pdrev__text" rows="3" maxlength="1000" placeholder="이 향의 장면을 남겨주세요 (5자 이상)"></textarea>
+          <button class="btn btn--solid pdrev__submit">리뷰 남기기</button>
+          <p class="pdrev__msg" role="status"></p>
+        </div>`;
+      formEl.querySelector(".pdrev__submit").addEventListener("click", async () => {
+        const msg = formEl.querySelector(".pdrev__msg");
+        try {
+          await Store.addReview({
+            productId,
+            rating: +formEl.querySelector(".pdrev__rating").value,
+            body: formEl.querySelector(".pdrev__text").value,
+          });
+          formEl.querySelector(".pdrev__text").value = "";
+          msg.textContent = "리뷰가 등록되었습니다.";
+          await refresh();
+        } catch (err) { msg.textContent = err.message || "등록 실패"; }
+      });
+    }
+  }
 }
 
 /* ---------- 관리자 (Supabase/RLS 기준 — URL 직접 진입 전용) ---------- */
@@ -416,5 +493,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   bindSignupPage();
   bindLoginPage();
   renderMyPage();
+  renderReviews();
   renderAdminPage();
 });
