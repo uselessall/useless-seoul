@@ -78,7 +78,7 @@
   </header>
 
   <main class="wrap">
-    <div class="err-spin" data-spin data-spin-auto="1" data-spin-base="https://uselessall.github.io/useless-seoul/assets/3d/spin/f" aria-hidden="true"></div>
+    <div class="err-spin" data-spin data-spin-auto="1" data-spin-base="https://uselessseoul.com/assets/3d/spin/f" aria-hidden="true"></div>
     <p class="code">404</p>
     <h1 class="title">이 페이지는 존재하지 않습니다.</h1>
     <p class="copy">
@@ -97,7 +97,7 @@
     // 배포 도메인 확정 시 절대경로로 교체: var BASE = "https://[배포URL 확인필요]/";
     // 미확정 동안은 휴리스틱: *.github.io 프로젝트 페이지면 /<repo>/ 가 루트, 그 외(커스텀 도메인·로컬)는 /.
     (function () {
-      var BASE = "https://uselessall.github.io/useless-seoul/";
+      var BASE = "https://uselessseoul.com/";
       if (!BASE) {
         if (/\.github\.io$/.test(location.hostname)) {
           var seg = location.pathname.split("/")[1] || "";
@@ -111,6 +111,6 @@
       });
     })();
   </script>
-  <script src="https://uselessall.github.io/useless-seoul/assets/js/spin.js?v=3" defer></script>
+  <script src="https://uselessseoul.com/assets/js/spin.js?v=3" defer></script>
 </body>
 </html>
