@@ -799,3 +799,13 @@ em { font-style: italic; }
 .wall__bar a { pointer-events: auto; color: inherit; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.14em; }
 .wall__hint { font-size: 0.68rem; letter-spacing: 0.34em; opacity: 0.75; }
 @media (max-width: 700px) { .wt--typo span { font-size: 1.7rem; } .wall__hint { display: none; } }
+
+/* ---- BK01 정본 로고 ---- */
+.foot__mark { display: block; margin: 0 auto 0.9rem; opacity: 0.9; }
+.bk01sec { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; max-width: 1080px; margin: 0 auto; padding: clamp(3rem, 8vh, 6rem) var(--pad); }
+.bk01sec__img { margin: 0; overflow: hidden; }
+.bk01sec__img img { width: 100%; height: auto; display: block; }
+.bk01sec__mark { margin-bottom: 1.4rem; }
+.bk01sec__slogan { font-family: "Playfair Display", "Nanum Myeongjo", serif; font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 500; letter-spacing: 0.01em; }
+.bk01sec__sub { margin-top: 1rem; font-size: 0.95rem; line-height: 1.9; color: var(--ink-mute); }
+@media (max-width: 700px) { .bk01sec { grid-template-columns: 1fr; } }

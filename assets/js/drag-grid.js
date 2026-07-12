@@ -9,7 +9,7 @@
   /* 타일 정의 — 6열 x 4행 패턴 블록 */
   var TILES = [
     { t: "img", src: "assets/img/live/product-hotel.jpg",   label: "호텔 블랭킷",  href: "product-hotel.html" },
-    { t: "typo", text: "USÉLESS" },
+    { t: "img", src: "assets/img/live/bottle-bk01.jpg", label: "BK01 — 시계 라벨", href: "story.html" },
     { t: "img", src: "assets/img/live/scene-hangang.jpg",   label: "여름밤 한강",  href: "product-hangang.html" },
     { t: "teaser", name: "첫눈", en: "First Snow" },
     { t: "img", src: "assets/img/live/product-seongsu.jpg", label: "성수 무화과",  href: "product-seongsu.html" },
@@ -31,7 +31,7 @@
 
     { t: "teaser", name: "남산 숲길", en: "Namsan Green" },
     { t: "img", src: "assets/img/live/product-seongsu.jpg", label: "성수 무화과",  href: "product-seongsu.html" },
-    { t: "teaser", name: "언두", en: "Undo" },
+    { t: "typo", text: "쓸모없어도 괜찮아" },
     { t: "img", src: "assets/img/live/scene-tea.jpg",       label: "미뤄둔 오후",  href: "product-tea.html" },
     { t: "teaser", name: "서울 애프터", en: "Seoul After" },
     { t: "img", src: "assets/img/live/scene-hotel.jpg",     label: "아침의 침구",  href: "product-hotel.html" },
