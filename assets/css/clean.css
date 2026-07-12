@@ -809,3 +809,11 @@ em { font-style: italic; }
 .bk01sec__slogan { font-family: "Playfair Display", "Nanum Myeongjo", serif; font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 500; letter-spacing: 0.01em; }
 .bk01sec__sub { margin-top: 1rem; font-size: 0.95rem; line-height: 1.9; color: var(--ink-mute); }
 @media (max-width: 700px) { .bk01sec { grid-template-columns: 1fr; } }
+
+/* ---- 히어로 3D 병 ---- */
+.hero__img--bottle3d { position: relative; cursor: grab; touch-action: pan-y; }
+.hero__img--bottle3d:active { cursor: grabbing; }
+.hero__img--bottle3d .hero__still { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s; }
+#hero-bottle-root { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; }
+.hero__img--bottle3d.bottle3d-on .hero__still { opacity: 0; }
+.hero__img--bottle3d.bottle3d-on #hero-bottle-root { opacity: 1; }

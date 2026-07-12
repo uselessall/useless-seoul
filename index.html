@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=56" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/store.js?v=38" defer></script>
   <script src="assets/js/site.js?v=38" defer></script>
@@ -55,11 +55,9 @@
 
   <!-- ① HERO — 실사 360° 스핀 (스크롤·드래그 회전, JS 없으면 정지컷) -->
   <section class="hero" id="top" data-ambient>
-    <figure class="hero__img hero__img--live hero__img--spin"
-            data-spin data-spin-base="assets/3d/spin/f" data-spin-count="40" data-spin-scroll="1" data-spin-speed="2" data-spin-theater="1"
-            aria-label="리드 디퓨저 360도 보기 — 스크롤하거나 드래그하면 회전">
-      <img src="assets/img/live/product-hero-clean.png" alt="USÉLESS SEOUL 리드 디퓨저 — 투명 유리 200ml" fetchpriority="high" />
-      <span class="spin-hint" aria-hidden="true">SCROLL / DRAG</span>
+    <figure class="hero__img hero__img--live hero__img--bottle3d" aria-label="USÉLESS SEOUL 리드 디퓨저 — 드래그하면 회전">
+      <img class="hero__still" src="assets/img/live/hero-bk01.jpg" alt="USÉLESS SEOUL 리드 디퓨저 BK01" fetchpriority="high" />
+      <div id="hero-bottle-root"></div>
     </figure>
     <div class="hero__text">
       <h1 class="hero__title reveal">SEOUL,<br /><em>BOTTLED.</em></h1>
@@ -194,14 +192,24 @@
   /* scene3d(R3F 번들 ~295KB gzip) — 스크롤 스토리 구간 근접 시에만 다운로드 */
   (function () {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var loaded = false;
+    function loadScene() {
+      if (loaded) return; loaded = true;
+      var sc = document.createElement("script");
+      sc.src = "assets/js/scene3d-dist/scene3d.js?v=14";
+      document.body.appendChild(sc);
+    }
+    /* 히어로 3D 병 — LCP(정적 이미지) 페인트 후 idle에 로드 */
+    if (document.getElementById("hero-bottle-root")) {
+      if ("requestIdleCallback" in window) requestIdleCallback(loadScene, { timeout: 3500 });
+      else setTimeout(loadScene, 2200);
+    }
     var s = document.getElementById("scent-story");
     if (!s || !("IntersectionObserver" in window)) return;
     var io = new IntersectionObserver(function (e) {
       if (!e[0].isIntersecting) return;
       io.disconnect();
-      var sc = document.createElement("script");
-      sc.src = "assets/js/scene3d-dist/scene3d.js?v=13";
-      document.body.appendChild(sc);
+      loadScene();
     }, { rootMargin: "900px 0px" });
     io.observe(s);
   })();
