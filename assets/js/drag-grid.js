@@ -18,23 +18,23 @@
     { t: "teaser", name: "새벽 택시", en: "Dawn Taxi" },
     { t: "img", src: "assets/img/live/scene-hotel.jpg",     label: "체크인 그 순간", href: "product-hotel.html" },
     { t: "typo", text: "SEOUL," },
-    { t: "img", src: "assets/img/live/product-hangang.jpg", label: "여름밤 한강",  href: "product-hangang.html" },
+    { t: "img", src: "assets/img/live/mock-lockup-cork.jpg", label: "USÉ / LESS — 락업", href: "story.html" },
     { t: "teaser", name: "을지로 밤", en: "Euljiro Night" },
     { t: "img", src: "assets/img/live/scene-tea.jpg",       label: "애프터눈 티",  href: "product-tea.html" },
 
     { t: "img", src: "assets/img/live/scene-seongsu.jpg",   label: "성수동 골목",  href: "product-seongsu.html" },
     { t: "teaser", name: "볕 든 북촌", en: "Bukchon Light" },
-    { t: "img", src: "assets/img/live/product-hotel.jpg",   label: "호텔 블랭킷",  href: "product-hotel.html" },
+    { t: "img", src: "assets/img/live/mock-script.jpg",   label: "Uséless — 스크립트",  href: "story.html" },
     { t: "typo", text: "BOTTLED." },
     { t: "img", src: "assets/img/live/scene-hangang.jpg",   label: "밤 10시 벤치", href: "product-hangang.html" },
     { t: "nav", text: "STORY →", href: "story.html" },
 
     { t: "teaser", name: "남산 숲길", en: "Namsan Green" },
-    { t: "img", src: "assets/img/live/product-seongsu.jpg", label: "성수 무화과",  href: "product-seongsu.html" },
+    { t: "img", src: "assets/img/live/mock-usl-clear.jpg", label: "USL — 실크", href: "story.html" },
     { t: "typo", text: "쓸모없어도 괜찮아" },
     { t: "img", src: "assets/img/live/scene-tea.jpg",       label: "미뤄둔 오후",  href: "product-tea.html" },
     { t: "teaser", name: "서울 애프터", en: "Seoul After" },
-    { t: "img", src: "assets/img/live/scene-hotel.jpg",     label: "아침의 침구",  href: "product-hotel.html" },
+    { t: "img", src: "assets/img/live/mock-clock-black.jpg", label: "BK01 — 블랙 스틱", href: "story.html" },
   ];
   var COLS = 6, ROWS = 4;
 
