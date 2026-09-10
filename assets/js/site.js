@@ -83,6 +83,7 @@ async function renderAuthLink() {
 function renderProductGrids(products) {
   document.querySelectorAll("[data-product-grid]").forEach((grid) => {
     const brand = String(grid.dataset.brand || "").trim();
+    const shopCatalog = Boolean(grid.closest("[data-shop-panel]"));
     const limit = parseInt(grid.dataset.limit || "", 10);
     let gridProducts = brand ? products.filter((p) => p.brand === brand) : products;
     if (Number.isFinite(limit) && limit > 0) gridProducts = gridProducts.slice(0, limit);
@@ -100,12 +101,14 @@ function renderProductGrids(products) {
       <a class="product__img" href="${url}"><img src="${img}" alt="${esc(p.alt)}" ${i === 0 ? 'fetchpriority="high"' : 'decoding="async"'} /></a>
       <div class="product__info">
         <p class="product__code">${esc(p.code)}</p>
-        <h3 class="product__name"><a href="${url}">${esc(p.name)} <span>${esc(p.en)}</span></a></h3>
+        <h3 class="product__name"><a href="${url}">${esc(p.name)}${p.en && p.en !== p.name ? ` <span>${esc(p.en)}</span>` : ""}</a></h3>
         <p class="product__hook">${esc(p.hook)}</p>
         <p class="product__notes">${esc(p.notes)}</p>
         <p class="product__spec">${esc(p.spec)}</p>
-        <p class="product__price">${onSale ? `${won(p.price)} <span class="mock">참고 가격</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
-        ${detailUrl
+        <p class="product__price">${shopCatalog ? "출시 예정" : onSale ? `${won(p.price)} <span class="mock">참고 가격</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
+        ${shopCatalog
+          ? `<a class="product__add product__detail" href="${url}">제품 자세히 보기 ↗</a>`
+          : detailUrl
           ? `<a class="product__add product__detail" href="${esc(detailUrl)}">${esc(p.detailCta || "상세페이지 바로가기")}</a>`
           : onSale
           ? `<button type="button" class="product__add" data-add="${esc(p.id)}">장바구니 담기</button>`
