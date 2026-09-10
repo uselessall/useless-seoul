@@ -1,0 +1,45 @@
+/* The approved wind film opens the company story as a single landscape. */
+.company-hero.company-hero--field { display:block; isolation:isolate; background:#263e44; min-height:100svh; }
+.company-field { position:absolute; inset:0; z-index:-1; overflow:hidden; }
+.company-field img,.company-field video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:55% center; }
+.company-field video { opacity:0; transition:opacity .6s; }
+.company-field.has-frame video { opacity:1; }
+.company-field::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(5,20,27,.73),rgba(5,20,27,.39) 55%,rgba(5,20,27,.1)),linear-gradient(0deg,rgba(5,20,27,.52),transparent 45%); }
+.company-hero--field .company-hero__copy { position:relative; z-index:1; width:min(100%,900px); min-height:100svh; padding:clamp(135px,15vh,190px) var(--gutter) 64px; justify-content:flex-start; }
+.theme-company .company-hero--field .company-hero__title { font-size:clamp(48px,6.4vw,96px); line-height:1.2; color:#fffdf7; }
+.company-hero--field .eyebrow { margin-bottom:36px; }
+.theme-company .company-hero--field .company-hero__lead { max-width:540px; margin-top:38px; font-size:clamp(17px,1.45vw,21px); color:rgba(255,253,247,.91); }
+.theme-company .company-hero--field .company-hero__note { max-width:480px; margin-top:22px; color:rgba(255,253,247,.76); font-size:16px; }
+.company-hero--field .company-hero__signature { color:rgba(255,253,247,.78); padding-top:64px; }
+.company-field-toggle { position:absolute; z-index:2; right:var(--gutter); bottom:48px; padding:12px 18px; color:#fffdf7; border:1px solid rgba(255,253,247,.5); background:rgba(6,23,29,.28); font:13px var(--sans); cursor:pointer; }
+.company-field-toggle:hover { background:rgba(6,23,29,.58); }
+.company-field-toggle:focus-visible { outline:2px solid #fff; outline-offset:4px; }
+@media(max-width:760px) {
+ .company-hero--field .company-hero__copy { width:100%; padding:120px 24px 100px; }
+ .theme-company .company-hero--field .company-hero__title { font-size:clamp(38px,9.6vw,70px); }
+ .company-hero--field .eyebrow { font-size:10px; letter-spacing:.14em; margin-bottom:28px; }
+ .theme-company .company-hero--field .company-hero__lead { margin-top:30px; }
+ .company-hero--field .company-hero__signature { padding-top:44px; font-size:9px; letter-spacing:.09em; }
+ .company-field-toggle { right:24px; bottom:26px; }
+ .company-field::after { background:linear-gradient(90deg,rgba(5,20,27,.64),rgba(5,20,27,.28)),linear-gradient(0deg,rgba(5,20,27,.5),transparent); }
+}
+@media(prefers-reduced-motion:reduce) { .company-field video { transition:none; } }
+
+/* One sticky landscape remains behind both chapters during native scrolling. */
+.company-opening { position:relative; display:grid; grid-template-columns:minmax(0,1fr); isolation:isolate; overflow:clip; background:#263e44; }
+.company-opening__scene { position:sticky; top:0; grid-column:1; grid-row:1 / 3; align-self:start; height:100svh; z-index:-1; }
+.company-opening .company-field { z-index:0; }
+.company-opening .company-hero--field { grid-column:1; grid-row:1; isolation:auto; overflow:visible; background:transparent; }
+.company-opening .brand-note { grid-column:1; grid-row:2; position:relative; min-height:100svh; display:flex; align-items:center; background:transparent; padding-top:120px; padding-bottom:130px; }
+.company-opening .brand-note .section__inner { width:100%; }
+.company-opening .brand-note__head { color:rgba(255,253,247,.8); }
+.company-opening .brand-note__lead { font-family:var(--sans); font-size:clamp(44px,5.6vw,80px); line-height:1.2; color:#fffdf7; margin:64px 0 76px; }
+.company-opening .brand-note__ledger strong { font-family:var(--sans); color:#fffdf7; line-height:1.25; }
+.company-opening .brand-note__ledger p { color:rgba(255,253,247,.88); line-height:1.85; }
+@media(max-width:760px) {
+ .company-opening .brand-note { padding:100px 24px 116px; }
+ .company-opening .brand-note .section__inner { padding:0; }
+ .company-opening .brand-note__lead { font-size:clamp(34px,8.5vw,60px); margin:44px 0 48px; }
+ .company-opening .brand-note__ledger { gap:24px; }
+ .company-opening .brand-note__ledger strong { font-size:30px; }
+}

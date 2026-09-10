@@ -1,218 +1,303 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USÉLESS SEOUL — SEOUL, BOTTLED.</title>
-  <link rel="icon" type="image/svg+xml" href="assets/img/bk01.svg" />
-  <meta name="description" content="서울의 네 장면을 향으로 병입한 리드 디퓨저. USÉLESS SEOUL — 가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="USÉLESS SEOUL — SEOUL, BOTTLED." />
-  <meta property="og:description" content="가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다. 서울의 네 장면을 병에 담은 리드 디퓨저." />
-  <meta property="og:image" content="https://uselessseoul.com/assets/img/live/hero-bk01.jpg" />
-  <meta property="og:url" content="https://uselessseoul.com/index.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23111111' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <!-- 폰트 CSS 비동기 로드(렌더블로킹 해소) — JS off는 noscript 폴백 -->
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'" />
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=56" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=38" defer></script>
-  <script src="assets/js/site.js?v=38" defer></script>
-  <script src="assets/js/spin.js?v=3" defer></script>
-  <script src="assets/js/typo-motion.js?v=2" defer></script>
-  <script src="assets/js/ambient-particles.js?v=3" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>USÉLESS SEOUL — Creative Company</title>
+  <meta name="description" content="USÉLESS SEOUL은 우리가 있었으면 했던 것들을 만드는 서울의 창작회사입니다. 쓸모없어 보이지만 버릴 수 없는 것들을 만듭니다.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="USÉLESS SEOUL — Creative Company">
+  <meta property="og:description" content="Things don't have to be useful to matter.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://uselessseoul.com/assets/img/detail-useless/product-front.webp">
+  <meta property="og:url" content="https://uselessseoul.com/">
+  <link rel="canonical" href="https://uselessseoul.com/">
+  <link rel="icon" href="apple-touch-icon.png">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="stylesheet" href="assets/css/canon-2026-08-27.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/home-scenes-20260905-v5.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/home-section-rail-20260905-v2.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/home-fpv-20260905.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/home-motion-20260905.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/home-choice-copy-20260905.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/launch-note-20260906.css?v=20260910-public">
+  <script src="assets/js/launch-config-20260906.js?v=20260910-public" defer></script>
+  <script src="assets/js/launch-note-20260906.js?v=20260910-public" defer></script>
 </head>
-<body>
+<body class="has-launch-float theme-editorial home-scenes">
+  <a class="skip-link" href="#main">본문으로 이동</a>
 
-  <a class="skip" href="#main">본문 바로가기</a>
-
-  <header class="nav" id="nav">
-    <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
-    <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
-    <nav class="nav__menu" id="navMenu">
-      <a href="shop.html">SHOP</a>
-      <a href="story.html">STORY</a>
-      <a href="faq.html">FAQ</a>
+  <header class="site-header" aria-label="주요 내비게이션">
+    <a class="site-brand" href="index.html?canon=20260829-v14" aria-current="page">USÉLESS SEOUL</a>
+    <span class="site-center">Creative company · Seoul</span>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">MENU</button>
+    <nav class="site-nav" id="site-nav">
+      <a href="company.html?canon=20260906-company-flow-fixed">Company</a>
+      <a href="useless.html?canon=20260829-v14">USÉLESS</a>
+      <a href="amaimu.html?canon=20260829-v14">amaimü</a>
+      <a class="site-nav__store" href="shop.html">Shop ↗</a>
+      <a href="company.html?canon=20260906-company-flow-fixed#contact">Contact</a>
     </nav>
-    <div class="nav__right">
-      <a href="login.html" class="nav__auth" id="navAuth">LOGIN</a>
-      <a href="cart.html" class="nav__cart">CART <span class="cart-count" data-cart-count>0</span></a>
-      <label for="navToggle" class="nav__burger" aria-label="메뉴 열기"><span></span><span></span></label>
-    </div>
   </header>
 
-  <main id="main" tabindex="-1">
 
-  <!-- ① HERO — 실사 360° 스핀 (스크롤·드래그 회전, JS 없으면 정지컷) -->
-  <section class="hero" id="top" data-ambient>
-    <figure class="hero__img hero__img--live hero__img--bottle3d" aria-label="USÉLESS SEOUL 리드 디퓨저 — 드래그하면 회전">
-      <img class="hero__still" src="assets/img/live/hero-bk01.jpg" alt="USÉLESS SEOUL 리드 디퓨저 BK01" fetchpriority="high" />
-      <div id="hero-bottle-root"></div>
-    </figure>
-    <div class="hero__text">
-      <h1 class="hero__title reveal">SEOUL,<br /><em>BOTTLED.</em></h1>
-      <p class="hero__sub reveal">가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다.<br />그 시간의 공기를 병에 담은 리드 디퓨저 — 파일럿 3종.</p>
-      <a class="btn btn--solid reveal" href="shop.html">SHOP — 파일럿 3종 보기</a>
+  <nav class="section-rail" aria-label="페이지 섹션 이동">
+    <div class="section-rail__links" id="section-rail-links">
+      <a class="section-rail__link" href="#home" aria-label="처음 섹션으로 이동" aria-current="location"><span class="section-rail__number" aria-hidden="true">01</span><span class="section-rail__label" aria-hidden="true">처음</span></a>
+      <a class="section-rail__link" href="#worlds" aria-label="두 브랜드 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">02</span><span class="section-rail__label" aria-hidden="true">두 브랜드</span></a>
+      <a class="section-rail__link" href="#seoul-scene" aria-label="USÉLESS 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">03</span><span class="section-rail__label" aria-hidden="true">USÉLESS</span></a>
+      <a class="section-rail__link" href="#personal-scene" aria-label="amaimü 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">04</span><span class="section-rail__label" aria-hidden="true">amaimü</span></a>
+      <a class="section-rail__link" href="#objects" aria-label="제품 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">05</span><span class="section-rail__label" aria-hidden="true">제품</span></a>
+      <a class="section-rail__link" href="#company" aria-label="우리의 이야기 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">06</span><span class="section-rail__label" aria-hidden="true">우리의 이야기</span></a>
+      <a class="section-rail__link" href="#brand-core" aria-label="브랜드 철학 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">07</span><span class="section-rail__label" aria-hidden="true">브랜드 철학</span></a>
+      <a class="section-rail__link" href="#launch-notify" aria-label="제품 출시 알림 섹션으로 이동"><span class="section-rail__number" aria-hidden="true">08</span><span class="section-rail__label" aria-hidden="true">제품 출시 알림</span></a>
     </div>
-  </section>
+  </nav>
+
+  <main id="main">
+    <section class="kinetic-hero" id="home" data-kinetic-hero aria-labelledby="home-title">
+      <div class="kinetic-hero__frame">
+        <div class="kinetic-hero__backdrop" data-hero-films aria-hidden="true">
+          <video class="kinetic-hero__backdrop-video kinetic-hero__backdrop-video--useless" data-hero-video autoplay muted loop playsinline preload="metadata" poster="assets/img/detail-useless/product-front.webp">
+            <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/06e7d40e-a5e2-4da9-b79a-d0361406224d.mp4" type="video/mp4">
+          </video>
+          <video class="kinetic-hero__backdrop-video kinetic-hero__backdrop-video--amaimu" data-hero-video autoplay muted loop playsinline preload="metadata" poster="assets/img/canon/amaimu-hero.jpg">
+            <source src="assets/video/home-amaimu-film.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="kinetic-hero__grid" aria-hidden="true"></div>
+        <p class="kinetic-hero__eyebrow eyebrow">First consumer brand / by USÉLESS SEOUL</p>
+        <time class="kinetic-hero__clock" data-seoul-clock aria-label="서울 현재 시각">
+          <svg class="kinetic-hero__clock-face" viewBox="0 0 100 100" aria-hidden="true">
+            <g class="kinetic-hero__clock-ring">
+              <text class="kinetic-hero__clock-divider" x="50" y="13" transform="rotate(90 50 50)">·</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(112.5 50 50)">U</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(135 50 50)">S</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(157.5 50 50)">É</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(180 50 50)">L</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(202.5 50 50)">E</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(225 50 50)">S</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(247.5 50 50)">S</text>
+              <text class="kinetic-hero__clock-divider" x="50" y="13" transform="rotate(270 50 50)">·</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(292.5 50 50)">U</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(315 50 50)">S</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(337.5 50 50)">É</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13">L</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(22.5 50 50)">E</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(45 50 50)">S</text>
+              <text class="kinetic-hero__clock-letter" x="50" y="13" transform="rotate(67.5 50 50)">S</text>
+            </g>
+            <line class="kinetic-hero__clock-hand kinetic-hero__clock-hand--hour" x1="50" y1="50" x2="50" y2="35"></line>
+            <line class="kinetic-hero__clock-hand kinetic-hero__clock-hand--minute" x1="50" y1="50" x2="50" y2="27"></line>
+            <line class="kinetic-hero__clock-hand kinetic-hero__clock-hand--second" x1="50" y1="53" x2="50" y2="24"></line>
+            <circle class="kinetic-hero__clock-pin" cx="50" cy="50" r="2.4"></circle>
+          </svg>
+          <span class="kinetic-hero__clock-meta">
+            <span>SEOUL</span>
+            <span data-seoul-clock-text>00:00:00</span>
+          </span>
+        </time>
+
+        <div class="kinetic-hero__wordmark">
+          <h1 class="kinetic-hero__title" id="home-title" aria-label="USÉLESS SEOUL에서 amaimü로">
+            <span class="kinetic-hero__word kinetic-hero__word--from" aria-hidden="true">USÉLESS SEOUL</span>
+            <span class="kinetic-hero__word kinetic-hero__word--to" aria-hidden="true">amaimü</span>
+          </h1>
+
+          <div class="kinetic-hero__film" aria-hidden="true">
+            <span class="kinetic-hero__refraction kinetic-hero__refraction--top">USÉLESS SEOUL</span>
+            <span class="kinetic-hero__refraction kinetic-hero__refraction--middle">USÉLESS SEOUL</span>
+            <span class="kinetic-hero__refraction kinetic-hero__refraction--bottom">USÉLESS SEOUL</span>
+          </div>
+        </div>
+
+        <div class="kinetic-hero__copy kinetic-hero__copy--useless">
+          <p class="kinetic-hero__statement">서울의 스쳐간 기억들을 수집하는<br>플래그십 향 오브제.</p>
+          <p class="kinetic-hero__translation">쓸모, 그 너머에 남는 것들.</p>
+          <a class="kinetic-hero__link text-link" href="shop.html#useless">USÉLESS SHOP 보기</a>
+        </div>
+
+        <div class="kinetic-hero__copy kinetic-hero__copy--amaimu" aria-hidden="true">
+          <p class="kinetic-hero__statement">내 방 전체 말고, 딱 내가 머무는 자리.</p>
+          <p class="kinetic-hero__translation">Just for you, amaimü.</p>
+          <a class="kinetic-hero__link text-link" href="amaimu.html?canon=20260829-v14">amaimü 브랜드 보기</a>
+        </div>
+
+        <span class="kinetic-hero__counter micro" aria-hidden="true">USÉLESS SEOUL → AMAIMÜ · WORLD 01</span>
+        <span class="kinetic-hero__scroll micro" aria-hidden="true">Scroll · Become amaimü ↓</span>
+      </div>
+    </section>
+
+    <section class="scene-intro" id="worlds" aria-labelledby="worlds-title">
+      <div class="scene-intro__heading">
+        <p class="eyebrow">유슬레스서울이 만든 두 향 브랜드</p>
+        <h2 id="worlds-title">오래 남는 장면.<br>가까이 두는 마음.</h2>
+        <p>서울의 기억을 담는 USÉLESS.<br>나의 작은 공간을 위한 amaimü.</p>
+      </div>
+      <div class="scene-choices">
+        <a class="scene-choice" href="#seoul-scene">
+          <img src="assets/img/canon/studio-grid-20260905.webp" alt="LED 그리드 스튜디오의 USÉLESS 그랜드 라운드" loading="lazy">
+          <span class="scene-choice__text">
+            <span class="micro">01 / Seoul, bottled.</span>
+            <strong>USÉLESS</strong>
+            <span class="scene-choice__reason"><span>여행에서 만난 서울을 집에서도 기억하고 싶을 때.</span><span>좋아하는 장면을 누군가에게 선물하고 싶을 때.</span></span>
+            <span class="scene-choice__link">서울의 장면으로 <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+        <a class="scene-choice scene-choice--pink" href="#personal-scene">
+          <img src="assets/img/canon/crayon-desk-20260905.webp" alt="크레용과 스케치북이 놓인 데스크의 amaimü 디퓨저" loading="lazy">
+          <span class="scene-choice__text">
+            <span class="micro">02 / Just for you.</span>
+            <strong class="scene-logo">amaimü</strong>
+            <span class="scene-choice__reason"><span>귀여워서 자꾸 눈길이 가는 것.</span><span>내 책상에 놓고, 친구에게도 선물하고 싶은 향.</span></span>
+            <span class="scene-choice__link">나의 작은 공간으로 <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="scene-story scene-story--seoul" id="seoul-scene" aria-labelledby="seoul-scene-title">
+      <div class="scene-story__copy" data-scene-film>
+        <img class="scene-story__setting" src="assets/img/canon/seoul-life-20260905.webp" alt="" loading="lazy">
+        <video class="scene-story__setting-film" id="seoul-life-film" muted loop playsinline preload="none" poster="assets/img/canon/seoul-life-20260905.webp" aria-hidden="true" tabindex="-1"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/3be8ab91-bac9-4df6-8df5-e07ffa3ba864.mp4" type="video/mp4"></video>
+        <div class="scene-story__words">
+          <p class="eyebrow">01 / USÉLESS · Seoul scent archive</p>
+          <h2 id="seoul-scene-title">그날의 서울을,<br>오늘의 공간에.</h2>
+          <p>그 시간의 향, 곁의 누군가, 계절의 색채.<br>지나온 장면을 향과 오브제로 남깁니다.</p>
+          <a class="text-link" href="useless.html">USÉLESS 이야기</a>
+        </div>
+        <span class="scene-story__foot micro">Seongsu / Light, glass &amp; memory</span>
+      </div>
+      <figure class="scene-film" data-scene-film>
+        <img src="assets/img/detail-useless/product-front.webp" alt="검은 캡과 리드, 투명한 그랜드 라운드 병" loading="lazy">
+        <video id="seoul-film" data-scene-video muted loop playsinline preload="none" poster="assets/img/detail-useless/product-front.webp" aria-label="USÉLESS 그랜드 라운드 제품 영상">
+          <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/06e7d40e-a5e2-4da9-b79a-d0361406224d.mp4" type="video/mp4">
+        </video>
+        <video id="seoul-film-next" muted playsinline preload="none" poster="assets/img/canon/studio-grid-20260905.webp" aria-label="USÉLESS LED 그리드 스튜디오 추가 영상"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/1ca22aac-7567-45f3-88eb-d57eb84b04bd.mp4" type="video/mp4"></video>
+        <figcaption><span class="micro">USÉLESS / Object film</span><span class="scene-film__count" data-film-count aria-hidden="true">01 / 02</span><button type="button" data-scene-toggle aria-controls="seoul-film" hidden>영상 재생</button></figcaption>
+      </figure>
+    </section>
+
+    <section class="scene-story scene-story--personal" id="personal-scene" aria-labelledby="personal-scene-title">
+      <figure class="scene-film" data-scene-film>
+        <img src="assets/img/canon/amaimu-desk.jpg" alt="핑크와 실버 소품이 놓인 책상 위 amaimü" loading="lazy">
+        <video id="personal-film" data-scene-video muted loop playsinline preload="none" poster="assets/img/canon/amaimu-desk.jpg" aria-label="amaimü의 책상과 소품이 움직이는 스톱모션 영상">
+          <source src="assets/video/home-amaimu-stopmotion-film.mp4" type="video/mp4">
+        </video>
+        <video id="personal-film-next" muted playsinline preload="none" poster="assets/img/canon/crayon-desk-20260905.webp" aria-label="amaimü 크레용 데스크 추가 영상"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/5c4f4abc-7783-4e46-a3f0-e9b07b81028f.mp4" type="video/mp4"></video>
+        <figcaption><span class="micro">amaimü / A little everyday</span><span class="scene-film__count" data-film-count aria-hidden="true">01 / 02</span><button type="button" data-scene-toggle aria-controls="personal-film" hidden>영상 재생</button></figcaption>
+      </figure>
+      <div class="scene-story__copy">
+        <div class="scene-story__words">
+          <p class="eyebrow">02 / amaimü · Just for you.</p>
+          <span class="scene-story__wordmark scene-logo" aria-hidden="true">amaimü</span>
+          <h2 id="personal-scene-title">내가 머무는 자리,<br>매일 받는 선물처럼.</h2>
+          <p>진정한 행복은 거대한 공간이 아니라 개인의 작은 반경에서 시작합니다.<br>누군가의 취향처럼, 누군가의 선물처럼.<br>비밀스럽고 소중한 공간을 위한 향 브랜드입니다.</p>
+          <a class="text-link" href="amaimu.html">amaimü 이야기</a>
+        </div>
+        <span class="scene-story__foot micro">Desk / Bedside / Your own little world</span>
+      </div>
+    </section>
+
+    <section class="scene-shop" id="objects" aria-labelledby="objects-title">
+      <header class="scene-shop__head">
+        <div><p class="eyebrow">Objects to keep close</p><h2 id="objects-title">당신의 곁에는<br>어떤 향이 어울릴까요.</h2></div>
+        <a class="text-link" href="shop.html">Shop 전체 보기</a>
+      </header>
+      <div class="scene-products">
+        <a class="scene-product" href="product-seongsu.html">
+          <div class="scene-product__image" data-scene-film><img src="assets/img/canon/studio-grid-20260905.webp" alt="USÉLESS 성수 무화과 그랜드 라운드 디퓨저" loading="lazy" decoding="async"><video muted loop playsinline preload="none" poster="assets/img/canon/studio-grid-20260905.webp" aria-hidden="true" tabindex="-1"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/1ca22aac-7567-45f3-88eb-d57eb84b04bd.mp4" type="video/mp4"></video></div>
+          <div class="scene-product__info"><div><p class="scene-product__brand">USÉLESS</p><h3>성수 무화과</h3><p class="scene-product__name">Seongsu Fig · Grand Round</p><p class="scene-product__reason">서울의 기억을 담아<br>선물하고 싶을 때.</p></div><span class="scene-product__cta">제품 보기 <span aria-hidden="true">↗</span></span></div>
+        </a>
+        <a class="scene-product scene-product--pink" href="product-amaimu.html">
+          <div class="scene-product__image" data-scene-film><img src="assets/img/canon/crayon-desk-20260905.webp" alt="amaimü 디퓨저 제품" loading="lazy" decoding="async"><video muted loop playsinline preload="none" poster="assets/img/canon/crayon-desk-20260905.webp" aria-hidden="true" tabindex="-1"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/5c4f4abc-7783-4e46-a3f0-e9b07b81028f.mp4" type="video/mp4"></video></div>
+          <div class="scene-product__info"><div><p class="scene-product__brand">amaimü</p><h3>Miss Fig</h3><p class="scene-product__reason">내 책상에 작은 즐거움을<br>더하고 싶을 때.</p></div><span class="scene-product__cta">제품 보기 <span aria-hidden="true">↗</span></span></div>
+        </a>
+      </div>
+      <p class="scene-shop__note">제품 이미지는 개발 중인 콘셉트를 포함합니다. 구성과 판매 상태는 각 제품 페이지에서 확인해 주세요.</p>
+    </section>
 
 
 
-  <!-- ★ 오버사이즈 타이포 밴드 — HAL 문법 (스크롤 연동 수평 흐름) -->
-  <div class="typo-band typo-band--dual" aria-hidden="true">
-    <span class="typo-band__word typo-band__word--outline typo-band__layer" data-typo-dir="1" data-typo-speed="0.55">USÉLESS&nbsp;USÉLESS&nbsp;USÉLESS</span>
-    <span class="typo-band__word typo-band__layer typo-band__layer--front" data-typo-dir="1" data-typo-speed="1">USÉLESS&nbsp;USÉLESS&nbsp;USÉLESS</span>
+    <div class="field-story" aria-label="유슬레스서울의 믿음과 이야기">
+      <div class="field-story__backdrop" data-scene-film aria-hidden="true">
+        <img src="assets/img/canon/closing-fpv-20260905.webp" width="1280" height="720" alt="" loading="lazy" decoding="async">
+        <video id="closing-film" muted loop playsinline preload="none" poster="assets/img/canon/closing-fpv-20260905.webp" tabindex="-1"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_3EceEqS04PynH5lbyJt7KUsbu3n/e42df158-4aca-41a3-a684-ed4521728cc1.mp4" type="video/mp4"></video>
+      </div>
+      <section class="field-story__panel" id="company" aria-labelledby="company-belief-title">
+        <div class="field-story__words">
+          <p class="eyebrow">From belief to company</p>
+          <h2 class="architecture__quote" id="company-belief-title">쓸모, 그 너머에<br>남는 것들</h2>
+          <p class="architecture__translation">What remains beyond use</p>
+        </div>
+      </section>
+      <div class="field-story__panel">
+        <div class="field-story__words field-story__copy">
+          <p class="field-story__lead"><strong>우리는 논리만으로는 설명되지 않는 하루를 살아갑니다.</strong></p>
+          <p>목적 없이 걷던 길, 왠지 오래 기억하고 싶은 공기, 이유 없이 곁에 두고 싶은 물건.<br>기능이 끝난 자리에도 감정은 남고, 때로는 그 잔상이 삶의 온도를 바꿉니다.</p>
+          <p>우리에게 필요한 것은 더 쓸모 있는 물건이 아니라, 쉽게 지나치는 장면을 오래 기억하게 하는 작은 계기인지도 모르겠습니다.</p>
+        </div>
+      </div>
+      <div class="field-story__panel">
+        <div class="field-story__words field-story__copy">
+          <p>유슬레스서울은 서울의 장소와 개인의 감정을 향과 오브제로 기록합니다. 가까운 공간을 선물처럼 바꾸어주는 <strong class="architecture__brand-name">amaimü</strong>, 그리고 도시의 가장 따뜻한 장면을 수집하는 <strong class="architecture__brand-name">USÉLESS</strong>. 서로 다른 두 브랜드는 하나의 믿음에서 출발합니다. 쓸모없어 보이지만 버릴 수 없는 것들이 삶을 조금 더 아름답게 만든다는 믿음.</p>
+          <p class="micro">ONE BELIEF · TWO BRANDS · SEOUL</p>
+          <a class="text-link" href="company.html?canon=20260906-company-flow-fixed">유슬레스서울의 믿음과 방식 보기</a>
+        </div>
+      </div>
+      <section class="field-story__panel field-story__ending" id="brand-core" aria-labelledby="belief-title">
+        <div class="field-story__words">
+          <p class="eyebrow">USÉLESS SEOUL / Things that matter</p>
+          <h2 id="belief-title" lang="en">Things don't have to be <br>useful to matter.</h2>
+          <p class="scene-belief__korean">일상에 온기를 더하는 것들.</p>
+          <div class="scene-belief__links"><a class="text-link" href="company.html">우리의 이야기</a><a class="text-link" id="contact" href="company.html#contact">문의하기</a></div>
+        </div>
+      </section>
+    </div>
+<section class="launch-note" id="launch-notify" tabindex="-1" aria-labelledby="launch-title">
+  <div class="launch-note__copy">
+    <p class="launch-note__eyebrow">LAUNCH LETTER · USÉLESS SEOUL</p>
+    <h2 id="launch-title">새로운 제품이<br>준비되면<br>알려드릴게요.</h2>
+    <p class="launch-note__intro">서울의 기억을 담은 향부터<br>내 책상 위의 작은 선물까지.<br>유슬레스서울의 제품 출시 소식을 문자로 받아보세요.</p>
+    <p class="launch-note__signature">USÉLESS <span aria-hidden="true">/</span> amaimü</p>
   </div>
-
-  <!-- ★ SCENT STORY — 향 입자 나선 스크롤 씬 (R3F 번들, 구간 근접 시에만 로드) -->
-  <section id="scent-story" aria-label="향이 병에 담기는 과정 연출">
-    <div class="scent-sticky">
-      <div id="scene3d-root"></div>
-      <p class="scent-copy" data-story-copy data-from="0.03" data-to="0.3">공기 중에 흩어져 있던 향.</p>
-      <p class="scent-copy" data-story-copy data-from="0.3" data-to="0.6">가장 쓸모없던 시간의 입자들.</p>
-      <p class="scent-copy scent-copy--last" data-story-copy data-from="0.72" data-to="1.02">병에 담다.</p>
-      <figure class="scent-bottle" data-spin data-spin-base="assets/3d/spin/f" data-spin-count="40" data-spin-auto="1" aria-hidden="true"></figure>
+  <div class="launch-note__panel">
+    <form class="launch-form" data-launch-form>
+      <p class="launch-form__heading">제품 출시 알림</p>
+      <input name="product" type="hidden" value="all">
+      <label for="launch-phone">전화번호 <small>필수</small></label>
+      <input id="launch-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000" maxlength="20" aria-describedby="launch-phone-help" required>
+      <p class="launch-form__hint" id="launch-phone-help">출시 소식을 받을 휴대전화 번호를 입력해 주세요.</p>
+      <div class="launch-form__optional">
+        <div><label for="launch-email">이메일 <small>선택</small></label><input id="launch-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" maxlength="254"></div>
+        <div><label for="launch-name">이름 <small>선택</small></label><input id="launch-name" name="name" type="text" autocomplete="name" placeholder="이름" maxlength="60"></div>
+      </div>
+      <div class="launch-form__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="launch-form__consent"><input type="checkbox" name="consent" required><span>제품 출시 알림을 위한 개인정보 수집·이용에 동의합니다. <small>(필수)</small></span></label>
+      <details class="launch-form__privacy"><summary>수집·이용 안내</summary><p>유슬레스서울은 제품 출시 알림을 위해 전화번호(필수), 이메일·이름(선택), 상품 상세에서 연결된 관심 제품 정보를 수집합니다. 전화번호는 문자 알림에, 입력한 이메일·이름은 추가 출시 소식과 안내에 사용합니다. 선택 항목을 입력하지 않아도 신청할 수 있습니다. 신청일로부터 6개월간 보관하며, 그 전에 철회를 요청하면 삭제합니다. 동의하지 않으면 신청할 수 없습니다. 철회 문의: <a href="mailto:ops@uselessseoul.com">ops@uselessseoul.com</a></p><a href="privacy.html">개인정보처리방침 ↗</a></details>
+      <div data-launch-captcha></div>
+      <button class="launch-form__submit" type="submit" disabled aria-describedby="launch-status">제품 출시 알림 준비 중</button>
+      <p class="launch-form__status" id="launch-status" data-launch-status role="status" aria-live="polite">제품 출시 알림 신청을 준비하고 있습니다.</p>
+      <p class="launch-form__fine">알림 신청은 구매 예약이나 결제가 아닙니다.</p>
+    </form>
+    <div class="launch-success" data-launch-success hidden tabindex="-1">
+      <p class="launch-note__eyebrow">YOU’RE ON THE LIST</p><h3>출시 소식으로<br>다시 만나요.</h3><p data-launch-confirmation></p><p>신청이 접수되었습니다.<br>새로운 제품이 준비되면 문자로 알려드리겠습니다.</p><a href="shop.html#scent-guide">제품 둘러보기 ↗</a>
     </div>
-  </section>
-
-  <!-- ★ BRAND FILM — 스토리 요약 (전문은 story.html) -->
-  <section class="film" id="film">
-    <figure class="film__bg">
-      <!-- 브랜드 필름 무빙 클립 (seedance, 흑백 필름 톤) — 실패 시 poster 스틸 폴백 -->
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="assets/img/live/scene-hangang.jpg"
-             aria-label="여름밤 한강 — 브랜드 필름">
-        <source src="assets/img/live/brand-film-web.mp4" type="video/mp4" />
-      </video>
-    </figure>
-    <div class="film__text reveal">
-      <p class="film__jp">何もしなかった夜ほど、忘れられない。</p>
-      <h2 class="film__line">가장 쓸모없던 시간이,<br />가장 잊히지 않는 시간이다.</h2>
-      <p class="film__body">
-        스무 살의 우리는 밤새 강변에 앉아 아무것도 하지 않았다.<br />
-        그 밤은 어디에도 기록되지 않았지만, 아직 어제처럼 선명하다.<br />
-        USÉLESS SEOUL은 그 시간의 공기를 병에 담는다.
-      </p>
-      <p class="film__en">The most useless hours are the ones we never forget.</p>
-      <a class="btn reveal" href="story.html" style="margin-top:2.2rem;border-color:#fff;color:#fff;">브랜드 스토리 읽기</a>
-    </div>
-  </section>
-
-  <!-- ② BEST — 파일럿 3종 + 출시 예정 1종 (스크롤 핀 — 병이 돌아가는 구간) -->
-  <div class="lineup-pin" id="lineup-pin">
-  <section class="lineup" id="lineup">
-    <header class="sect-head reveal">
-      <h2>4 Scents</h2>
-      <p>하나의 향은 하나의 장면입니다. 판매 3종 · 애프터눈 티는 출시 예정.</p>
-    </header>
-    <!-- 카드는 site.js가 Store.getProducts()로 렌더 — 제품 정본은 store.js 한 곳 (가격 전부 mock) -->
-    <div class="lineup__grid" data-product-grid>
-      <!-- 스켈레톤 4장 = JS 렌더 전 공간 예약(CLS 방지) — renderProductGrids가 통째 교체 -->
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-    </div>
-    <!-- no-JS 폴백: 카드가 JS 렌더라 스크립트 꺼짐 시 스켈레톤 숨기고 정적 상세(폴백 완비) 링크 제공 -->
-    <noscript>
-      <style>.product--skeleton{display:none}</style>
-      <p class="nojs-note">JavaScript가 꺼져 있어 제품 카드를 표시할 수 없습니다. 향별 페이지에서 바로 보실 수 있습니다 —
-        <a href="product-hangang.html">여름밤 한강</a> ·
-        <a href="product-hotel.html">호텔 블랭킷</a> ·
-        <a href="product-seongsu.html">성수 무화과</a> ·
-        <a href="product-tea.html">애프터눈 티 (출시 예정)</a></p>
-    </noscript>
-  </section>
   </div>
-
-
-  <div class="typo-band typo-band--dual" aria-hidden="true">
-    <span class="typo-band__word typo-band__word--outline typo-band__layer" data-typo-dir="-1" data-typo-speed="0.55">SEOUL,&nbsp;BOTTLED&nbsp;—&nbsp;SEOUL,&nbsp;BOTTLED</span>
-    <span class="typo-band__word typo-band__layer typo-band__layer--front" data-typo-dir="-1" data-typo-speed="1">SEOUL,&nbsp;BOTTLED&nbsp;—&nbsp;SEOUL,&nbsp;BOTTLED</span>
-  </div>
-
-  <!-- ③ BRAND PHILOSOPHY -->
-  <section class="about" id="about">
-    <div class="about__inner reveal">
-      <p class="about__mark">DO NOT DRINK!</p>
-      <h2 class="about__title">쓸모없어 보이는 것을<br /><em>아름답게.</em></h2>
-      <p class="about__body">
-        디퓨저는 마실 수도, 먹을 수도, 입을 수도 없습니다.
-        방 안의 공기를 아주 조금 바꿀 뿐입니다.
-        USÉLESS SEOUL은 그 "아주 조금"을 만듭니다 —
-        효율로는 설명되지 않는 감각, 기억, 장면 같은 것들.
-        서울을 병에 담아 방에 두는 일. 쓸모는 없지만, 버릴 수 없는 것.
-      </p>
-    </div>
-  </section>
-
-  <!-- ④ SHOP CTA -->
-  <section class="buy buy--duo" id="buy">
-    <div class="buy__inner reveal">
-      <p class="buy__lead">아무것도 하지 않는 시간을 위해.</p>
-      <h2 class="buy__title">서울 한 병,<br />방에 두기.</h2>
-      <a class="btn btn--solid btn--lg" href="shop.html">SHOP 바로가기</a>
-      <p class="buy__note">결제는 오픈 준비 중 — 표시된 가격·주문은 목업입니다.</p>
-    </div>
-    <figure class="buy__spin" data-spin data-spin-base="assets/3d/spin-slv/f" data-spin-count="40" data-spin-scroll="1" data-spin-speed="1.6" aria-hidden="true"></figure>
-  </section>
-
+</section>
   </main>
 
-  <footer class="foot">
-    <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
-    <p class="foot__brand">USÉLESS SEOUL</p>
-    <p class="foot__line">쓸모없어도 괜찮아.</p>
-    <div class="foot__links">
-      <a href="shop.html">SHOP</a>
-      <a href="story.html">STORY</a>
-      <a href="faq.html">FAQ</a>
-      <a href="archive.html">ARCHIVE</a>
-      <a href="https://www.instagram.com/useless_seoul/" target="_blank" rel="noopener">@useless_seoul</a>
-    </div>
-    <div class="foot__biz">
-      <p>유슬레스서울 · 대표 백승준 · 사업자등록번호 150-19-02571</p>
-      <p>서울특별시 광진구 능동로3길 63, 201-S73호 (자양동) · ops@uselessseoul.com</p>
-      <p>통신판매업 신고: 절차 진행 중 (완료 시 게시) · <a href="terms.html">이용약관</a> · <a href="privacy.html">개인정보처리방침</a></p>
-    </div>
-    <p class="foot__legal">© 2026 USÉLESS SEOUL · 시제품 단계 — 표시된 가격·사양은 목업이며 변경될 수 있습니다.</p>
+  <footer class="site-footer">
+    <p class="micro">© 2026 USELESS SEOUL</p>
+    <p class="site-footer__center micro">Creative company · Seoul</p>
+    <p class="site-footer__right micro"><a href="shop.html">Shop</a> · <a href="story.html">Story</a> · <a href="faq.html">FAQ</a></p>
   </footer>
 
-  <script>
-  /* scene3d(R3F 번들 ~295KB gzip) — 스크롤 스토리 구간 근접 시에만 다운로드 */
-  (function () {
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var loaded = false;
-    function loadScene() {
-      if (loaded) return; loaded = true;
-      var sc = document.createElement("script");
-      sc.src = "assets/js/scene3d-dist/scene3d.js?v=15";
-      document.body.appendChild(sc);
-    }
-    /* 히어로 3D 병 — LCP(정적 이미지) 페인트 후 idle에 로드 */
-    if (document.getElementById("hero-bottle-root")) {
-      if ("requestIdleCallback" in window) requestIdleCallback(loadScene, { timeout: 3500 });
-      else setTimeout(loadScene, 2200);
-    }
-    var s = document.getElementById("scent-story");
-    if (!s || !("IntersectionObserver" in window)) return;
-    var io = new IntersectionObserver(function (e) {
-      if (!e[0].isIntersecting) return;
-      io.disconnect();
-      loadScene();
-    }, { rootMargin: "900px 0px" });
-    io.observe(s);
-  })();
-  </script>
+  <script src="assets/js/canon-site.js?v=20260910-public" defer></script>
+  <script src="assets/js/home-motion-20260905.js?v=20260910-public" defer></script>
+  <script src="assets/js/home-section-rail-20260905-v2.js?v=20260910-public" defer></script>
+<a class="launch-float" href="#launch-notify">제품 출시 알림 <span aria-hidden="true">↗</span></a>
 </body>
 </html>

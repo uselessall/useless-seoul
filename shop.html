@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHOP — USÉLESS SEOUL</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/bk01.svg" />
-  <meta name="description" content="USÉLESS SEOUL 리드 디퓨저 파일럿 3종 — 호텔 블랭킷 · 성수 무화과 · 여름밤 한강. 애프터눈 티는 출시 예정." />
+  <meta name="description" content="USÉLESS SEOUL의 서울 향 파일럿과 첫 소비자 브랜드 amaimü의 무화과 우드 상품관." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SHOP — USÉLESS SEOUL" />
-  <meta property="og:description" content="서울의 장면을 병에 담은 리드 디퓨저 — 파일럿 3종." />
+  <meta property="og:description" content="서울의 장면을 병에 담은 USÉLESS와 Just for U, Amaimu." />
   <meta property="og:image" content="https://uselessseoul.com/assets/img/live/product-hero-clean.png" />
   <meta property="og:url" content="https://uselessseoul.com/shop.html" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -24,23 +24,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
-  <!-- SHOP 대표 실사 컷 선발견 -->
-  <link rel="preload" as="image" href="assets/img/live/product-hero-clean.png" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=20260910-public" />
+  <!-- SHOP 대표 정본 실사 컷 선발견 -->
+  <link rel="preload" as="image" href="assets/img/canon/seoul-life-20260905.webp" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=38" defer></script>
-  <script src="assets/js/site.js?v=38" defer></script>
-  <script src="assets/js/spin.js?v=3" defer></script>
+  <script src="assets/js/store.js?v=20260910-public" defer></script>
+  <script src="assets/js/site.js?v=20260910-public" defer></script>
+  <link rel="stylesheet" href="assets/css/brand-purchase-20260905.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/site-refine-20260906.css?v=20260910-public">
+<link rel="stylesheet" href="assets/css/product-evidence-20260906.css?v=20260910-public">
+<link rel="stylesheet" href="assets/css/shop-color-20260906.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/launch-note-20260906.css?v=20260910-public">
+  <script src="assets/js/launch-config-20260906.js?v=20260910-public" defer></script>
+  <script src="assets/js/launch-note-20260906.js?v=20260910-public" defer></script>
 </head>
-<body>
+<body class="has-launch-float refined-store shop-color">
 
   <a class="skip" href="#main">본문 바로가기</a>
 
   <header class="nav" id="nav">
     <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
     <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
-    <nav class="nav__menu" id="navMenu">
-      <a href="shop.html" class="on">SHOP</a>
+    <nav class="nav__menu" id="navMenu" aria-label="주요 내비게이션">
+      <a href="shop.html" class="on" aria-current="page">SHOP</a>
+      <a href="company.html">ABOUT US</a>
+      <a href="shop.html#amaimu">AMAIMU</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
     </nav>
@@ -54,50 +62,120 @@
   <main id="main" tabindex="-1" class="page">
     <header class="page-head reveal">
       <h1>Shop</h1>
-      <p>파일럿 3종 + 출시 예정 1종 — 하나의 향은 하나의 장면입니다. 가격·주문은 목업(오픈 준비 중).</p>
+      <p>서울의 기억을 간직할 향, 내 책상에 두고 싶은 작은 선물. 유슬레스서울의 두 향 브랜드에서 마음이 가는 장면을 골라보세요.</p>
     </header>
 
-    <section class="shop-visual reveal" aria-label="USÉLESS SEOUL 리드 디퓨저 대표 이미지">
-      <figure class="shop-visual__img">
-        <img src="assets/img/live/product-hero-clean.png" alt="USÉLESS SEOUL 리드 디퓨저 — 투명 유리 200ml" fetchpriority="high" />
-      </figure>
-      <div class="shop-visual__copy">
-        <p>ONLINE PILOT</p>
-        <h2>서울의 장면을<br />방 안으로.</h2>
-        <span>판매 3종 · 200ml · ₩35,000 mock</span>
+    <p class="evidence-purchase-link"><a href="#scent-guide">어떤 향이 어울릴까요? 여섯 향 비교하기 ↓</a></p><nav class="brand-tabs reveal" aria-label="브랜드 대분류">
+      <a class="brand-tabs__item on" href="#useless" data-shop-tab="useless" aria-current="true">
+        <span>USÉLESS</span>
+        <em>서울의 기억 · 취향의 선물</em>
+      </a>
+      <a class="brand-tabs__item brand-tabs__item--amaimu" href="#amaimu" data-shop-tab="amaimu">
+        <span>amaimü</span>
+        <em>내 책상 · 작은 선물</em>
+      </a>
+    </nav>
+
+    <section class="shop-brand-panel shop-brand-panel--useless is-active" id="useless" data-shop-panel="useless" aria-labelledby="useless-shop-title">
+      <section class="shop-visual reveal" aria-label="USÉLESS SEOUL 리드 디퓨저 대표 이미지">
+        <figure class="shop-visual__img shop-visual__img--editorial" data-product-hero>
+          <img class="hero__still" src="assets/img/canon/seoul-life-20260905.webp" alt="서울의 초록과 붉은 벽돌이 보이는 창가의 USÉLESS 보틀 연출" fetchpriority="high" />
+          <span class="shop-visual__light" aria-hidden="true"></span>
+          <figcaption class="shop-visual__badge">200ml / 500ml set · Product study</figcaption>
+        </figure>
+        <div class="shop-visual__copy">
+          <p>USÉLESS SEOUL SIGNATURE DIFFUSER</p>
+          <h2>당신이 지나친<br />서울의 장면을<br />방 안으로.</h2>
+          <strong class="shop-visual__chapter">그 첫 번째 이야기, 성수동</strong>
+          <p class="shop-purchase-note">여행에서 만난 서울을 기억하고, 좋아하는 사람에게 그 장면을 선물하고 싶을 때.</p>
+          <span>USÉLESS 5종 · 200ml/500ml 세트 중 택</span>
+        </div>
+      </section>
+
+      <!-- 카드는 site.js가 Store.getProducts()로 렌더 — 제품 정본은 store.js 한 곳 (가격 전부 mock) -->
+      <h2 class="sr-only" id="useless-shop-title">USÉLESS SEOUL 제품</h2>
+      <div class="lineup__grid" style="padding:0;" data-product-grid data-brand="useless">
+        <!-- 스켈레톤 5장 = JS 렌더 전 공간 예약(CLS 방지) — renderProductGrids가 통째 교체 -->
+        <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
+        <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
+        <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
+        <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
+        <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
       </div>
+      <!-- no-JS 폴백: 카드가 JS 렌더라 스크립트 꺼짐 시 스켈레톤 숨기고 정적 상세(폴백 완비) 링크 제공 -->
+      <noscript>
+        <style>.product--skeleton{display:none}</style>
+        <p class="nojs-note">JavaScript가 꺼져 있어 제품 카드를 표시할 수 없습니다. 향별 페이지에서 바로 보실 수 있습니다 —
+          <a href="product-seongsu.html">성수 무화과</a> ·
+          <a href="product-hotel.html">호텔 블랭킷</a> ·
+          <a href="product-seoul-forest.html">서울숲의 아침</a> ·
+          <a href="product-seokchon-cherrywood.html">석촌 체리우드</a> ·
+          <a href="product-cafe-flower-tea.html">카페 플라워티</a></p>
+      </noscript>
     </section>
 
-      <div data-spin data-spin-auto="1" data-spin-offset="13"></div>
-      <div data-spin data-spin-auto="1" data-spin-offset="27"></div>
+    <section class="shop-brand-panel shop-brand-section shop-brand-section--amaimu" id="amaimu" data-shop-panel="amaimu" aria-labelledby="amaimu-shop-title">
+      <section class="shop-brand-intro shop-brand-intro--amaimu reveal" aria-label="amaimü 브랜드 소개">
+        <a class="shop-brand-intro__image" href="amaimu.html" aria-label="amaimü 브랜드 이미지로 소개페이지 이동">
+          <img src="assets/img/detail-amaimu/lifestyle-window-v7.webp" alt="창가에 놓인 amaimü 무화과 우드 리드 디퓨저" />
+          <span>JUST FOR U, AMAIMÜ</span>
+        </a>
+        <div class="shop-brand-intro__copy">
+          <p>FIRST CONSUMER BRAND · BY USÉLESS SEOUL</p>
+          <h2 id="amaimu-shop-title">amaimü</h2>
+          <strong>오직 당신만을 위한 선물,<br /><span>저스트 포 유, 아마이뮤.</span></strong>
+          <p class="shop-brand-intro__body">귀여워서 자꾸 눈길이 가는 것. 내 책상에 놓고, 친구에게도 선물하고 싶은 향을 골라보세요.</p>
+          <a class="btn shop-brand-intro__link" href="product-amaimu.html">Miss Fig 자세히 보기</a>
+        </div>
+      </section>
+      <div class="shop-products-panel">
+        <div class="lineup__grid lineup__grid--amaimu" style="padding:0;" data-product-grid data-brand="amaimu">
+          <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
+        </div>
+        <noscript><p class="nojs-note"><a href="product-amaimu.html">Miss Fig 상품 구매페이지 보기</a></p></noscript>
+      </div>
+    </section>
+  <section class="evidence evidence-shop-guide" id="scent-guide"><p class="evidence-eyebrow">FIND YOUR SCENT</p><h2>향의 흐름과 취향을<br>나란히 비교해 보세요.</h2><div class="evidence-table-wrap" role="region" aria-label="여섯 향 비교표" tabindex="0"><table class="evidence-table"><thead><tr><th scope="col">향</th><th scope="col">향의 흐름</th><th scope="col">선택의 기준</th></tr></thead><tbody><tr ><th scope="row"><span>USÉLESS</span><a href="product-seongsu.html" target="_top">성수 무화과 ↗</a></th><td>무화과 · 자두 → 편백 · 사이프러스 → 우드</td><td>서울의 기억을 담은 선물, 단정한 공간</td></tr><tr ><th scope="row"><span>amaimü</span><a href="product-amaimu.html" target="_top">Miss Fig ↗</a></th><td>무화과 · 자두 → 편백 · 사이프러스 → 우드</td><td>컬러 레터링과 내 책상 위 작은 즐거움</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-hotel.html" target="_top">호텔 블랭킷 ↗</a></th><td>클린 → 라벤더 → 머스크</td><td>여행에서 만난 침실의 분위기</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-seoul-forest.html" target="_top">서울숲의 아침 ↗</a></th><td>그린 리프 → 히노키 · 시더우드 → 머스크</td><td>나무와 이른 산책을 좋아하는 취향</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-seokchon-cherrywood.html" target="_top">석촌 체리우드 ↗</a></th><td>체리 · 꽃잎 → 시더우드 · 샌달우드 → 머스크</td><td>함께 걸었던 계절과 우드 톤의 공간</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-cafe-flower-tea.html" target="_top">카페 플라워티 ↗</a></th><td>베르가모트 → 플로럴 티 · 블랙 티 → 머스크</td><td>찻잔과 책이 있는 오후의 테이블</td></tr></tbody></table></div><p class="evidence-fine">현재 소개된 향 노트와 브랜드 제안을 비교한 안내입니다. 성수 무화과와 Miss Fig는 공통된 무화과·우드 노트를 소개하고 있어, 향의 차이를 단정하기보다 디자인과 담고 싶은 장면을 함께 살펴보세요.</p></section><section class="launch-note" id="launch-notify" tabindex="-1" aria-labelledby="launch-title">
+  <div class="launch-note__copy">
+    <p class="launch-note__eyebrow">LAUNCH LETTER · USÉLESS SEOUL</p>
+    <h2 id="launch-title">새로운 제품이<br>준비되면<br>알려드릴게요.</h2>
+    <p class="launch-note__intro">서울의 기억을 담은 향부터<br>내 책상 위의 작은 선물까지.<br>유슬레스서울의 제품 출시 소식을 문자로 받아보세요.</p>
+    <p class="launch-note__signature">USÉLESS <span aria-hidden="true">/</span> amaimü</p>
+  </div>
+  <div class="launch-note__panel">
+    <form class="launch-form" data-launch-form>
+      <p class="launch-form__heading">제품 출시 알림</p>
+      <input name="product" type="hidden" value="all">
+      <label for="launch-phone">전화번호 <small>필수</small></label>
+      <input id="launch-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000" maxlength="20" aria-describedby="launch-phone-help" required>
+      <p class="launch-form__hint" id="launch-phone-help">출시 소식을 받을 휴대전화 번호를 입력해 주세요.</p>
+      <div class="launch-form__optional">
+        <div><label for="launch-email">이메일 <small>선택</small></label><input id="launch-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" maxlength="254"></div>
+        <div><label for="launch-name">이름 <small>선택</small></label><input id="launch-name" name="name" type="text" autocomplete="name" placeholder="이름" maxlength="60"></div>
+      </div>
+      <div class="launch-form__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="launch-form__consent"><input type="checkbox" name="consent" required><span>제품 출시 알림을 위한 개인정보 수집·이용에 동의합니다. <small>(필수)</small></span></label>
+      <details class="launch-form__privacy"><summary>수집·이용 안내</summary><p>유슬레스서울은 제품 출시 알림을 위해 전화번호(필수), 이메일·이름(선택), 상품 상세에서 연결된 관심 제품 정보를 수집합니다. 전화번호는 문자 알림에, 입력한 이메일·이름은 추가 출시 소식과 안내에 사용합니다. 선택 항목을 입력하지 않아도 신청할 수 있습니다. 신청일로부터 6개월간 보관하며, 그 전에 철회를 요청하면 삭제합니다. 동의하지 않으면 신청할 수 없습니다. 철회 문의: <a href="mailto:ops@uselessseoul.com">ops@uselessseoul.com</a></p><a href="privacy.html">개인정보처리방침 ↗</a></details>
+      <div data-launch-captcha></div>
+      <button class="launch-form__submit" type="submit" disabled aria-describedby="launch-status">제품 출시 알림 준비 중</button>
+      <p class="launch-form__status" id="launch-status" data-launch-status role="status" aria-live="polite">제품 출시 알림 신청을 준비하고 있습니다.</p>
+      <p class="launch-form__fine">알림 신청은 구매 예약이나 결제가 아닙니다.</p>
+    </form>
+    <div class="launch-success" data-launch-success hidden tabindex="-1">
+      <p class="launch-note__eyebrow">YOU’RE ON THE LIST</p><h3>출시 소식으로<br>다시 만나요.</h3><p data-launch-confirmation></p><p>신청이 접수되었습니다.<br>새로운 제품이 준비되면 문자로 알려드리겠습니다.</p><a href="shop.html#scent-guide">제품 둘러보기 ↗</a>
     </div>
+  </div>
+</section>
 
-    <!-- 카드는 site.js가 Store.getProducts()로 렌더 — 제품 정본은 store.js 한 곳 (가격 전부 mock) -->
-    <h2 class="sr-only">전체 제품</h2>
-    <div class="lineup__grid" style="padding:0;" data-product-grid>
-      <!-- 스켈레톤 4장 = JS 렌더 전 공간 예약(CLS 방지) — renderProductGrids가 통째 교체 -->
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-      <article class="product product--skeleton" aria-hidden="true"><span class="product__img"></span><div class="product__info"></div></article>
-    </div>
-    <!-- no-JS 폴백: 카드가 JS 렌더라 스크립트 꺼짐 시 스켈레톤 숨기고 정적 상세(폴백 완비) 링크 제공 -->
-    <noscript>
-      <style>.product--skeleton{display:none}</style>
-      <p class="nojs-note">JavaScript가 꺼져 있어 제품 카드를 표시할 수 없습니다. 향별 페이지에서 바로 보실 수 있습니다 —
-        <a href="product-hangang.html">여름밤 한강</a> ·
-        <a href="product-hotel.html">호텔 블랭킷</a> ·
-        <a href="product-seongsu.html">성수 무화과</a> ·
-        <a href="product-tea.html">애프터눈 티 (출시 예정)</a></p>
-    </noscript>
-  </main>
+</main>
 
   <footer class="foot">
     <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
     <p class="foot__brand">USÉLESS SEOUL</p>
-    <p class="foot__line">쓸모없어도 괜찮아.</p>
+    <p class="foot__line">일상에 온기를 더하는 것들.</p>
     <div class="foot__links">
       <a href="shop.html">SHOP</a>
+      <a href="shop.html#amaimu">AMAIMU</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
       <a href="archive.html">ARCHIVE</a>
@@ -111,5 +189,6 @@
     <p class="foot__legal">© 2026 USÉLESS SEOUL · 시제품 단계 — 표시된 가격·사양은 목업이며 변경될 수 있습니다.</p>
   </footer>
 
+<a class="launch-float" href="#launch-notify">제품 출시 알림 <span aria-hidden="true">↗</span></a>
 </body>
 </html>

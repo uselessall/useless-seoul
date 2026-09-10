@@ -19,20 +19,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=20260910-public" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=38" defer></script>
-  <script src="assets/js/site.js?v=38" defer></script>
+  <script src="assets/js/store.js?v=20260910-public" defer></script>
+  <script src="assets/js/site.js?v=20260910-public" defer></script>
+  <link rel="stylesheet" href="assets/css/site-refine-20260906.css?v=20260910-public">
 </head>
-<body>
+<body class="refined-store">
 
   <a class="skip" href="#main">본문 바로가기</a>
 
   <header class="nav" id="nav">
     <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
     <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
-    <nav class="nav__menu" id="navMenu">
+    <nav class="nav__menu" id="navMenu" aria-label="주요 내비게이션">
       <a href="shop.html">SHOP</a>
+      <a href="company.html">ABOUT US</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
     </nav>
@@ -48,7 +52,7 @@
     <div class="auth reveal">
       <header class="page-head">
         <h1>Login</h1>
-        <p>돌아온 걸 환영해요. 오늘도 쓸모없이.</p>
+        <p>담아둔 향과 주문 내역을 이어서 확인하세요.</p>
       </header>
       <form class="co__form" id="loginForm">
         <label for="liEmail">이메일</label>
@@ -59,15 +63,18 @@
         <button type="submit" class="btn btn--solid btn--lg">로그인</button>
         <p class="auth__alt">계정이 없다면 <a href="signup.html">회원가입 →</a></p>
       </form>
+      <p class="guest-path"><a href="shop.html">로그인 없이 향 둘러보기 →</a></p>
     </div>
   </main>
 
   <footer class="foot">
     <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
     <p class="foot__brand">USÉLESS SEOUL</p>
-    <p class="foot__line">쓸모없어도 괜찮아.</p>
+    <p class="foot__line">일상에 온기를 더하는 것들.</p>
     <div class="foot__links">
       <a href="shop.html">SHOP</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
       <a href="archive.html">ARCHIVE</a>

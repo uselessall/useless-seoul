@@ -1,0 +1,17 @@
+/* Slim glass dot rail, shared desktop/mobile behavior. */
+.section-rail { position: fixed; z-index: 45; right: max(18px, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); padding: 8px 3px; border: 1px solid rgb(255 255 255 / 16%); border-radius: 30px; color: #fff; background: linear-gradient(140deg, rgb(65 65 62 / 48%), rgb(20 20 20 / 32%)); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); box-shadow: inset 1px 1px 1px rgb(255 255 255 / 16%), 0 6px 24px rgb(0 0 0 / 12%); }
+.section-rail__links { display: grid; }
+.section-rail__link { position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.section-rail__number { width: 6px; height: 6px; border-radius: 50%; background: rgb(255 255 255 / 50%); font-size: 0; transition: background .25s, box-shadow .25s, transform .25s; }
+.section-rail__link[aria-current="location"] .section-rail__number { background: #fff; transform: scale(1.7); box-shadow: 0 0 0 4px rgb(255 255 255 / 16%), 0 0 8px rgb(255 255 255 / 10%); }
+.section-rail__link:hover .section-rail__number { background: #fff; }
+.section-rail__label { position: absolute; right: calc(100% + 10px); padding: 7px 9px; border: 1px solid rgb(255 255 255 / 12%); border-radius: 5px; white-space: nowrap; color: #fff; background: rgb(20 20 20 / 76%); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); font: 400 10px/1.2 var(--sans); opacity: 0; transform: translateX(4px); pointer-events: none; transition: opacity .2s, transform .2s; }
+.section-rail__link:is([aria-current="location"],:hover,:focus-visible) .section-rail__label { opacity: 1; transform: none; }
+.section-rail a:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.home-scenes #home { scroll-margin-top: 0; }
+.home-scenes #brand-core { scroll-margin-top: 76px; }
+.menu-open .section-rail { visibility: hidden; }
+@media (max-width: 680px) { .section-rail { right: max(9px, env(safe-area-inset-right)); } }
+@media (max-height: 400px) { .section-rail__link { height: 26px; } }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .section-rail { background: rgb(40 40 40 / 88%); } }
+@media (prefers-reduced-motion: reduce) { .section-rail__number, .section-rail__label { transition: none; } }

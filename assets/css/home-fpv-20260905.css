@@ -1,0 +1,7 @@
+/* FPV comparison: preserve the generated slate-blue sky and silver-green field. */
+.scene-belief--fpv { background: #334b50; color: #fffdf7; }
+.scene-belief--fpv::before { background: linear-gradient(180deg, rgb(13 35 57 / 24%), rgb(9 25 39 / 22%) 48%, rgb(9 21 29 / 26%)); }
+.scene-belief--fpv .eyebrow, .scene-belief--fpv .text-link, .scene-belief--fpv .scene-belief__korean { color: #fffdf7; }
+.scene-belief--fpv .text-link { border-color: rgb(255 253 247 / 65%); }
+.scene-belief--fpv h2 { text-shadow: 0 2px 26px rgb(5 20 19 / 16%); }
+.scene-belief--fpv .scene-belief__media > :is(img, video) { object-position: 50% 42%; }

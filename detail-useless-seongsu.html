@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USÉLESS 성수 무화과 — 스마트스토어 상세페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;700&family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{background:#E9E9E9;font-family:'Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased}
+/* 상세페이지 본문 폭 860px 고정 — 스마트스토어 상세 규격 */
+.pg-u{--ink:#141414;--ink2:#6E6E6E;--ink3:#9A9A9A;--line:#E4E4E4;--bg:#fff;--grey:#F5F5F5;--dark:#121212}
+.pg-u *{box-sizing:border-box;margin:0;padding:0}
+.pg-u{background:#E9E9E9;font-family:'Noto Sans KR',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+.pg-u .page{width:min(100%,860px);margin:0 auto;background:var(--bg)}
+.pg-u img{display:block;width:100%;height:auto}
+.pg-u .pad{padding:96px 78px}
+.pg-u .pad-s{padding:62px 78px}
+.pg-u .center{text-align:center}
+.pg-u .en{font-size:14px;letter-spacing:.3em;color:var(--ink3);text-transform:uppercase}
+.pg-u .rule{width:1px;height:34px;background:#CFCFCF;margin:26px 0}
+.pg-u .center .rule{margin:26px auto}
+.pg-u h2{font-family:'Noto Serif KR',serif;font-size:38px;font-weight:200;line-height:1.62;letter-spacing:-.025em}
+.pg-u h3{font-size:24px;font-weight:500;line-height:1.55;letter-spacing:-.015em}
+.pg-u h4{font-size:19px;font-weight:500;line-height:1.55}
+.pg-u p{font-size:18px;font-weight:300;line-height:1.95;color:var(--ink2);letter-spacing:-.008em}
+.pg-u .body-l{font-size:20px;line-height:2;color:#4A4A4A;font-weight:300}
+.pg-u .mt-xs{margin-top:8px}
+.pg-u .mt-s{margin-top:16px}
+.pg-u .mt{margin-top:28px}
+.pg-u .mt-l{margin-top:48px}
+.pg-u .grey{background:var(--grey)}
+.pg-u .dark{background:var(--dark);color:#fff}
+.pg-u .dark h2, .pg-u .dark h3, .pg-u .dark h4{color:#fff}
+.pg-u .dark p{color:#A6A6A6}
+.pg-u .dark .en{color:#7E7E7E}
+.pg-u .dark .rule{background:#3A3A3A}
+.pg-u .spec{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pg-u .spec div{padding:30px 10px;text-align:center;border-left:1px solid var(--line)}
+.pg-u .spec div:first-child{border-left:0}
+.pg-u .spec b{display:block;font-size:25px;font-weight:400}
+.pg-u .spec span{display:block;font-size:14px;color:var(--ink3);margin-top:8px;letter-spacing:.1em}
+.pg-u .pyr{border-top:1px solid #333}
+.pg-u .pyr div{display:grid;grid-template-columns:92px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid #333;align-items:baseline}
+.pg-u .pyr .k{font-size:14px;letter-spacing:.2em;color:#7E7E7E}
+.pg-u .pyr .v{font-size:19px;font-weight:300;color:#EAEAEA;line-height:1.7}
+.pg-u .check{list-style:none}
+.pg-u .check li{font-size:18px;font-weight:300;line-height:1.65;color:#4A4A4A;padding:18px 0 18px 24px;border-bottom:1px solid var(--line);position:relative}
+.pg-u .check li:before{content:"";position:absolute;left:2px;top:22px;width:8px;height:1px;background:#141414}
+.pg-u .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.pg-u .grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.pg-u .num{font-size:14px;letter-spacing:.2em;color:#B4B4B4}
+.pg-u table{width:100%;border-collapse:collapse;font-size:16px;font-weight:300}
+.pg-u th, .pg-u td{padding:15px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.pg-u th{width:146px;font-weight:400;color:var(--ink)}
+.pg-u td{color:var(--ink2);line-height:1.8}
+.pg-u table.mid th{width:auto;text-align:center;font-size:15px;color:var(--ink3);font-weight:400;border-bottom:1px solid #D2D2D2}
+.pg-u table.mid td{text-align:center;color:#4A4A4A}
+.pg-u .faq{border-top:1px solid var(--line)}
+.pg-u .faq dt{font-size:19px;font-weight:500;padding:28px 0 0}
+.pg-u .faq dd{font-size:17px;font-weight:300;line-height:1.9;color:var(--ink2);padding:11px 0 28px;border-bottom:1px solid var(--line)}
+.pg-u .note{font-size:14px;line-height:1.9;color:#A2A2A2;font-weight:300}
+.pg-u .todo{background:#FFF6D6;padding:3px 7px;border-radius:2px;color:#7A6410;font-size:14px}
+.pg-u .logo{font-size:18px;letter-spacing:.38em}
+.pg-u .xbrand{border:1px solid var(--line);padding:32px 36px;display:flex;align-items:center;gap:26px}
+.pg-u .xbrand img{width:132px}
+.pg-u .quote{font-family:'Noto Serif KR',serif;font-size:32px;font-weight:200;line-height:1.85;letter-spacing:-.025em}
+.pg-u .guide{width:860px;margin:24px auto;font-size:14px;line-height:1.8;color:#666;background:#fff;border:1px dashed #bbb;padding:16px 20px}
+@media(max-width:640px){
+  .pg-u .pad{padding:64px 24px}.pg-u .pad-s{padding:48px 24px}
+  .pg-u h2{font-size:30px}.pg-u h3{font-size:22px}.pg-u p,.pg-u .body-l{font-size:16px}
+  .pg-u .grid2,.pg-u .grid3{grid-template-columns:1fr;gap:24px}
+  .pg-u .spec{grid-template-columns:1fr}.pg-u .spec div{border-left:0;border-top:1px solid var(--line)}
+  .pg-u .spec div:first-child{border-top:0}.pg-u .xbrand{align-items:flex-start;flex-direction:column}
+}
+</style>
+<link rel="stylesheet" href="assets/css/product-evidence-20260906.css?v=20260910-public">
+</head><body>
+
+<div class="pg-u">
+<div class="page">
+
+<img src="assets/img/detail-useless/hero-interior-labeled-v2.webp" alt="USÉLESS 라벨이 또렷하게 보이는 인테리어 컷" fetchpriority="high" width="1451" height="1084">
+
+<section class="evidence evidence-check" aria-label="세 가지 선택 포인트"><p class="evidence-eyebrow">AT A GLANCE / 3 POINTS</p><h2>고르기 전에, 세 가지만.</h2><div class="evidence-points"><a href="#signature-scent"><span>01 / SCENT</span><strong>푸른 무화과와 우드</strong><p>무화과·자두에서 편백·사이프러스를 지나 우드로 이어지는 향의 방향.</p><b aria-hidden="true">↓</b></a><a href="#signature-object"><span>02 / DESIGN</span><strong>투명 유리, 블랙의 대비</strong><p>사진에서 보틀의 곡면과 캡·리드의 조화를 확인하세요.</p><b aria-hidden="true">↓</b></a><a href="#signature-package"><span>03 / PACKAGE</span><strong>두 병을 담는 패키지</strong><p>200ml 두 병과 리드를 함께 담는 현재 패키지 기획.</p><b aria-hidden="true">↓</b></a></div></section><section class="dark pad center">
+  <div class="en">USÉLESS SEOUL</div>
+  <div class="rule"></div>
+  <h2>여행이 끝난 뒤에도<br>곁에 남는 서울</h2>
+  <p class="body-l mt-l" style="color:#B4B4B4">
+    함께 걷던 골목, 우연히 들어간 카페,<br>
+    오래 기억하고 싶은 오후의 공기.<br><br>
+    성수 무화과는 그 장면을 집에서도 떠올리고,<br>
+    좋아하는 사람에게 이야기와 함께 건네고 싶은 향입니다.
+  </p>
+</section>
+
+<img loading="lazy" decoding="async" src="assets/img/detail-useless/seongsu-alley.webp" alt="성수동 골목" width="1800" height="1207">
+
+<section class="pad center">
+  <div class="en">SEOUL SCENES</div>
+  <div class="rule"></div>
+  <h2 class="quote">서울의 한 장면을<br>유리병에 담아갑니다</h2>
+  <p class="mt-l">가장 사소하지만 낭만적인 순간을 향으로 녹였습니다.</p>
+</section>
+
+<section class="pad center" style="border-top:1px solid var(--line)">
+  <div class="en">THE FIRST STORY</div>
+  <div class="rule"></div>
+  <h2>유슬리스 서울의<br>첫 번째 이야기, 성수동</h2>
+  <p class="mt-l">추억과 가장 가까운 오감인<br>
+  향이라는 형태로</p>
+</section>
+
+<img loading="lazy" decoding="async" src="assets/img/detail-useless/story-seongsu-fig-v1.webp" alt="초록 무화과와 짙은 나뭇결" width="1536" height="1024">
+
+<section class="grey pad-s">
+  <div class="en">SCENT 01 · SEONGSU</div>
+  <div class="rule"></div>
+  <h3>첫 향, 성수 무화과</h3>
+  <p class="mt">막 가른 초록 무화과의 과육.<br>
+  그 뒤로 겹치는 잎과 나무의 온도.<br>
+  성수에서 오래 남은 한 장면을 첫 향으로 만들었습니다.</p>
+</section>
+
+<section class="pad-s center" style="border-top:1px solid var(--line)">
+  <div class="en">SIGNATURE DIFFUSER</div>
+  <div class="rule"></div>
+  <h2>성수 무화과</h2>
+  <p class="mt-s">SEONGSU FIG · 리드 디퓨저 200ml</p>
+</section>
+
+<div class="spec">
+  <div><b>200ml</b><span>용량</span></div>
+  <div><b>2병</b><span>세트 구성</span></div>
+  <div><b>리드형</b><span>공간용 디퓨저</span></div>
+</div>
+
+<section class="dark pad" id="signature-scent">
+  <div class="en">SCENT</div>
+  <div class="rule"></div>
+  <h2>푸르름을 간직한 무화과를<br>따뜻한 우드향이 감싸는, 우디피그</h2>
+  <p class="mt">늦은 오후의 성수, 콘크리트 사이로 햇빛이 들어오고,<br>
+  카페 앞 나무의 무화과에서 나는 풀향 섞인 달짝지근함</p>
+
+  <div class="pyr mt-l">
+    <div><span class="k">TOP</span><span class="v">Fig · Plum<br><span style="font-size:15px;color:#8E8E8E">무화과의 푸른 달콤함에 소량의 자두</span></span></div>
+    <div><span class="k">MIDDLE</span><span class="v">Fig Pulp · Hinoki · Cypress<br><span style="font-size:15px;color:#8E8E8E">편백과 사이프러스의 맑고 깨끗한 숲 공기</span></span></div>
+    <div><span class="k">BASE</span><span class="v">Cedarwood · Sandalwood<br><span style="font-size:15px;color:#8E8E8E">차분하고 고급스럽게 남는 클린 우디 잔향</span></span></div>
+  </div>
+</section>
+
+<section class="evidence evidence-signature" id="signature-object"><p class="evidence-eyebrow">LOOK CLOSER / USÉLESS</p><h2>향을 담는 형태도,<br>곁에 두고 싶은 이유.</h2><div class="evidence-photo-grid"><figure><img loading="lazy" src="assets/img/detail-useless/product-front.webp" alt="USÉLESS 그랜드라운드 보틀 정면 디자인" width="1800" height="1800"><figcaption><b>01 / 투명한 그랜드라운드</b><p>낮고 넓은 곡면과 간결한 레터링. 책과 작은 오브제 옆에 놓인 모습을 떠올려보세요.</p></figcaption></figure><figure><img loading="lazy" src="assets/img/detail-useless/cap-reed-detail.webp" alt="블랙 캡과 리드, 유리의 곡면 클로즈업" width="1800" height="1344"><figcaption><b>02 / 블랙과 유리의 대비</b><p>리드의 가느다란 선과 빛이 맺히는 유리. 가까이서 볼수록 다른 질감이 드러납니다.</p></figcaption></figure></div><p class="evidence-fine">현재 디자인 연출 이미지입니다. 최종 라벨·용기·동봉 사양은 판매 시작 전에 안내합니다.</p></section><section class="grey pad">
+  <div class="en">FOR</div>
+  <div class="rule"></div>
+  <h3>이런 분께</h3>
+  <ul class="check mt">
+    <li>추억을 향기의 형태로 간직하거나 선물하고 싶은 분</li>
+    <li>집이나 카페에 단정한 유리 오브제로 취향을 더하고 싶은 분</li>
+    <li>공간의 냄새와 분위기를 고급스럽게 바꾸고 싶은 분</li>
+    <li>마냥 달기보다 은은하고 자연스러운 향을 원하시는 분</li>
+  </ul>
+  <p class="note mt-s">문을 열자마자 확 퍼지는 강한 향을 찾으신다면 맞지 않습니다.</p>
+</section>
+
+<section class="pad">
+  <div class="en">HOW TO USE</div>
+  <div class="rule"></div>
+  <div class="grid3">
+    <div><div class="num">STEP 01</div><h4 class="mt-s">세운 채로 캡을 엽니다</h4><p class="mt-xs">기울이면 흐릅니다. 스토퍼를 빼고 캡은 따로 보관하세요.</p></div>
+    <div><div class="num">STEP 02</div><h4 class="mt-s">리드는 5개 정도</h4><p class="mt-xs">한 번에 다 꽂으면 향은 세지고 기간은 짧아집니다.</p></div>
+    <div><div class="num">STEP 03</div><h4 class="mt-s">2주-1개월</h4><p class="mt-xs">티슈로 잡고 반대로 꽂으면 향이 다시 올라옵니다.</p></div>
+  </div>
+</section>
+
+<section class="evidence evidence-package" id="signature-package"><p class="evidence-eyebrow">WHAT'S IN THE BOX / 기획 구성</p><h2>상자 안에 담을 것들을<br>한눈에.</h2><figure><img loading="lazy" src="assets/img/canon/shared-package-concept-20260906.webp" alt="두 병과 기본 칸막이, 무인쇄 E골 박스 구성 시안" width="1400" height="1049"><figcaption>제작 요청 사양을 시각화한 포장 구조 시안 · 최종 실측 사진이 아닙니다.</figcaption></figure><div class="evidence-contents"><div><strong>200ml × 2</strong><span>같은 향의 본품 두 병</span></div><div><strong>리드 2세트</strong><span>블랙 리드 구성 기획</span></div><div><strong>무인쇄 E골 박스</strong><span>기본 칸막이 + 브랜드 스티커</span></div></div><p class="evidence-fine">리드 길이는 25cm이며, 동봉 개수와 패키지 최종 규격은 제작 샘플 확인 후 안내합니다. 별도 선물 포장 서비스가 포함되었다는 의미는 아닙니다.</p></section><img loading="lazy" decoding="async" src="assets/img/detail-useless/souvenir-useless-pair-v2.webp" alt="USÉLESS 라벨 디퓨저 2병이 놓인 기념품 컷" width="1528" height="1029">
+
+<section class="pad">
+  <div class="en">SOUVENIR</div>
+  <div class="rule"></div>
+  <h3>기억을 간직하고, 취향을 선물하는 방법</h3>
+  <p class="mt">서울의 순간이 조용하지만 존재감 있게 방에 남습니다.</p>
+  <div class="grid2 mt-l">
+    <div><h4>여행 기념품으로</h4><p class="mt-xs">사진을 꺼내 보듯, 집에서도 서울의 오후를 떠올리고 싶을 때. 여행에서 마음에 남은 장면을 곁에 두세요.</p></div>
+    <div><h4>선물로</h4><p class="mt-xs">함께 걸었던 성수의 골목, 상대가 좋아할 카페의 분위기. 그 사람에게 들려주고 싶은 이야기를 담아 건네보세요.</p></div>
+  </div>
+</section>
+
+<section class="evidence evidence-compare"><details><summary>어떤 향을 고를지 고민된다면 <span>여섯 향 비교하기 +</span></summary><div class="evidence-table-wrap" role="region" aria-label="여섯 향 비교표" tabindex="0"><table class="evidence-table"><thead><tr><th scope="col">향</th><th scope="col">향의 흐름</th><th scope="col">선택의 기준</th></tr></thead><tbody><tr class=evidence-current><th scope="row"><span>USÉLESS</span><a href="product-seongsu.html" target="_top">성수 무화과 ↗</a></th><td>무화과 · 자두 → 편백 · 사이프러스 → 우드</td><td>서울의 기억을 담은 선물, 단정한 공간</td></tr><tr ><th scope="row"><span>amaimü</span><a href="product-amaimu.html" target="_top">Miss Fig ↗</a></th><td>무화과 · 자두 → 편백 · 사이프러스 → 우드</td><td>컬러 레터링과 내 책상 위 작은 즐거움</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-hotel.html" target="_top">호텔 블랭킷 ↗</a></th><td>클린 → 라벤더 → 머스크</td><td>여행에서 만난 침실의 분위기</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-seoul-forest.html" target="_top">서울숲의 아침 ↗</a></th><td>그린 리프 → 히노키 · 시더우드 → 머스크</td><td>나무와 이른 산책을 좋아하는 취향</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-seokchon-cherrywood.html" target="_top">석촌 체리우드 ↗</a></th><td>체리 · 꽃잎 → 시더우드 · 샌달우드 → 머스크</td><td>함께 걸었던 계절과 우드 톤의 공간</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-cafe-flower-tea.html" target="_top">카페 플라워티 ↗</a></th><td>베르가모트 → 플로럴 티 · 블랙 티 → 머스크</td><td>찻잔과 책이 있는 오후의 테이블</td></tr></tbody></table></div><p class="evidence-fine">현재 소개된 향 노트와 브랜드 제안을 비교한 안내입니다. 성수 무화과와 Miss Fig는 공통된 무화과·우드 노트를 소개하고 있어, 향의 차이를 단정하기보다 디자인과 담고 싶은 장면을 함께 살펴보세요.</p></details><a class="evidence-more" href="shop.html#scent-guide" target="_top">전체 향 선택 가이드 ↗</a></section><section class="pad-s">
+  <div class="en">INFORMATION</div>
+  <div class="rule"></div>
+  <table>
+    <tr><th>제품명</th><td>USÉLESS 리드 디퓨저 · 성수 무화과 (SEONGSU FIG)</td></tr>
+    <tr><th>용량</th><td>200ml (6.7 fl.oz.) · 그랜드라운드 200ml</td></tr>
+    <tr><th>향 노트</th><td>Fig · Plum · Fig Pulp · Hinoki · Cypress · Cedarwood · Sandalwood<br><span class="todo">자두와 샌달우드는 소량 사용. 실제 배합은 조향 샘플 후 확정</span></td></tr>
+    <tr><th>부향률</th><td><span class="todo">확정 후 기입</span></td></tr>
+    <tr><th>구성</th><td>본품 2병 · 블랙 리드스틱 2세트 · 무인쇄 E골 공용박스 · 기본 칸막이 · 브랜드 스티커</td></tr>
+    <tr><th>캡 / 리드</th><td>유광 블랙 캡 · 블랙 리드스틱</td></tr>
+    <tr><th>사용 기간</th><td><span class="todo">제조사 테스트 후 안내</span><br>리드 개수와 환기 빈도에 따라 달라집니다</td></tr>
+    <tr><th>제조국</th><td>대한민국</td></tr>
+    <tr><th>제조사 / 책임판매업자</th><td><span class="todo">노즈팩토리 / 유슬레스서울</span></td></tr>
+    <tr><th>사용 시 주의</th><td>화기 주의 · 어린이와 반려동물의 손이 닿지 않는 곳에 보관 · 직사광선을 피해 보관 · 도장면, 가죽, 플라스틱 표면에 닿지 않도록 주의 · 눈에 들어갔을 경우 즉시 물로 씻어낼 것</td></tr>
+  </table>
+  <p class="note mt-s">※ 안전확인대상 생활화학제품 표시사항은 신고 완료 후 제조사 안내 문구를 그대로 기재하세요. 용기 바닥 스티커와 상세페이지 내용이 일치해야 합니다.</p>
+</section>
+
+<section class="grey pad">
+  <div class="en">FAQ</div>
+  <div class="rule"></div>
+  <dl class="faq">
+    <dt>Q. 향이 생각보다 약해요.</dt>
+    <dd>리드를 하나씩 늘려보세요. 에어컨이나 공기청정기 바람이 직접 닿는 자리는 향이 빨리 날아갑니다.</dd>
+    <dt>Q. 리드가 젖는 데 얼마나 걸리나요?</dt>
+    <dd>꽂고 2~3시간이면 끝까지 올라옵니다. 첫날 향이 약한 건 정상입니다.</dd>
+    <dt>Q. 해외로 가져갈 수 있나요?</dt>
+    <dd>위탁 수하물에 넣어 보내시길 권합니다. <span class="todo">기내 반입 가능 여부는 향액 성분표 확인 후 확정</span> 국가별 반입 기준은 다를 수 있습니다.</dd>
+    <dt>Q. 반려동물이 있어도 괜찮나요?</dt>
+    <dd>제품에 직접 닿지 않도록 손이 닿지 않는 높이에 두시고, 쓰러뜨릴 수 있는 자리는 피해주세요. 개별 건강 영향은 수의사와 상담하시길 권합니다.</dd>
+    <dt>Q. 다 쓴 병은 어떻게 버리나요?</dt>
+    <dd>남은 향액을 비우고 세척하면 유리로 분리배출됩니다. 리드스틱은 일반쓰레기입니다.</dd>
+  </dl>
+</section>
+
+<section class="pad-s">
+  <div class="grid2">
+    <div><h4>배송</h4><p class="mt-xs">판매 오픈 준비 중입니다.<br>출고 일정과 배송비는 판매 시작 전에 안내합니다.</p></div>
+    <div><h4>교환 / 반품</h4><p class="mt-xs">수령 후 7일 이내 신청 가능<br>개봉·사용한 제품은 어렵습니다</p></div>
+  </div>
+</section>
+
+<section class="pad-s">
+  <div class="xbrand">
+    <img loading="lazy" decoding="async" src="assets/img/detail-useless/amaimu-first-brand.webp" alt="amaimu" width="1800" height="1800">
+    <div>
+      <div class="en">FIRST BRAND</div>
+      <h4 class="mt-s">amaimü</h4>
+      <p class="mt-xs">USÉLESS가 처음 만든 브랜드입니다.<br>개인 공간을 위한, 방해되지 않는 은은한 향.</p>
+      <p class="note mt-xs">→ amaimü 카테고리</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark pad center">
+  <p class="quote" style="color:#DADADA">
+    이 향은 아무 일도 하지 않습니다.<br>
+    다만 바쁘게 지나쳤던 서울의 한 장면이<br>
+    방 안에 남아 있을 뿐입니다.
+  </p>
+  <p class="mt-l" style="color:#8E8E8E;font-size:18px">쓸모없는 채로 두어도 괜찮습니다.</p>
+  <div class="logo mt-l" style="color:#6E6E6E">USÉLESS SEOUL</div>
+</section>
+
+</div>
+</div>
+
+</body></html>

@@ -4,6 +4,22 @@
    레퍼런스 감각: 무신사 뷰티 브랜드관 / Nonfiction / Aesop
    ============================================================ */
 
+@font-face {
+  font-family: "LINE Seed KR";
+  src: url("../fonts/LINESeedKR-Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LINE Seed KR";
+  src: url("../fonts/LINESeedKR-Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg:       #ffffff;
   --ink:      #111111;
@@ -77,7 +93,7 @@ em { font-style: italic; }
 }
 .nav.solid { border-color: var(--line); }
 .nav__brand { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.18em; }
-.nav__menu { display: flex; gap: clamp(16px, 2.6vw, 34px); }
+.nav__menu { display: flex; gap: clamp(12px, 2vw, 26px); }
 .nav__menu a { font-size: 0.76rem; letter-spacing: 0.14em; color: var(--ink-mute); transition: color 0.25s; }
 .nav__menu a:hover { color: var(--ink); }
 .nav__cta {
@@ -356,13 +372,15 @@ em { font-style: italic; }
 }
 .shop-visual__copy p { font-size: 0.72rem; letter-spacing: 0.16em; color: var(--ink-mute); }
 .shop-visual__copy h2 { margin-top: 0.7rem; font-size: clamp(1.5rem, 3.2vw, 2.4rem); line-height: 1.24; letter-spacing: -0.02em; }
-.shop-visual__copy span { margin-top: 1rem; font-size: 0.82rem; color: var(--ink-soft); }
+.shop-visual__chapter { margin-top: 1rem; font-size: 0.94rem; font-weight: 600; }
+.shop-visual__copy span { margin-top: 0.55rem; font-size: 0.82rem; color: var(--ink-soft); }
 
 /* ---------- 제품 카드 담기 버튼 ---------- */
 .product__add {
   margin-top: 0.8rem; width: 100%; cursor: pointer;
   font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.08em;
   padding: 10px 0; background: #fff; color: var(--ink); border: 1px solid var(--ink);
+  min-height: 44px; line-height: 1.45; text-align: center; white-space: normal;
   transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
 .product__add:hover { background: var(--ink); color: #fff; }
@@ -817,3 +835,578 @@ em { font-style: italic; }
 #hero-bottle-root { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s; }
 .hero__img--bottle3d.bottle3d-on .hero__still { opacity: 0; }
 .hero__img--bottle3d.bottle3d-on #hero-bottle-root { opacity: 1; }
+
+/* ---- 브랜드관 분리: USÉLESS / AMAIMU ---- */
+.brand-gate {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad) clamp(3rem, 7vh, 5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.brand-gate__item {
+  min-height: 210px;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.brand-gate__item + .brand-gate__item { border-left: 0; }
+.brand-gate__eyebrow {
+  font-size: 0.68rem;
+  color: var(--ink-mute);
+}
+.brand-gate__item strong {
+  margin-top: 2rem;
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+.brand-gate__item em {
+  margin-top: 0.7rem;
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+.brand-gate__item--useless:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.brand-gate__item--useless:hover span,
+.brand-gate__item--useless:hover em { color: rgba(255,255,255,0.7); }
+.brand-gate__item--amaimu {
+  background: #f4ede4;
+  color: #5b4148;
+  border-color: #d7cbc3;
+}
+.brand-gate__item--amaimu span,
+.brand-gate__item--amaimu em { color: #7b6268; }
+.brand-gate__item--amaimu:hover { background: #5b4148; color: #fff; border-color: #5b4148; }
+.brand-gate__item--amaimu:hover span,
+.brand-gate__item--amaimu:hover em { color: rgba(255,255,255,0.74); }
+
+.brand-tabs {
+  margin: 0 0 clamp(1.8rem, 3vw, 2.6rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+}
+.brand-tabs__item {
+  min-height: 86px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-left: 1px solid var(--line);
+  color: var(--ink-mute);
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.brand-tabs__item:first-child { border-left: 0; }
+.brand-tabs__item span { font-weight: 700; }
+.brand-tabs__item em {
+  font-size: 0.68rem;
+  color: var(--ink-mute);
+}
+.brand-tabs__item:hover {
+  background: #f7f5f1;
+  color: var(--ink);
+}
+.brand-tabs__item.on {
+  background: var(--ink);
+  color: #fff;
+}
+.brand-tabs__item.on em { color: rgba(255,255,255,0.62); }
+.brand-tabs__item.on:hover { background: var(--ink); color: #fff; }
+.brand-tabs__item--amaimu:hover {
+  background: #f4ede4;
+  color: #5b4148;
+}
+.brand-tabs__item--amaimu.on,
+.brand-tabs__item--amaimu.on:hover {
+  background: #5b4148;
+  color: #fff;
+  border-color: #5b4148;
+}
+.brand-tabs__item--amaimu.on em { color: rgba(255,255,255,0.68); }
+
+.shop-brand-panel {
+  scroll-margin-top: 100px;
+}
+.shop-brand-panel[hidden] {
+  display: none;
+}
+.shop-brand-panel.is-active {
+  animation: shop-panel-in 0.26s ease both;
+}
+@keyframes shop-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shop-brand-panel.is-active { animation: none; }
+}
+
+/* ---- AMAIMU 별도 브랜드관 ---- */
+.amaimu-page {
+  --amaimu-bg: #f4ede4;
+  --amaimu-ink: #5b4148;
+  --amaimu-soft: #7b6268;
+  --amaimu-rose: #9e6169;
+  --amaimu-line: #d7cbc3;
+  background: #fffaf5;
+  color: var(--amaimu-ink);
+}
+.amaimu-page img { filter: none; }
+.amaimu-page .nav {
+  background: rgba(255,250,245,0.9);
+  border-bottom-color: rgba(215,203,195,0.72);
+}
+.amaimu-page .nav__menu a,
+.amaimu-page .nav__cart,
+.amaimu-page .nav__auth { color: var(--amaimu-soft); }
+.amaimu-page .nav__menu a.on,
+.amaimu-page .nav__menu a:hover,
+.amaimu-page .nav__cart:hover,
+.amaimu-page .nav__auth:hover { color: var(--amaimu-ink); }
+.amaimu-page .cart-count.on,
+.amaimu-page .btn--solid {
+  background: var(--amaimu-ink);
+  border-color: var(--amaimu-ink);
+  color: #fff;
+}
+.amaimu-page .btn--solid:hover { background: #fffaf5; color: var(--amaimu-ink); }
+
+.amaimu-hero {
+  position: relative;
+  min-height: 84svh;
+  margin-top: 60px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.amaimu-hero__bg {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+.amaimu-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% center;
+}
+.amaimu-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(244,237,228,0.98) 0%, rgba(244,237,228,0.82) 34%, rgba(244,237,228,0.2) 68%, rgba(244,237,228,0) 100%);
+}
+.amaimu-hero__text {
+  position: relative;
+  z-index: 1;
+  width: min(560px, calc(100% - 40px));
+  margin-left: max(20px, calc((100vw - var(--maxw)) / 2 + var(--pad)));
+  padding: 5rem 0;
+}
+.amaimu-hero__kicker {
+  font-size: 0.72rem;
+  color: var(--amaimu-soft);
+}
+.amaimu-hero h1 {
+  margin-top: 0.8rem;
+  font-family: var(--serif);
+  font-size: 5.2rem;
+  line-height: 0.98;
+  font-weight: 400;
+}
+.amaimu-hero__line {
+  margin-top: 0.9rem;
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  color: var(--amaimu-rose);
+}
+.amaimu-hero__body {
+  margin-top: 1.1rem;
+  max-width: 34rem;
+  color: var(--amaimu-soft);
+  font-size: 1.02rem;
+}
+.amaimu-hero .btn { margin-top: 2rem; }
+
+.amaimu-intro,
+.amaimu-shop,
+.brand-return {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 5rem var(--pad);
+}
+.amaimu-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 3rem;
+  align-items: start;
+}
+.amaimu-intro__eyebrow {
+  font-size: 0.72rem;
+  color: var(--amaimu-soft);
+}
+.amaimu-intro h2 {
+  margin-top: 0.8rem;
+  font-size: 2.3rem;
+  line-height: 1.28;
+}
+.amaimu-intro__inner p:last-child {
+  margin-top: 1.2rem;
+  color: var(--amaimu-soft);
+}
+.amaimu-principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--amaimu-line);
+  background: #fffaf5;
+}
+.amaimu-principles div {
+  min-height: 190px;
+  padding: 1.3rem;
+  border-left: 1px solid var(--amaimu-line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.amaimu-principles div:first-child { border-left: 0; }
+.amaimu-principles span {
+  font-family: var(--serif);
+  color: var(--amaimu-rose);
+}
+.amaimu-principles strong { font-size: 1.05rem; }
+.amaimu-principles p {
+  color: var(--amaimu-soft);
+  font-size: 0.86rem;
+}
+.amaimu-shop {
+  border-top: 1px solid var(--amaimu-line);
+  background: #fffaf5;
+}
+.amaimu-shop .sect-head,
+.amaimu-shop .lineup__grid {
+  padding-left: 0;
+  padding-right: 0;
+}
+.lineup__grid--amaimu {
+  grid-template-columns: minmax(260px, 390px);
+  justify-content: start;
+}
+.lineup__grid--amaimu .product__img img { filter: none; }
+.amaimu-page .product__img {
+  background: #f4ede4;
+  border: 1px solid var(--amaimu-line);
+}
+.amaimu-page .product__code,
+.amaimu-page .product__hook,
+.amaimu-page .product__spec,
+.amaimu-page .product__price .mock { color: var(--amaimu-soft); }
+.amaimu-page .product__add {
+  border-color: var(--amaimu-ink);
+  color: var(--amaimu-ink);
+}
+.amaimu-page .product__add:disabled:hover { color: var(--amaimu-ink); }
+.brand-return {
+  padding-top: 3rem;
+  border-top: 1px solid var(--amaimu-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.brand-return p {
+  color: var(--amaimu-soft);
+}
+.foot--amaimu {
+  background: var(--amaimu-bg);
+  border-color: var(--amaimu-line);
+  color: var(--amaimu-ink);
+}
+
+@media (max-width: 900px) {
+  .brand-gate,
+  .brand-tabs,
+  .amaimu-intro {
+    grid-template-columns: 1fr;
+  }
+  .brand-gate__item + .brand-gate__item,
+  .brand-tabs__item {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .brand-tabs__item:first-child { border-top: 0; }
+  .amaimu-hero {
+    min-height: 78svh;
+    align-items: flex-end;
+  }
+  .amaimu-hero__bg img { object-position: 62% center; }
+  .amaimu-hero::after {
+    background: linear-gradient(0deg, rgba(244,237,228,0.98) 0%, rgba(244,237,228,0.84) 42%, rgba(244,237,228,0.08) 100%);
+  }
+  .amaimu-hero__text {
+    margin: 0;
+    padding: 0 20px 4rem;
+    width: 100%;
+  }
+  .amaimu-hero h1 { font-size: 3.8rem; }
+  .amaimu-principles { grid-template-columns: 1fr; }
+  .amaimu-principles div {
+    min-height: 132px;
+    border-left: 0;
+    border-top: 1px solid var(--amaimu-line);
+  }
+  .amaimu-principles div:first-child { border-top: 0; }
+  .brand-return {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-gate__item { min-height: 176px; padding: 1.4rem; }
+  .brand-tabs__item { min-height: 68px; padding: 0.85rem 1rem; }
+  .brand-tabs__item em { display: none; }
+  .amaimu-hero h1 { font-size: 3.1rem; }
+  .amaimu-hero__line { font-size: 1.45rem; }
+  .amaimu-intro,
+  .amaimu-shop,
+  .brand-return { padding: 3.4rem var(--pad); }
+  .amaimu-intro h2 { font-size: 1.8rem; }
+}
+
+/* ---------- 2026-08-29 · D2C 상세 정본 + 그랜드라운드 제품 사진 ---------- */
+.shop-visual__img--editorial {
+  isolation: isolate;
+  background: #e9e9e7;
+  --hero-shift-x: 0px;
+  --hero-shift-y: 0px;
+  --hero-light-x: 50%;
+  --hero-light-y: 42%;
+}
+.shop-visual__img--editorial > img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  object-fit: cover;
+  transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(1.035);
+  filter: contrast(1.025) saturate(.88);
+  transition: transform .7s cubic-bezier(.2,.72,.18,1), filter .7s ease;
+  will-change: transform;
+}
+.shop-visual__light {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at var(--hero-light-x) var(--hero-light-y), rgba(255,255,255,.16), transparent 27%),
+    linear-gradient(126deg, rgba(255,255,255,.08), transparent 38% 72%, rgba(20,20,20,.055));
+  mix-blend-mode: soft-light;
+  opacity: .72;
+  pointer-events: none;
+  transition: background-position .2s linear;
+}
+.shop-visual__badge {
+  position: absolute;
+  z-index: 2;
+  left: 18px;
+  bottom: 18px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,.88);
+  color: #222;
+  font-size: .66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.shop-brand-section {
+  margin-top: 0;
+  padding-top: 0;
+  scroll-margin-top: 90px;
+}
+.shop-brand-section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .55fr);
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2.4rem;
+}
+.shop-brand-section__head p {
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.shop-brand-section__head h2 {
+  margin-top: .55rem;
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  font-weight: 400;
+  line-height: .92;
+}
+.shop-brand-section__head div:last-child {
+  color: #66515a;
+  font-size: .95rem;
+  line-height: 1.8;
+}
+.shop-brand-section--amaimu {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0 0 clamp(4rem, 7vw, 6rem);
+  background: #fff;
+  border-color: #d9bdc7;
+  font-family: "LINE Seed KR", "Apple SD Gothic Neo", sans-serif;
+}
+.shop-brand-intro {
+  margin: 0 0 clamp(3rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, .8fr);
+  min-height: clamp(520px, 70vw, 760px);
+  background: #fffafc;
+  border-bottom: 1px solid #d9bdc7;
+}
+.shop-brand-intro__image {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+}
+.shop-brand-intro__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  transition: transform .5s ease;
+}
+.shop-brand-intro__image:hover img { transform: scale(1.015); }
+.shop-brand-intro__image span {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  padding: 8px 10px;
+  background: rgba(255,250,252,.9);
+  color: #5b4148;
+  font-size: .66rem;
+  letter-spacing: .14em;
+}
+.shop-brand-intro__copy {
+  padding: clamp(2.5rem, 5vw, 5rem) var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #5b4148;
+}
+.shop-brand-intro__copy > p:first-child {
+  font-size: .68rem;
+  letter-spacing: .16em;
+  color: #8a6874;
+}
+.shop-brand-intro__copy h2 {
+  margin-top: .7rem;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 4.5vw, 3.7rem);
+  font-weight: 400;
+  line-height: 1;
+}
+.shop-brand-intro__copy strong {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  font-family: "LINE Seed KR", "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.42;
+}
+.shop-brand-intro__copy strong span {
+  display: inline-block;
+  margin-top: .28rem;
+  font-weight: 700;
+}
+.shop-brand-intro__body {
+  margin-top: 1.25rem;
+  max-width: 31rem;
+  color: #775c66;
+  line-height: 1.8;
+}
+.shop-brand-intro__link { margin-top: 1.8rem; }
+.shop-products-panel {
+  width: min(100%, 520px);
+  margin: 0 auto 0 0;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  background: #f8edf1;
+  border: 1px solid #e2ccd5;
+}
+.shop-products-panel .lineup__grid { margin-top: 0; }
+
+.body--canonical-detail .pdwrap {
+  grid-template-areas: "img side" "body body";
+}
+.body--canonical-detail .pdmain { grid-column: 1 / -1; }
+.body--canonical-detail .pdmain > .pdsec:not([aria-label="리뷰"]) { display: none; }
+.detail-embed {
+  margin-top: clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--line);
+}
+.detail-embed__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  padding: 1.4rem 0 1.6rem;
+}
+.detail-embed__head p {
+  font-size: .68rem;
+  letter-spacing: .16em;
+  color: var(--ink-mute);
+}
+.detail-embed__head h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 400;
+}
+.detail-embed__head--amaimu h2 { color: #6c3d4e; }
+.detail-embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 1200px;
+  border: 0;
+  background: #fff;
+}
+.pdhero--amaimu::after {
+  background: linear-gradient(90deg, rgba(44,24,32,.62), rgba(44,24,32,.06) 72%);
+}
+.pdhero--amaimu .pdhero__bg img {
+  filter: none;
+  object-position: center 58%;
+}
+.pdhero__copy {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad) clamp(2rem, 5vh, 3.2rem);
+  color: #fff;
+}
+.pdhero__copy .pdhero__scene { font-size: .7rem; letter-spacing: .2em; }
+
+@media (max-width: 900px) {
+  .shop-brand-section__head { grid-template-columns: 1fr; align-items: start; }
+  .shop-brand-intro { grid-template-columns: 1fr; min-height: 0; }
+  .shop-brand-intro__image { min-height: min(112vw, 680px); }
+  .shop-brand-intro__copy { padding-top: 3rem; padding-bottom: 3.5rem; }
+  .shop-products-panel { width: min(100%, 480px); }
+  .body--canonical-detail .pdwrap { grid-template-areas: "img" "side" "body"; }
+  .detail-embed__head { align-items: flex-start; flex-direction: column; }
+  .pdhero--amaimu::after { background: linear-gradient(0deg, rgba(44,24,32,.72), rgba(44,24,32,.04) 74%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-visual__img--editorial > img { transform: none; transition: none; }
+  .shop-visual__light { display: none; }
+}

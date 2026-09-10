@@ -9,26 +9,42 @@
      createOrder({items,receiver,phone,addr,memo}) / myOrders()
      (admin) listOrders() / updateOrderStatus(orderId, status)
 
-   제품은 정본 하드코딩(프론트 표시 필드가 풍부해 DB보다 유지 쉬움). 주문 FK는 DB products.id(hotel/seongsu/hangang/tea)와 일치.
-   결제 = 무통장입금(우리은행 1002-454-250728 백승준). 실 PG 없음.
+   제품은 정본 하드코딩(프론트 표시 필드가 풍부해 DB보다 유지 쉬움).
+   신규 SHOP 목업 id는 DB products 행 동기화 전까지 주문 FK 확인필요.
+   판매 준비용 주문 저장. 실 PG 및 입금 안내 없음.
 */
 (function () {
   const SUPABASE_URL = "https://nkqrqbptuvbuihnzfgco.supabase.co";
   const SUPABASE_ANON = "sb_publishable_ma_7bfX57VDoFuD_wnSk7w_FE77YwGp";
 
   const PRODUCTS = [
-    { id: "hotel",   name: "호텔 블랭킷", en: "Hotel Blanket",        code: "UL-D01", price: 35000, status: "on_sale",
+    { id: "seongsu", brand: "useless", brandLabel: "USÉLESS SEOUL", name: "성수 무화과", en: "Seongsu Fig",          code: "UL-D02", price: 35000, status: "on_sale",
+      hook: "늦은 오후의 성수, 초록 무화과와 따뜻한 우드.", notes: "Fig · Plum · Fig Pulp · Hinoki · Cypress · Cedarwood · Sandalwood",
+      notePyramid: ["Fig · Plum", "Fig Pulp · Hinoki · Cypress", "Cedarwood · Sandalwood"],
+      spec: "그랜드라운드 200ml × 2병 세트", img: "assets/img/detail-useless/hero-interior-labeled-v2.webp", alt: "성수 무화과 — 그랜드라운드 리드 디퓨저 200ml", url: "product-seongsu.html" },
+    { id: "hotel",   brand: "useless", brandLabel: "USÉLESS SEOUL", name: "호텔 블랭킷", en: "Hotel Blanket",        code: "UL-D01", price: 68000, status: "on_sale",
       hook: "체크인 직후, 침구에 스민 그 냄새.", notes: "클린 · 라벤더 · 머스크",
-      spec: "끌로에 투명 유리 · 200ml", img: "assets/img/live/product-hotel.jpg",   alt: "호텔 블랭킷 — 리드 디퓨저 200ml", url: "product-hotel.html" },
-    { id: "seongsu", name: "성수 무화과", en: "Seongsu Fig",          code: "UL-D02", price: 35000, status: "on_sale",
-      hook: "성수동 카페 골목, 우드 베이스 과육향.", notes: "과육 · 우디 · 앰버",
-      spec: "끌로에 투명 유리 · 200ml", img: "assets/img/live/product-seongsu.jpg", alt: "성수 무화과 — 리드 디퓨저 200ml", url: "product-seongsu.html" },
-    { id: "hangang", name: "여름밤 한강", en: "Hangang Summer Night", code: "UL-D03", price: 35000, status: "on_sale",
-      hook: "밤 10시 한강 벤치, 선선한 잔향.", notes: "우디 · 머스크 · 아쿠아",
-      spec: "끌로에 투명 유리 · 200ml", img: "assets/img/live/product-hangang.jpg", alt: "여름밤 한강 — 리드 디퓨저 200ml", url: "product-hangang.html" },
-    { id: "tea",     name: "애프터눈 티", en: "Afternoon Tea",        code: "COMING SOON", price: null, status: "coming_soon",
-      hook: "할 일을 미룬 채 우린 홍차.", notes: "베르가못 · 홍차 · 머스크",
-      spec: "출시 예정", img: "assets/img/live/scene-tea.jpg",     alt: "애프터눈 티 — 출시 예정", url: "product-tea.html" },
+      spec: "500ml × 2병 세트", img: "assets/img/canon/hotel-blanket-studio-20260906.webp",   alt: "호텔 블랭킷 — 컬러 스튜디오 보틀 콘셉트 이미지", url: "product-hotel.html" },
+    { id: "seoul-forest", brand: "useless", brandLabel: "USÉLESS SEOUL", name: "서울숲의 아침", en: "Seoul Forest Morning", code: "UL-D03", price: 68000, status: "on_sale",
+      hook: "이른 산책 뒤에 남는 젖은 잎과 깨끗한 나무의 숨.",
+      notes: "Green Leaf · Morning Air · Hinoki · Cedarwood · Soft Musk",
+      notePyramid: ["Green Leaf · Morning Air", "Hinoki · Cedarwood", "Soft Musk"],
+      spec: "500ml × 2병 세트", img: "assets/img/canon/seoul-forest-studio-20260906.webp", alt: "서울숲의 아침 — 초록 잎과 아침빛을 담은 보틀 콘셉트 이미지", url: "product-seoul-forest.html" },
+    { id: "seokchon-cherrywood", brand: "useless", brandLabel: "USÉLESS SEOUL", name: "석촌 체리우드", en: "Seokchon Cherrywood", code: "UL-D04", price: 68000, status: "on_sale",
+      hook: "호수 가장자리의 체리 톤과 마른 우드가 겹치는 오후.",
+      notes: "Cherry · Rose Petal · Cedarwood · Sandalwood · Musk",
+      notePyramid: ["Cherry · Rose Petal", "Cedarwood · Sandalwood", "Musk"],
+      spec: "500ml × 2병 세트", img: "assets/img/canon/cherrywood-studio-20260906.webp", alt: "석촌 체리우드 — 컬러 스튜디오 보틀 콘셉트 이미지", url: "product-seokchon-cherrywood.html" },
+    { id: "cafe-flower-tea", brand: "useless", brandLabel: "USÉLESS SEOUL", name: "카페 플라워티", en: "Cafe Flower Tea", code: "UL-D05", price: 68000, status: "on_sale",
+      hook: "오후 카페 테이블 위, 꽃차의 얇은 김과 머스크.",
+      notes: "Bergamot · Floral Tea · Black Tea · White Musk",
+      notePyramid: ["Bergamot", "Floral Tea · Black Tea", "White Musk"],
+      spec: "500ml × 2병 세트", img: "assets/img/canon/flower-tea-studio-20260906.webp", alt: "카페 플라워티 — 컬러 스튜디오 보틀 콘셉트 이미지", url: "product-cafe-flower-tea.html" },
+    { id: "amaimu-fig", brand: "amaimu", brandLabel: "amaimü", name: "Miss Fig", en: "Miss Fig", code: "AM-D01", price: 35000, status: "on_sale",
+      hook: "오늘의 기분과 취향을 방 안에 더하는 무화과 우드.",
+      notes: "Fig · Plum · Hinoki · Cypress · Cedarwood · Sandalwood",
+      notePyramid: ["Fig · Plum", "Fig Pulp · Hinoki · Cypress", "Cedarwood · Sandalwood"],
+      spec: "그랜드라운드 200ml × 2병 세트", img: "assets/img/detail-amaimu/hero-bedroom-flash-v6.webp", alt: "amaimü Miss Fig — 그랜드라운드 리드 디퓨저 200ml 2병 세트", url: "product-amaimu.html" },
   ];
 
   /* DB status ↔ 한글 라벨. DB check: awaiting_payment/paid/done */
@@ -62,20 +78,9 @@
   async function getProduct(id) { const p = PRODUCTS.find((x) => x.id === id); return p ? { ...p } : null; }
 
   /* ---------- 회원 (Supabase Auth) ---------- */
-  async function signUp({ email, password, name }) {
-    email = normEmail(email);
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("이메일 형식을 확인해 주세요.");
-    if (!password || password.length < 8) throw new Error("비밀번호는 8자 이상이어야 합니다.");
-    if (!name || !name.trim()) throw new Error("이름을 입력해 주세요.");
-    const { data, error } = await sb().auth.signUp({
-      email, password, options: { data: { name: name.trim() } },
-    });
-    if (error) throw new Error(error.message);
-    const uid = data.user && data.user.id;
-    if (uid) {
-      await sb().from("useless_profiles").upsert({ id: uid, email, name: name.trim() });
-    }
-    return { email, name: name.trim(), emailConfirmationRequired: !data.session };
+  // Public prelaunch release: no account creation or personal-data writes.
+  async function signUp() {
+    throw new Error("회원가입은 준비 중입니다. 지금은 로그인 없이 제품을 둘러보실 수 있습니다.");
   }
 
   async function signIn({ email, password }) {
@@ -96,44 +101,8 @@
   }
 
   /* ---------- 주문 (무통장입금, Supabase DB) ---------- */
-  async function createOrder({ items, receiver, phone, addr, memo }) {
-    const user = await currentUser();
-    if (!user) throw new Error("로그인이 필요합니다.");
-    if (!items || !items.length) throw new Error("주문할 상품이 없습니다.");
-    receiver = String(receiver || "").trim();
-    phone = String(phone || "").trim();
-    addr = String(addr || "").trim();
-    if (!receiver || !phone || !addr) throw new Error("수령인·연락처·주소를 입력해 주세요.");
-    if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(phone)) throw new Error("연락처 형식이 올바르지 않습니다. 예: 010-0000-0000");
-
-    let total = 0;
-    const lines = [];
-    for (const it of items) {
-      const p = PRODUCTS.find((x) => x.id === it.id);
-      if (!p || p.status !== "on_sale") continue;
-      const qty = Math.min(Math.max(1, it.qty | 0), 99);
-      total += p.price * qty;
-      lines.push({ product_id: p.id, product_name: p.name, price_krw: p.price, qty });
-    }
-    if (!lines.length) throw new Error("주문할 상품이 없습니다.");
-
-    const { data: order, error } = await sb().from("useless_orders").insert({
-      user_id: user.id, receiver, phone, addr, memo: (memo || "").trim(),
-      total_krw: total, pay_method: "bank_transfer", status: "awaiting_payment",
-    }).select().single();
-    if (error) throw new Error("주문 생성 실패: " + error.message);
-
-    const itemsRows = lines.map((l) => ({ order_id: order.id, ...l }));
-    const { error: itErr } = await sb().from("useless_order_items").insert(itemsRows);
-    if (itErr) throw new Error("주문 항목 저장 실패: " + itErr.message);
-
-    return {
-      orderId: order.order_no, id: order.id, total: order.total_krw,
-      receiver, phone, addr, memo: order.memo, status: order.status,
-      items: lines.map((l) => ({ id: l.product_id, name: l.product_name, price: l.price_krw, qty: l.qty })),
-      createdAt: order.created_at,
-      bankInfo: { bank: "우리은행", account: "1002-454-250728", holder: "백승준" },
-    };
+  async function createOrder() {
+    throw new Error("주문은 준비 중입니다. 현재 주문서 저장·결제·배송은 진행되지 않습니다.");
   }
 
   async function myOrders() {

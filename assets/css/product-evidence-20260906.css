@@ -1,0 +1,90 @@
+/* Product evidence: quick checkpoints, explained photographs, and a scent comparison. */
+.evidence,.evidence * { box-sizing:border-box; }
+.evidence.evidence { padding:56px clamp(24px,5vw,72px); color:var(--ink,#242825); background:#f8f6f1; }
+.evidence.evidence h2 { font-family:inherit; font-weight:400; font-size:clamp(27px,3vw,40px); line-height:1.35; letter-spacing:-.04em; margin:18px 0 28px; word-break:keep-all; }
+.evidence.evidence p { margin:0; font-weight:400; font-size:14px; line-height:1.85; letter-spacing:0; word-break:keep-all; }
+.evidence.evidence .evidence-eyebrow { font-size:10px; letter-spacing:.16em; color:#6c7067; }
+.evidence.evidence .evidence-fine { font-size:11px; line-height:1.85; color:#75766f; margin-top:24px; }
+.evidence-check { border-bottom:1px solid #d5d6cd; }
+.product-edition .evidence-check { background:var(--edition-paper); padding-inline:max(32px,calc((100vw - 1200px)/2)); }
+.evidence-points { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.evidence-points a { color:inherit; text-decoration:none; position:relative; padding:22px 0 34px; border-top:1px solid #b2b6aa; min-width:0; }
+.evidence-points a>span { display:block; font-size:10px; letter-spacing:.12em; margin-bottom:18px; color:#73796a; }
+.evidence-points strong { display:block; font-size:clamp(17px,1.8vw,23px); font-weight:500; line-height:1.55; letter-spacing:-.04em; margin-bottom:14px; word-break:keep-all; }
+.evidence-points a>b { position:absolute; bottom:0; font-weight:400; }
+.evidence-points a:hover strong { text-decoration:underline; text-underline-offset:4px; }
+.evidence :is(a,summary):focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+.evidence-photo-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.evidence-photo-grid figure,.evidence-package figure { margin:0; }
+.evidence-photo-grid img { width:100%; aspect-ratio:4/5; height:auto; object-fit:cover; display:block; }
+.evidence-photo-grid figcaption { padding:22px 0; }
+.evidence-photo-grid b { display:block; font-size:16px; font-weight:500; line-height:1.5; margin-bottom:12px; }
+.evidence-package.evidence { background:#ebe7df; }
+.evidence-package>figure img { display:block; width:100%; height:auto; }
+.evidence-package figcaption { font-size:11px; color:#6e6a63; margin-top:12px; line-height:1.7; }
+.evidence-contents { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:32px; border-block:1px solid #bfbdb5; }
+.evidence-contents>div { padding:24px 14px; text-align:center; border-right:1px solid #bfbdb5; }
+.evidence-contents>div:last-child { border-right:0; }
+.evidence-contents strong { display:block; font-size:20px; line-height:1.5; font-weight:500; }
+.evidence-contents span { display:block; font-size:12px; line-height:1.7; margin-top:10px; }
+.evidence-details { list-style:none; padding:0; margin:24px 0 0; }
+.evidence-details li { border-top:1px solid #d0d0c5; padding:18px 0; }
+.evidence-details b { display:block; font-weight:500; font-size:14px; margin-bottom:8px; }
+.evidence-details p { font-size:15px; line-height:1.85; }
+.evidence-label-caption { padding:24px; background:#f6e5eb; }
+.evidence-label-caption b { font-size:17px; font-weight:500; }
+.evidence-label-caption p { font-size:14px; line-height:1.9; margin-top:14px; }
+.evidence-compare.evidence { padding-block:32px; background:#f5f3ec; }
+.evidence-compare summary { cursor:pointer; display:flex; justify-content:space-between; gap:22px; flex-wrap:wrap; padding:16px 0; font-size:18px; list-style:none; }
+.evidence-compare summary::-webkit-details-marker { display:none; }
+.evidence-compare summary span { font-size:12px; }
+.evidence-compare details[open] summary { border-bottom:1px solid #b3b6ac; margin-bottom:24px; }
+.evidence-more,.evidence-purchase-link a { display:inline-block; font-size:12px; line-height:1.7; min-height:44px; padding-block:12px; color:inherit; text-decoration:underline; text-underline-offset:4px; }
+.evidence-table-wrap { width:100%; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.evidence.evidence .evidence-table { border-collapse:collapse; width:100%; min-width:620px; max-width:none; table-layout:fixed; margin:0; font-size:13px; }
+.evidence.evidence .evidence-table :is(th,td) { width:auto; padding:22px 16px; text-align:left; vertical-align:top; border-bottom:1px solid #cecfc4; line-height:1.8; font-weight:400; color:inherit; }
+.evidence-table thead { background:#e8eadf; }
+.evidence-table thead th:first-child { width:24%; }
+.evidence-table tbody th span { display:block; font-size:9px; letter-spacing:.08em; color:#6c7067; }
+.evidence-table th a { display:inline-block; color:inherit; font-size:14px; min-height:44px; padding-top:8px; text-decoration:underline; text-underline-offset:4px; }
+.evidence-current { background:#e5e9df; }
+.evidence-shop-guide { scroll-margin-top:90px; margin-top:64px; }
+.evidence-purchase-link { margin:12px 0; }
+.process:has(.evidence-label-caption) { height:auto; }
+#signature-object,#signature-package,#signature-scent,#amaimu-scent,#amaimu-object,#amaimu-desk { scroll-margin-top:24px; }
+@media(max-width:680px) {
+ .evidence.evidence { padding:42px 24px; }
+ .product-edition .evidence-check { padding-inline:24px; }
+ .evidence-points { grid-template-columns:1fr; gap:20px; }
+ .evidence-points a { padding-bottom:28px; }
+ .evidence-points a>span { margin-bottom:10px; }
+ .evidence-points strong { font-size:20px; margin-bottom:8px; }
+ .evidence-photo-grid { grid-template-columns:1fr; gap:28px; }
+ .evidence-photo-grid img { aspect-ratio:1/1; }
+ .evidence-contents { grid-template-columns:1fr; }
+ .evidence-contents>div { border-right:0; border-bottom:1px solid #bfbdb5; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; padding-inline:0; }
+ .evidence-contents>div:last-child { border-bottom:0; }
+ .evidence-contents span { margin-top:0; }
+ .evidence-contents strong { font-size:18px; }
+ .evidence-table-wrap::before { content:'표를 좌우로 밀어 다른 향과 비교해 보세요.'; display:block; font-size:11px; color:#6c7067; padding-bottom:16px; }
+ .evidence-compare summary { font-size:17px; }
+}
+@media(max-width:680px) {
+ .evidence-table-wrap { overflow:visible; }
+ .evidence-table-wrap::before { content:none; }
+ .evidence.evidence .evidence-table { min-width:0; table-layout:auto; }
+ .evidence-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .evidence-table tbody { display:block; }
+ .evidence-table tbody tr { display:block; padding:20px 0; border-bottom:1px solid #cecfc4; }
+ .evidence.evidence .evidence-table tbody :is(th,td) { display:block; width:100%; padding:0; border:0; }
+ .evidence.evidence .evidence-table tbody td { margin-top:12px; }
+ .evidence-table td::before { display:block; font-size:10px; color:#75766f; margin-bottom:3px; }
+ .evidence-table td:nth-child(2)::before { content:'향의 흐름'; }
+ .evidence-table td:nth-child(3)::before { content:'선택의 기준'; }
+ .evidence-table th a { min-height:36px; font-size:17px; }
+ .evidence-table tbody tr.evidence-current { padding-inline:14px; }
+}
+
+/* Seoul Forest product-led botanical concept, preserve the morning greens. */
+.product__img[href="product-seoul-forest.html"] img { filter:none; object-position:50% 50%; }
+.product__img[href="product-seoul-forest.html"]::after { content:"CONCEPT VISUAL"; position:absolute; left:16px; bottom:16px; padding:6px 9px; background:rgba(250,249,243,.9); color:#40513b; font-size:9px; letter-spacing:.12em; pointer-events:none; }

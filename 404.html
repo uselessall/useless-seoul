@@ -73,32 +73,29 @@
     <a href="/" class="nav__brand" data-base-link="index.html">USÉLESS SEOUL</a>
     <nav class="nav__menu" aria-label="주 메뉴">
       <a href="/" data-base-link="shop.html">SHOP</a>
+      <a href="/" data-base-link="amaimu.html">AMAIMU</a>
       <a href="/" data-base-link="story.html">STORY</a>
       <a href="/" data-base-link="faq.html">FAQ</a>
     </nav>
   </header>
 
   <main class="wrap">
-    <div class="err-spin" data-spin data-spin-auto="1" data-spin-base="https://uselessseoul.com/assets/3d/spin/f" aria-hidden="true"></div>
     <p class="code">404</p>
-    <h1 class="title">이 페이지는 존재하지 않습니다.</h1>
-    <p class="copy">
-      길을 잘못 든 것도 나쁘지 않습니다만,<br />
-      여기엔 <em>정말로</em> 아무것도 없습니다. 쓸모없음에도 정도가 있죠.
-    </p>
+    <h1 class="title">찾으시는 페이지를 찾지 못했어요.</h1>
+    <p class="copy">주소가 바뀌었거나 페이지가 이동했을 수 있어요.<br />홈이나 숍에서 다시 찾아보세요.</p>
     <div class="btns">
       <a href="/" class="btn btn--fill" data-base-link="index.html">홈으로</a>
       <a href="/" class="btn btn--ghost" data-base-link="shop.html">SHOP 보기</a>
     </div>
   </main>
 
-  <footer class="foot">© USÉLESS SEOUL — 가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다.</footer>
+  <footer class="foot">© USÉLESS SEOUL — 일상에 온기를 더하는 것들.</footer>
 
   <script>
     // 배포 도메인 확정 시 절대경로로 교체: var BASE = "https://[배포URL 확인필요]/";
     // 미확정 동안은 휴리스틱: *.github.io 프로젝트 페이지면 /<repo>/ 가 루트, 그 외(커스텀 도메인·로컬)는 /.
     (function () {
-      var BASE = "https://uselessseoul.com/";
+      var BASE = "";
       if (!BASE) {
         if (/\.github\.io$/.test(location.hostname)) {
           var seg = location.pathname.split("/")[1] || "";
@@ -112,6 +109,6 @@
       });
     })();
   </script>
-  <script src="https://uselessseoul.com/assets/js/spin.js?v=3" defer></script>
+
 </body>
 </html>

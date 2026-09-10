@@ -1,0 +1,7 @@
+/* SHOP photographs retain their full original colour. */
+.shop-color #main img { filter:none; }
+.shop-color .shop-visual__img--editorial > img { object-position:72% 50%; }
+.shop-color .shop-visual__light { opacity:.35; }
+.shop-color .product__img[href="product-hotel.html"]::after,
+.shop-color .product__img[href="product-seokchon-cherrywood.html"]::after,
+.shop-color .product__img[href="product-cafe-flower-tea.html"]::after { content:"CONCEPT VISUAL"; position:absolute; left:16px; bottom:16px; padding:6px 9px; background:rgba(250,249,243,.9); color:#51483b; font-size:9px; letter-spacing:.12em; pointer-events:none; }

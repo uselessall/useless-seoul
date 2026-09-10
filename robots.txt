@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://uselessall.github.io/useless-seoul/sitemap.xml
+Sitemap: https://uselessseoul.com/sitemap.xml

@@ -19,20 +19,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=20260910-public" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=38" defer></script>
-  <script src="assets/js/site.js?v=38" defer></script>
+  <script src="assets/js/store.js?v=20260910-public" defer></script>
+  <script src="assets/js/site.js?v=20260910-public" defer></script>
+  <link rel="stylesheet" href="assets/css/site-refine-20260906.css?v=20260910-public">
+  <link rel="stylesheet" href="assets/css/product-color-refine-20260906.css?v=20260910-public">
 </head>
-<body>
+<body class="product-page-color refined-store">
 
   <a class="skip" href="#main">본문 바로가기</a>
 
   <header class="nav" id="nav">
     <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
     <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
-    <nav class="nav__menu" id="navMenu">
+    <nav class="nav__menu" id="navMenu" aria-label="주요 내비게이션">
       <a href="shop.html">SHOP</a>
+      <a href="company.html">ABOUT US</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
     </nav>
@@ -47,12 +52,12 @@
     <noscript><p class="nojs-note">이 페이지는 JavaScript가 필요합니다. 브라우저 설정에서 JavaScript를 켠 뒤 다시 열어주세요.</p></noscript>
     <header class="page-head reveal">
       <h1>Cart</h1>
-      <p>장바구니 — 주문·가격은 목업입니다. 결제는 오픈 준비 중.</p>
+      <p>나를 위해, 누군가를 위해 골라둔 향입니다. 현재는 판매 준비 화면으로 실제 결제되지 않습니다.</p>
     </header>
 
     <div id="cartEmpty" class="cart__empty" hidden>
-      <p>장바구니가 비어 있습니다.<br />아직 아무 시간도 담지 않으셨네요.</p>
-      <a class="btn btn--solid" href="shop.html">SHOP 보러 가기</a>
+      <p>아직 담아둔 향이 없어요.<br />서울을 기억할 향과 내 책상에 둘 작은 선물을 만나보세요.</p>
+      <div class="empty-choices"><a class="btn btn--solid" href="shop.html#useless">USÉLESS 둘러보기</a><a class="btn" href="shop.html#amaimu">amaimü 둘러보기</a></div>
     </div>
 
     <div id="cartBox" hidden>
@@ -67,9 +72,11 @@
   <footer class="foot">
     <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
     <p class="foot__brand">USÉLESS SEOUL</p>
-    <p class="foot__line">쓸모없어도 괜찮아.</p>
+    <p class="foot__line">일상에 온기를 더하는 것들.</p>
     <div class="foot__links">
       <a href="shop.html">SHOP</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
       <a href="archive.html">ARCHIVE</a>

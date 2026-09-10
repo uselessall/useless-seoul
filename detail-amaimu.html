@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>amaimü — Reed Diffuser</title>
+  <style>
+    @font-face{font-family:"LINE Seed KR";src:url("assets/fonts/LINESeedKR-Th.woff2") format("woff2");font-weight:100 300;font-style:normal;font-display:swap}
+    @font-face{font-family:"LINE Seed KR";src:url("assets/fonts/LINESeedKR-Rg.woff2") format("woff2");font-weight:400 500;font-style:normal;font-display:swap}
+    @font-face{font-family:"LINE Seed KR";src:url("assets/fonts/LINESeedKR-Bd.woff2") format("woff2");font-weight:600 900;font-style:normal;font-display:swap}
+    :root{
+      --paper:#f8edf1;
+      --white:#fffafc;
+      --ink:#27191f;
+      --muted:#68555d;
+      --line:#d8bec8;
+      --pink:#eb8eac;
+      --blush:#f6d8e2;
+      --blue:#ccdeef;
+      --lime:#dfe5a9;
+      --silver:#b8b8b8;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:#e7dde1}
+    body{margin:0;font-family:"LINE Seed KR","Malgun Gothic",sans-serif;font-weight:400;color:var(--ink);background:#e7dde1}
+    img{display:block;width:100%;height:auto}
+    button,summary{font:inherit}
+    .amai-v2{width:min(100%,860px);margin:0 auto;background:var(--white);overflow:hidden;word-break:keep-all}
+    .amai-v2 p,.amai-v2 dd,.amai-v2 summary,.amai-v2 span{max-width:100%;overflow-wrap:normal;text-wrap:pretty}
+    @supports (word-break:auto-phrase){.amai-v2{word-break:auto-phrase}}
+    .amai-v2 h1,.amai-v2 h2,.amai-v2 h3,.finale p{text-wrap:balance}
+    .line{display:block}
+    .hero{position:relative;background:#d8d0c7}
+    .hero img{aspect-ratio:43/54;object-fit:cover;object-position:center}
+    .hero-stamp{position:absolute;left:32px;bottom:28px;padding:11px 14px;background:var(--pink);color:#fff;font:700 16px/1 "Arial Narrow",Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;transform:rotate(-2deg)}
+    .intro{padding:46px 64px 52px;background:var(--blush)}
+    .paper-mood{position:relative;isolation:isolate}
+    .paper-mood::before{content:"";position:absolute;inset:0;z-index:-1;background:url("assets/img/detail-amaimu/amaimu-paper-texture-v1.webp") center/cover no-repeat;opacity:.32;pointer-events:none}
+    .intro.paper-mood::before{opacity:.48}
+    .intro-layout{display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:26px;align-items:start}
+    .intro-copy{position:relative;z-index:1;padding-top:14px}
+    .intro-art{align-self:start}
+    .intro-art img{width:100%;height:288px;object-fit:contain;object-position:center;opacity:.9}
+    .brand{font-family:"Arial Narrow","LINE Seed KR",sans-serif;font-size:clamp(92px,13.5vw,126px);line-height:.82;letter-spacing:-.065em;font-weight:600}
+    .eyebrow{font-family:"Arial Narrow","LINE Seed KR",sans-serif;font-size:16px;line-height:1.55;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+    .intro h1{margin:30px 0 0;max-width:430px;font-family:"Arial Narrow","LINE Seed KR",sans-serif;font-size:clamp(44px,6.5vw,60px);font-weight:500;line-height:1.1;letter-spacing:-.045em}
+    .intro-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 24px;margin-top:26px;padding-top:18px;border-top:1px solid var(--ink);font:600 16px/1.65 "Arial Narrow",Arial,sans-serif;letter-spacing:.065em;text-transform:uppercase}
+    .catalog{padding:70px 64px;background:var(--white)}
+    .catalog figure{margin:0}
+    .catalog img{max-height:1160px;object-fit:cover;object-position:center;background:#e7dfd9}
+    .caption{display:flex;justify-content:space-between;gap:24px;margin-top:18px;font-family:"Arial Narrow","LINE Seed KR",sans-serif;font-size:16px;font-weight:500;line-height:1.7;letter-spacing:.055em;text-transform:uppercase;color:var(--muted)}
+    .statement{padding:68px 64px 82px;background-color:#563442;background-image:url("assets/img/detail-amaimu/amaimu-paper-texture-v1.webp");background-position:center;background-size:cover;background-blend-mode:soft-light;color:#fff}
+    .statement h2,.maker h2{margin:20px 0 0;font-size:clamp(38px,6.2vw,56px);font-weight:500;line-height:1.12;letter-spacing:-.05em}
+    .statement p{max-width:620px;margin:38px 0 0;font-size:21px;font-weight:400;line-height:1.9;letter-spacing:-.025em;color:#f7e7ed}
+    .pink-rule{width:150px;height:8px;margin-top:48px;background:var(--pink);transform:rotate(-1deg)}
+    .scent-story{display:block;background:#f7dde6}
+    .scent-visual{min-height:0;background:#ead8dd}
+    .scent-visual img{height:auto;object-fit:contain;object-position:center}
+    .scent-copy{display:flex;flex-direction:column;justify-content:center;padding:66px 64px 72px;background:rgba(255,246,249,.72)}
+    .scent-copy h2{max-width:620px}
+    .scent-copy h2,.desk-copy h2,.difference h2{margin:22px 0 0;font-size:clamp(38px,5.8vw,54px);font-weight:500;line-height:1.15;letter-spacing:-.05em}
+    .scent-copy>p,.desk-copy>p,.difference-lead{margin:30px 0 0;font-size:19px;line-height:1.9;color:var(--muted)}
+    .scent-notes{margin-top:38px;border-top:1px solid var(--ink)}
+    .scent-note{display:grid;grid-template-columns:94px 1fr;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);font-size:17px;line-height:1.7}
+    .scent-note b{font-family:"Arial Narrow","LINE Seed KR",sans-serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase}
+    .scent-note span{color:var(--muted)}
+    .lifestyle{background:#e9e7e2}
+    .lifestyle img{aspect-ratio:43/48;object-fit:cover}
+    .close-scent{display:grid;grid-template-columns:1fr 1fr;background:#fae9ef url("assets/img/detail-amaimu/amaimu-paper-texture-v1.webp") center/cover no-repeat}
+    .close-scent>div{padding:52px 38px 56px;background:rgba(250,233,239,.72)}
+    .close-scent>div+div{border-left:1px solid var(--line);background:rgba(255,246,249,.64)}
+    .story-card{position:relative;overflow:hidden}
+    .story-heading{display:grid;grid-template-columns:minmax(0,1fr) 104px;gap:18px;align-items:start;min-height:0}
+    .story-heading>div{max-width:none}
+    .story-object{position:static;width:104px;height:92px;justify-self:end;align-self:start;object-fit:contain;object-position:center;opacity:.94}
+    .close-scent h3{margin:20px 0 0;font-size:30px;font-weight:500;line-height:1.28;letter-spacing:-.04em}
+    .close-scent p{max-width:320px;margin:24px 0 0;font-size:19px;line-height:1.88;color:var(--muted)}
+    .charm-divider{padding:34px 68px 42px;background:#fff7fa url("assets/img/detail-amaimu/amaimu-paper-texture-v1.webp") center/cover no-repeat}
+    .charm-divider img{max-width:690px;height:170px;margin:0 auto;object-fit:cover;object-position:center;opacity:.88}
+    .desk-feature{display:block;background:#e8cfd8}
+    .desk-visual{min-height:0;background:#eadde1}
+    .desk-visual img{height:auto;object-fit:contain;object-position:center}
+    .desk-copy{position:relative;display:flex;flex-direction:column;justify-content:center;padding:66px 64px 72px;background:#f4dce5 url("assets/img/detail-amaimu/amaimu-paper-texture-v1.webp") center/cover no-repeat}
+    .desk-copy::after{content:"just for u";align-self:flex-start;margin-top:44px;padding:10px 13px;background:var(--pink);color:#fff;font:700 15px/1 "Arial Narrow",Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;transform:rotate(-2deg)}
+    .maker{padding:76px 0 0;background:#fff7fa}
+    .maker-copy{padding:58px 64px;background:#fff7fa url("assets/img/detail-amaimu/amaimu-paper-texture-v1.webp") center/cover no-repeat}
+    .maker-copy h2{max-width:720px}
+    .maker-copy p{max-width:650px;margin:30px 0 0;font-size:20px;line-height:1.9;color:var(--muted)}
+    .process{position:relative}
+    .process img{aspect-ratio:43/35;object-fit:cover}
+    .process-tag{position:absolute;right:24px;top:-18px;padding:12px 16px;background:var(--pink);color:#fff;font:700 16px/1 "Arial Narrow",Arial,sans-serif;letter-spacing:.1em;transform:rotate(2deg)}
+    .difference{padding:68px 64px;background:#f7e3ea}
+    .difference h2{max-width:660px}
+    .difference-lead{max-width:690px}
+    .difference-list{margin:36px 0 0;border-top:1px solid var(--ink)}
+    .difference-row{display:grid;grid-template-columns:140px 1fr;gap:28px;padding:22px 0;border-bottom:1px solid var(--line)}
+    .difference-row b{font-size:18px;font-weight:600;line-height:1.65;letter-spacing:-.01em}
+    .difference-row span{font-size:18px;line-height:1.85;color:var(--muted)}
+    .use{padding:82px 64px;background:#fffafc}
+    .use h2,.info h2,.faq h2{margin:20px 0 0;font-size:clamp(36px,5.8vw,54px);font-weight:500;line-height:1.14;letter-spacing:-.05em}
+    .steps{margin-top:48px;border-top:2px solid var(--ink)}
+    .step{display:grid;grid-template-columns:54px 190px 1fr;gap:18px;align-items:start;padding:24px 0;border-bottom:1px solid var(--line)}
+    .step .n{font:700 17px/1 "Arial Narrow",Arial,sans-serif;color:var(--pink)}
+    .step b{font-size:19px;font-weight:600;line-height:1.65}
+    .step p{margin:0;font-size:18px;line-height:1.85;color:var(--muted)}
+    .info{padding:78px 64px;background:#f1e7ec}
+    .specs{margin-top:44px;border-top:2px solid var(--ink)}
+    .spec{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid #c9adb8;font-size:18px;line-height:1.85}
+    .spec dt{font-weight:600}
+    .spec dd{margin:0;color:#4b5053}
+    .pending{display:inline-block;padding:5px 8px;background:var(--white);font-size:16px;line-height:1.55;letter-spacing:.005em;color:#705c12}
+    .faq{padding:78px 64px;background:var(--white)}
+    .faq-list{margin-top:42px;border-top:2px solid var(--ink)}
+    details{border-bottom:1px solid var(--line)}
+    summary{position:relative;cursor:pointer;list-style:none;padding:26px 48px 26px 0;font-size:20px;font-weight:600;line-height:1.65}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";position:absolute;right:2px;top:20px;font:400 24px/1 Arial,sans-serif}
+    details[open] summary::after{content:"−"}
+    details p{margin:0;padding:0 48px 28px 0;font-size:18px;line-height:1.9;color:var(--muted)}
+    .finale{padding:86px 64px 94px;background:#f09ab7;color:var(--ink)}
+    .finale p{margin:0;max-width:690px;font-size:clamp(40px,6.8vw,66px);font-weight:500;line-height:1.12;letter-spacing:-.055em}
+    .finale .sign{margin-top:50px;font-family:"Arial Narrow","LINE Seed KR",sans-serif;font-size:19px;font-weight:600;letter-spacing:.05em}
+    @media(max-width:640px){
+      .amai-v2 p,.amai-v2 dd,.amai-v2 summary,.difference-row span{word-break:keep-all;overflow-wrap:normal;text-wrap:pretty}
+      .amai-v2 .line{word-break:keep-all;overflow-wrap:normal}
+      .intro,.catalog,.statement,.maker-copy,.difference,.use,.info,.faq,.finale{padding-left:28px;padding-right:28px}
+      .intro{padding-top:34px;padding-bottom:42px}
+      .intro-layout{display:grid;grid-template-columns:minmax(0,1fr) 116px;gap:10px;align-items:start}
+      .intro-copy{position:relative;z-index:2;padding-top:8px}
+      .intro-art{position:static;width:auto;opacity:.86}
+      .intro-art img{height:176px}
+      .brand{max-width:245px;font-size:68px;line-height:.85}
+      .catalog{padding-top:38px;padding-bottom:46px}
+      .intro h1{max-width:245px;margin-top:34px;font-size:39px}
+      .statement h2{font-size:31px;line-height:1.22}
+      .maker h2,.use h2{font-size:34px;line-height:1.2}
+      .scent-visual,.desk-visual{min-height:0}
+      .scent-visual img,.desk-visual img{height:auto;aspect-ratio:auto;object-fit:contain}
+      .scent-copy,.desk-copy{padding:52px 28px 58px}
+      .scent-copy h2,.desk-copy h2,.difference h2{font-size:36px;line-height:1.2}
+      .scent-copy>p,.desk-copy>p,.difference-lead{font-size:18px}
+      .scent-note{grid-template-columns:78px 1fr}
+      .close-scent{grid-template-columns:1fr}
+      .close-scent>div{padding:42px 28px 46px}
+      .close-scent>div+div{border-left:0;border-top:1px solid var(--line)}
+      .story-heading{grid-template-columns:minmax(0,1fr) 82px;gap:14px;min-height:0}
+      .story-heading>div{max-width:none}
+      .story-object{width:82px;height:76px}
+      .close-scent p{max-width:none}
+      .difference-row{grid-template-columns:1fr;gap:7px}
+      .step{grid-template-columns:36px 1fr}
+      .step p{grid-column:2}
+      .spec{grid-template-columns:1fr;gap:7px}
+      .hero-stamp{left:20px;bottom:20px}
+      .intro-meta{grid-template-columns:1fr;font-size:16px;gap:10px}
+      .caption{display:grid;grid-template-columns:1fr;gap:4px}
+      .caption span:last-child{text-align:left}
+      .charm-divider{padding:24px 22px 30px}
+      .charm-divider img{height:120px;opacity:.72}
+    }
+  </style>
+<link rel="stylesheet" href="assets/css/product-evidence-20260906.css?v=20260910-public">
+</head>
+<body>
+  <!-- AMAIMU REDESIGN START -->
+  <main class="amai-v2">
+    <section class="hero" aria-label="amaimü 제품 이미지">
+      <img src="assets/img/detail-amaimu/hero-bedroom-flash-v6.webp" alt="핑크 침실 화장대 위 무화과 우드 향의 amaimü 리드 디퓨저" fetchpriority="high" width="860" height="1080">
+      <span class="hero-stamp">just for u</span>
+    </section>
+
+    <section class="intro paper-mood">
+      <div class="intro-layout">
+        <div class="intro-copy">
+          <div class="brand">amaimü</div>
+          <h1><span class="line">Just for U,</span><span class="line">Amaimu</span></h1>
+        </div>
+        <div class="intro-art" aria-hidden="true">
+          <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/amaimu-ballet-ribbon-v2.webp" alt="" width="1024" height="1536">
+        </div>
+      </div>
+      <div class="intro-meta">
+        <span>Reed Diffuser · 200ml</span>
+        <span>Signature glass object</span>
+        <span>Scent for your mood</span>
+      </div>
+    </section>
+
+    <section class="evidence evidence-check" aria-label="세 가지 선택 포인트"><p class="evidence-eyebrow">AT A GLANCE / 3 POINTS</p><h2>고르기 전에, 세 가지만.</h2><div class="evidence-points"><a href="#amaimu-scent"><span>01 / SCENT</span><strong>무화과에서 차분한 우드로</strong><p>무화과·자두, 편백·사이프러스, 시더우드·샌달우드로 이어지는 향의 방향.</p><b aria-hidden="true">↓</b></a><a href="#amaimu-object"><span>02 / DESIGN</span><strong>컬러 레터링과 실버</strong><p>핑크 로고와 색색의 글씨, 실버 캡·화이트 리드의 조합.</p><b aria-hidden="true">↓</b></a><a href="#amaimu-desk"><span>03 / SPACE</span><strong>책상 위의 작은 즐거움</strong><p>노트와 문구 옆에 놓인 모습으로 내 공간과의 어울림을 살펴보세요.</p><b aria-hidden="true">↓</b></a></div></section><section class="catalog">
+      <figure>
+        <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/amaimu-product-reference-v4.webp" alt="무화과, 자두, 사이프러스, 시더우드와 샌달우드 노트를 담은 amaimü 디퓨저 제품 시안" width="996" height="1579">
+        <figcaption class="caption"><span>The amaimü object / 01</span><span>Signature diffuser</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="statement">
+      <div class="eyebrow">Your room, your mood</div>
+      <h2><span class="line">귀여워서 데려온 향,</span><span class="line">매일 받는 작은 선물처럼</span></h2>
+      <p>예쁜 컵이나 작은 문구처럼, 귀여워서 자꾸 눈길이 가는 향. amaimü는 내 책상에 놓고 매일 바라보는 즐거움을 생각합니다. 아무 기념일이 아니어도 나에게, 문득 떠오르는 친구에게 선물하고 싶은 마음으로요.</p>
+      <div class="pink-rule" aria-hidden="true"></div>
+    </section>
+
+    <section class="scent-story paper-mood" id="amaimu-scent">
+      <div class="scent-visual">
+        <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/scent-fig-wood-stilllife-v3.webp" alt="무화과와 사이프러스, 시더우드와 샌달우드로 표현한 맑은 무화과 나무 숲의 향 무드" width="1254" height="1254">
+      </div>
+      <div class="scent-copy">
+        <div class="eyebrow">The scent</div>
+        <h2><span class="line">무화과 나무 숲을 닮은</span><span class="line">맑고 차분한 향</span></h2>
+        <p>잘 익은 무화과와 소량의 자두가 부드럽게 열리고, 무화과 과육 사이로 편백과 사이프러스의 맑은 숲 공기가 스며듭니다. 시더우드와 소량의 샌달우드가 차분한 결을 남겨 달지 않고 고급스러운 무화과 우드 향으로 이어집니다.</p>
+        <div class="scent-notes" aria-label="향 노트">
+          <div class="scent-note"><b>Top</b><span>Fig · Plum</span></div>
+          <div class="scent-note"><b>Middle</b><span>Fig Pulp · Hinoki · Cypress</span></div>
+          <div class="scent-note"><b>Base</b><span>Cedarwood · Sandalwood</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lifestyle">
+      <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/lifestyle-window-v7.webp" alt="핑크 포인트가 있는 침구와 창가에 놓인 무화과 우드 향의 amaimü 디퓨저" width="860" height="950">
+    </section>
+
+    <section class="close-scent">
+      <div class="story-card">
+        <div class="story-heading">
+          <div>
+            <span class="eyebrow">Afternoon</span>
+            <h3><span class="line">좋아하는 것들이</span><span class="line">놓인 책상</span></h3>
+          </div>
+          <img loading="lazy" decoding="async" class="story-object" src="assets/img/detail-amaimu/amaimu-afternoon-objects-v1.webp" alt="핑크 체리와 작은 카메라, 유리 하트 장식" width="800" height="620">
+        </div>
+        <p>커피를 내리고 해야 할 일을 펼쳐 놓는 오후. 책상 위에 기분에 맞는 향을 더해 보세요.</p>
+      </div>
+      <div class="story-card">
+        <div class="story-heading">
+          <div>
+            <span class="eyebrow">For a friend</span>
+            <h3><span class="line">네 자리가 떠올라서,</span><span class="line">고른 작은 선물</span></h3>
+          </div>
+          <img loading="lazy" decoding="async" class="story-object" src="assets/img/detail-amaimu/amaimu-night-objects-v1.webp" alt="초승달과 날개, 진주 장식" width="800" height="620">
+        </div>
+        <p>친구가 좋아하는 색, 늘 앉아 있는 책상, 함께 고른 작은 소품. 그 자리에 어울릴 것 같아서 골랐다는 말과 함께 건네보세요.</p>
+      </div>
+    </section>
+
+    <div class="charm-divider" aria-hidden="true">
+      <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/amaimu-charms-v1.webp" alt="" width="1200" height="500">
+    </div>
+
+    <section class="desk-feature" id="amaimu-desk">
+      <div class="desk-visual">
+        <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/desk-deskterior-v5.webp" alt="핑크와 실버 문구, 다이어리와 노트북이 놓인 책상 위 무화과 우드 향의 amaimü 디퓨저" width="1122" height="1402">
+      </div>
+      <div class="desk-copy">
+        <div class="eyebrow">Finishing touch</div>
+        <h2><span class="line">내 취향을 완성하는</span><span class="line">한 끗</span></h2>
+        <p><span class="line">내 일상이 흘러가는 책상, 노트와 크레용, 좋아하는 크고 작은 물건들 사이.</span><span class="line">amaimü는 향과 오브제로 마지막 분위기를 더합니다.</span></p>
+      </div>
+    </section>
+
+    <section class="maker" id="amaimu-object">
+      <div class="maker-copy">
+        <div class="eyebrow">The object</div>
+        <h2><span class="line">투명한 보틀에 담은</span><span class="line">amaimü의 무드</span></h2>
+        <p><span class="line">맑은 유리와 실버 캡, 부드러운 핑크 로고와 자유로운 컬러 레터링.</span><span class="line">선반 위에 가볍게 놓아도 amaimü만의 장면이 완성됩니다.</span></p>
+      </div>
+      <div class="process">
+        <img loading="lazy" decoding="async" src="assets/img/detail-amaimu/label-detail-no-reeds-v6.webp" alt="리드 없이 무화과 우드 향으로 수정한 amaimü 라벨 디자인과 종이 질감 클로즈업" width="860" height="700">
+        <span class="process-tag">signature detail</span><div class="evidence-label-caption"><b>가까이에서 보는 컬러 레터링</b><p>핑크 로고와 크레용을 떠올리는 글씨, 밝게 반사되는 실버 캡. 현재 라벨 디자인 시안에서 확인할 수 있는 디테일입니다.</p></div>
+      </div>
+    </section>
+
+    <section class="difference paper-mood">
+      <div class="eyebrow">Why amaimü</div>
+      <h2><span class="line">달지 않게 깊어진</span><span class="line">무화과 우드</span></h2>
+      <p class="difference-lead">무화과의 인상에 편백과 사이프러스의 맑은 공기감, 시더우드와 샌달우드의 차분한 결이 이어지는 향을 제안합니다. 달콤한 과일만 떠올리기보다 나무와 함께 있는 무화과의 장면으로 살펴보세요.</p>
+      <div class="difference-list">
+        <div class="difference-row"><b>클리어 글라스</b><span>빛과 주변의 색을 담아 공간에 자연스럽게 어우러지는 투명 보틀.</span></div>
+        <div class="difference-row"><b>컬러 레터링</b><span>부드러운 핑크 로고와 유쾌한 컬러 타이포로 완성한 amaimü의 시그니처.</span></div>
+        <div class="difference-row"><b>실버 &amp; 화이트</b><span>깨끗한 화이트 리드와 실버 캡으로 가볍고 선명하게 마무리했습니다.</span></div>
+      </div>
+    </section>
+
+    <section class="use">
+      <div class="eyebrow">How to enjoy</div>
+      <h2><span class="line">원하는 분위기에 맞춰</span><span class="line">즐겨 보세요</span></h2>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><b>캡을 열어 준비하기</b><p><span class="line">보틀을 평평한 곳에 놓고 향액이 라벨에 닿지 않도록</span><span class="line">조심스럽게 캡을 열어 주세요.</span></p></div>
+        <div class="step"><span class="n">02</span><b>화이트 리드 꽂기</b><p>공간의 크기와 원하는 분위기에 맞춰 리드 개수를 조절해 주세요.</p></div>
+        <div class="step"><span class="n">03</span><b>향을 새롭게 리프레시</b><p>향의 변화를 주고 싶은 날에는 티슈로 리드를 잡아 가볍게 뒤집어 주세요.</p></div>
+      </div>
+    </section>
+
+    <section class="evidence evidence-package"><p class="evidence-eyebrow">SET / 현재 기획 구성</p><h2>두 병으로 나누는<br>나의 작은 일상.</h2><div class="evidence-contents"><div><strong>200ml × 2</strong><span>Miss Fig 본품 두 병</span></div><div><strong>화이트 리드</strong><span>두 병에 사용할 2세트</span></div><div><strong>무인쇄 E골 박스</strong><span>기본 칸막이 + 브랜드 스티커</span></div></div><p class="evidence-fine">노트북·문구·리본 등 연출 소품은 상품 구성에 포함되지 않습니다. 리드 길이는 25cm입니다. 용기 실측, 박스 크기와 최종 동봉 개수는 제작 샘플 확인 후 안내합니다.</p></section><section class="evidence evidence-compare"><details><summary>어떤 향을 고를지 고민된다면 <span>여섯 향 비교하기 +</span></summary><div class="evidence-table-wrap" role="region" aria-label="여섯 향 비교표" tabindex="0"><table class="evidence-table"><thead><tr><th scope="col">향</th><th scope="col">향의 흐름</th><th scope="col">선택의 기준</th></tr></thead><tbody><tr ><th scope="row"><span>USÉLESS</span><a href="product-seongsu.html" target="_top">성수 무화과 ↗</a></th><td>무화과 · 자두 → 편백 · 사이프러스 → 우드</td><td>서울의 기억을 담은 선물, 단정한 공간</td></tr><tr class=evidence-current><th scope="row"><span>amaimü</span><a href="product-amaimu.html" target="_top">Miss Fig ↗</a></th><td>무화과 · 자두 → 편백 · 사이프러스 → 우드</td><td>컬러 레터링과 내 책상 위 작은 즐거움</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-hotel.html" target="_top">호텔 블랭킷 ↗</a></th><td>클린 → 라벤더 → 머스크</td><td>여행에서 만난 침실의 분위기</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-seoul-forest.html" target="_top">서울숲의 아침 ↗</a></th><td>그린 리프 → 히노키 · 시더우드 → 머스크</td><td>나무와 이른 산책을 좋아하는 취향</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-seokchon-cherrywood.html" target="_top">석촌 체리우드 ↗</a></th><td>체리 · 꽃잎 → 시더우드 · 샌달우드 → 머스크</td><td>함께 걸었던 계절과 우드 톤의 공간</td></tr><tr ><th scope="row"><span>USÉLESS</span><a href="product-cafe-flower-tea.html" target="_top">카페 플라워티 ↗</a></th><td>베르가모트 → 플로럴 티 · 블랙 티 → 머스크</td><td>찻잔과 책이 있는 오후의 테이블</td></tr></tbody></table></div><p class="evidence-fine">현재 소개된 향 노트와 브랜드 제안을 비교한 안내입니다. 성수 무화과와 Miss Fig는 공통된 무화과·우드 노트를 소개하고 있어, 향의 차이를 단정하기보다 디자인과 담고 싶은 장면을 함께 살펴보세요.</p></details><a class="evidence-more" href="shop.html#scent-guide" target="_top">전체 향 선택 가이드 ↗</a></section><section class="info">
+      <div class="eyebrow">Information</div>
+      <h2>제품 정보</h2>
+      <dl class="specs">
+        <div class="spec"><dt>제품명</dt><dd>amaimü 리드 디퓨저 · Miss Fig</dd></div>
+        <div class="spec"><dt>용량</dt><dd>200ml (6.7 fl.oz.)</dd></div>
+        <div class="spec"><dt>구성</dt><dd>본품 2병 · 화이트 리드스틱 2세트 · 무인쇄 E골 공용박스 · 기본 칸막이 · 브랜드 스티커</dd></div>
+        <div class="spec"><dt>캡 / 리드</dt><dd>실버 캡 · 화이트 리드스틱</dd></div>
+        <div class="spec"><dt>라벨</dt><dd>amaimü 시그니처 그래픽 라벨 · 모든 제품 동일 사양</dd></div>
+        <div class="spec"><dt>향 노트</dt><dd>Fig · Plum · Fig Pulp · Hinoki · Cypress · Cedarwood · Sandalwood</dd></div>
+        <div class="spec"><dt>사용 기간</dt><dd><span class="pending">제조사 확인 후 표기</span> 리드 개수와 환기 빈도에 따라 달라집니다.</dd></div>
+        <div class="spec"><dt>제조국</dt><dd>대한민국</dd></div>
+        <div class="spec"><dt>제조 정보</dt><dd><span class="pending">신고 완료 후 제조사 안내 문구와 동일하게 기재</span></dd></div>
+        <div class="spec"><dt>사용 시 주의</dt><dd>화기와 직사광선을 피하고 어린이와 반려동물의 손이 닿지 않는 곳에 보관하세요. 향액이 도장면·가죽·플라스틱 표면에 닿지 않도록 주의하세요.</dd></div>
+      </dl>
+    </section>
+
+    <section class="faq">
+      <div class="eyebrow">FAQ</div>
+      <h2>자주 묻는 질문</h2>
+      <div class="faq-list">
+        <details><summary>라벨은 제품마다 다른가요?</summary><p>아니요. 모든 제품에 동일한 amaimü 시그니처 그래픽 라벨이 적용됩니다.</p></details>
+        <details><summary>흰 리드의 색이 변해도 괜찮나요?</summary><p>향액이 배면서 리드 색이 아주 연하게 달라질 수 있습니다. 사용에는 문제가 없으며 신경 쓰일 때 새 리드로 교체해 주세요.</p></details>
+        <details><summary>향의 강도는 어떻게 조절하나요?</summary><p>리드 개수와 뒤집는 주기로 조절할 수 있습니다. 공간의 크기와 환기 빈도에 맞춰 편안한 정도를 찾아 주세요.</p></details>
+        <details><summary>라벨에 물이 묻으면 어떻게 하나요?</summary><p>종이 라벨은 물과 습기에 약합니다. 젖은 손으로 만지지 말고 향액이 닿지 않도록 주의해 주세요.</p></details>
+      </div>
+    </section>
+
+    <footer class="finale">
+      <p><span class="line">나만을 위한 애착 디퓨저,</span><span class="line">내 공간이 조금 더 깊어지는 순간</span></p>
+      <div class="sign">Just for U, Amaimu</div>
+    </footer>
+  </main>
+  <!-- AMAIMU REDESIGN END -->
+</body>
+</html>

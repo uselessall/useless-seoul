@@ -82,9 +82,18 @@ async function renderAuthLink() {
 /* ---------- 제품 카드 그리드 ([data-product-grid] — 정본은 Store.getProducts() 하나) ---------- */
 function renderProductGrids(products) {
   document.querySelectorAll("[data-product-grid]").forEach((grid) => {
-    grid.innerHTML = products.map((p, i) => {
+    const brand = String(grid.dataset.brand || "").trim();
+    const limit = parseInt(grid.dataset.limit || "", 10);
+    let gridProducts = brand ? products.filter((p) => p.brand === brand) : products;
+    if (Number.isFinite(limit) && limit > 0) gridProducts = gridProducts.slice(0, limit);
+    if (!gridProducts.length) {
+      grid.innerHTML = '<p class="nojs-note">표시할 제품이 없습니다.</p>';
+      return;
+    }
+    grid.innerHTML = gridProducts.map((p, i) => {
       const onSale = p.status === "on_sale";
-      const url = esc(safeRelativeUrl(p.url, "shop.html"));
+      const detailUrl = safeRelativeUrl(p.detailUrl, "");
+      const url = esc(detailUrl || safeRelativeUrl(p.url, "shop.html"));
       const img = esc(safeRelativeUrl(p.img, "assets/img/live/scene-tea.jpg"));
       return `
     <article class="product reveal">
@@ -96,13 +105,53 @@ function renderProductGrids(products) {
         <p class="product__notes">${esc(p.notes)}</p>
         <p class="product__spec">${esc(p.spec)}</p>
         <p class="product__price">${onSale ? `${won(p.price)} <span class="mock">표시용</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
-        ${onSale
+        ${detailUrl
+          ? `<a class="product__add product__detail" href="${esc(detailUrl)}">${esc(p.detailCta || "상세페이지 바로가기")}</a>`
+          : onSale
           ? `<button type="button" class="product__add" data-add="${esc(p.id)}">장바구니 담기</button>`
           : `<button type="button" class="product__add" disabled aria-disabled="true">출시 예정</button>`}
       </div>
     </article>`;
     }).join("");
   });
+}
+
+function bindShopBrandPanels() {
+  const tabs = Array.from(document.querySelectorAll("[data-shop-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-shop-panel]"));
+  if (!tabs.length || !panels.length) return;
+
+  const panelIds = panels.map((panel) => panel.dataset.shopPanel);
+  const defaultId = panelIds[0] || "useless";
+  const currentId = () => {
+    const hashId = decodeURIComponent(location.hash.replace(/^#/, ""));
+    return panelIds.includes(hashId) ? hashId : defaultId;
+  };
+  const setActive = (id) => {
+    const activeId = panelIds.includes(id) ? id : defaultId;
+    panels.forEach((panel) => {
+      const active = panel.dataset.shopPanel === activeId;
+      panel.hidden = !active;
+      panel.classList.toggle("is-active", active);
+    });
+    tabs.forEach((tab) => {
+      const active = tab.dataset.shopTab === activeId;
+      tab.classList.toggle("on", active);
+      if (active) tab.setAttribute("aria-current", "true");
+      else tab.removeAttribute("aria-current");
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", (event) => {
+      event.preventDefault();
+      const id = tab.dataset.shopTab || defaultId;
+      history.pushState(null, "", `${location.pathname}${location.search}#${id}`);
+      setActive(id);
+    });
+  });
+  addEventListener("hashchange", () => setActive(currentId()));
+  setActive(currentId());
 }
 
 /* ---------- 제품 상세 하이드레이션 ([data-product-page="id"])
@@ -122,7 +171,7 @@ function hydrateProductPage() {
   set("name", p.name);
   set("en", p.en);
   set("hook", p.hook);
-  set("spec", onSale ? p.spec + " · 블랙 리드 스틱 8가닥 포함" : p.spec);
+  set("spec", p.spec);
   const priceEl = root.querySelector('[data-pd="price"]');
   if (priceEl) priceEl.innerHTML = onSale
     ? `${won(p.price)} <span class="mock">표시용</span>`
@@ -137,12 +186,12 @@ function hydrateProductPage() {
     const qty = root.querySelector('input[aria-label="수량"]');
     if (qty) qty.disabled = true;
   }
-  const [top, mid, base] = p.notes.split("·").map((s) => s.trim());
+  const [top, mid, base] = p.notePyramid || p.notes.split("·").map((s) => s.trim());
   set("note-top", top);
   set("note-mid", mid);
   set("note-base", base);
   const img = root.querySelector(".pd__img img");
-  if (img) { img.src = safeRelativeUrl(p.img, img.getAttribute("src") || "assets/img/live/scene-tea.jpg"); img.alt = p.alt; }
+  if (img && !img.hasAttribute("data-editorial-image")) { img.src = safeRelativeUrl(p.img, img.getAttribute("src") || "assets/img/live/scene-tea.jpg"); img.alt = p.alt; }
 }
 
 /* ---------- 담기 버튼 (data-add="id" [data-qty-from="#sel"]) ---------- */
@@ -192,7 +241,7 @@ function renderCartPage() {
     <div class="cart__row" data-row="${esc(it.id)}">
       <a class="cart__img" href="${url}"><img src="${img}" alt="${esc(p.name)}" /></a>
       <div class="cart__info">
-        <p class="cart__code">${esc(p.code)}</p>
+        <p class="cart__code">${esc(p.brandLabel || p.brand)} · ${esc(p.code)}</p>
         <a class="cart__name" href="${url}">${esc(p.name)}</a>
         <p class="cart__spec">${esc(p.spec)}</p>
         <p class="cart__unit">${won(p.price)} <span class="mock">표시용</span></p>
@@ -323,7 +372,7 @@ async function renderMyPage() {
   });
   const orders = await Store.myOrders();
   if (!orders.length) {
-    wrap.innerHTML = `<p class="order__empty">주문 내역이 없습니다. <a href="shop.html">SHOP 보러 가기 →</a></p>`;
+    wrap.innerHTML = `<p class="order__empty">아직 저장한 주문서가 없어요. <a href="shop.html">나에게 맞는 향 둘러보기 →</a></p>`;
     return;
   }
   /* 손상 내성: 필드 누락 주문 레코드도 렌더가 안 죽게 폴백 */
@@ -340,7 +389,7 @@ async function renderMyPage() {
         ${(Array.isArray(o.items) ? o.items : []).map((it) => `<li><span>${esc(it.name)} × ${esc(it.qty)}</span><span>${won((+it.price || 0) * (+it.qty || 0))}</span></li>`).join("")}
       </ul>
       <p class="order__total"><span>합계</span><span>${won(+o.total || 0)}</span></p>
-      ${o.status === "awaiting_payment" ? `<p class="order__deposit">무통장입금 대기 — 입금 계좌: 우리은행 1002-454-250728 예금주 백승준 · 입금 확인 후 배송이 시작됩니다.</p>
+      ${o.status === "awaiting_payment" ? `<p class="order__deposit">판매 준비 중에 저장한 주문서입니다. 현재 입금을 받지 않으며, 실제 결제·배송은 진행되지 않습니다.</p>
       <button class="order__cancel" data-cancel-order="${esc(o.orderId)}">입금 전 주문 취소</button>` : ""}
     </article>`;
   }).join("");
@@ -466,6 +515,62 @@ async function renderAdminPage() {
   }));
 }
 
+/* ---------- 선민 상세 정본 임베드 ---------- */
+function bindDetailFrames() {
+  document.querySelectorAll("iframe[data-detail-frame]").forEach((frame) => {
+    const resize = () => {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+        const height = Math.max(doc.documentElement.scrollHeight, doc.body?.scrollHeight || 0);
+        if (height > 0) frame.style.height = `${height}px`;
+      } catch { /* same-origin detail only; CSS fallback remains */ }
+    };
+    frame.addEventListener("load", () => {
+      resize();
+      try {
+        const observer = new ResizeObserver(resize);
+        observer.observe(frame.contentDocument.documentElement);
+      } catch { /* load + window resize fallback */ }
+    });
+    window.addEventListener("resize", resize, { passive: true });
+  });
+}
+
+function bindProductHero() {
+  const hero = document.querySelector("[data-product-hero]");
+  if (
+    !hero
+    || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    || !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  ) return;
+
+  let frame = 0;
+  const reset = () => {
+    hero.style.setProperty("--hero-shift-x", "0px");
+    hero.style.setProperty("--hero-shift-y", "0px");
+    hero.style.setProperty("--hero-light-x", "50%");
+    hero.style.setProperty("--hero-light-y", "42%");
+  };
+  const move = (event) => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const rect = hero.getBoundingClientRect();
+      const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+      const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+      hero.style.setProperty("--hero-shift-x", `${((x - 0.5) * -9).toFixed(2)}px`);
+      hero.style.setProperty("--hero-shift-y", `${((y - 0.5) * -7).toFixed(2)}px`);
+      hero.style.setProperty("--hero-light-x", `${(x * 100).toFixed(1)}%`);
+      hero.style.setProperty("--hero-light-y", `${(y * 100).toFixed(1)}%`);
+    });
+  };
+
+  reset();
+  hero.addEventListener("pointermove", move, { passive: true });
+  hero.addEventListener("pointerleave", reset, { passive: true });
+  hero.addEventListener("pointercancel", reset, { passive: true });
+}
+
 /* ---------- 공통 초기화 ---------- */
 document.addEventListener("DOMContentLoaded", async () => {
   // 제품 로드 + 카드 그리드 렌더를 reveal 관찰보다 먼저 — 렌더된 카드도 IO에 잡히게
@@ -473,6 +578,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   PRODUCT_MAP = Object.fromEntries(products.map((p) => [p.id, p]));
   cartPrune(); // 정본에 없는 상품 id 제거 — 이후 렌더는 전부 유효 항목만 본다
   renderProductGrids(products);
+  bindShopBrandPanels();
   hydrateProductPage();
 
   // 클린 커머스 방향: 콘텐츠는 즉시 보이게 둔다. 스크롤 연출은 제거해 full-page 캡처·느린 환경에서도 빈 섹션이 생기지 않게 한다.
@@ -495,4 +601,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderMyPage();
   renderReviews();
   renderAdminPage();
+  bindDetailFrames();
+  bindProductHero();
 });

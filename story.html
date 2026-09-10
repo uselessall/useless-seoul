@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STORY — USÉLESS SEOUL</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/bk01.svg" />
-  <meta name="description" content="가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다. USÉLESS SEOUL 브랜드 스토리와 다음 장면들." />
+  <meta name="description" content="여행의 기억, 선물, 곁에 두고 싶은 물건. USÉLESS와 amaimü를 만드는 이유. USÉLESS SEOUL 브랜드 스토리와 다음 장면들." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="STORY — USÉLESS SEOUL" />
-  <meta property="og:description" content="가장 쓸모없던 시간이, 가장 잊히지 않는 시간이다." />
-  <meta property="og:image" content="https://uselessseoul.com/assets/img/live/product-hangang.jpg" />
+  <meta property="og:description" content="여행의 기억, 선물, 곁에 두고 싶은 물건. USÉLESS와 amaimü를 만드는 이유." />
+  <meta property="og:image" content="https://uselessseoul.com/assets/img/canon/seoul-life-20260905.webp" />
   <meta property="og:url" content="https://uselessseoul.com/story.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23111111' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
@@ -24,22 +24,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=20260910-public" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=38" defer></script>
-  <script src="assets/js/site.js?v=38" defer></script>
-  <script src="assets/js/spin.js?v=3" defer></script>
+  <script src="assets/js/store.js?v=20260910-public" defer></script>
+  <script src="assets/js/site.js?v=20260910-public" defer></script>
+  <link rel="stylesheet" href="assets/css/site-refine-20260906.css?v=20260910-public">
 </head>
-<body>
+<body class="refined-store">
 
   <a class="skip" href="#main">본문 바로가기</a>
 
   <header class="nav" id="nav">
     <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
     <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
-    <nav class="nav__menu" id="navMenu">
+    <nav class="nav__menu" id="navMenu" aria-label="주요 내비게이션">
       <a href="shop.html">SHOP</a>
-      <a href="story.html" class="on">STORY</a>
+      <a href="company.html">ABOUT US</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
+      <a href="story.html" class="on" aria-current="page">STORY</a>
       <a href="faq.html">FAQ</a>
     </nav>
     <div class="nav__right">
@@ -51,51 +54,49 @@
 
   <main id="main" tabindex="-1">
 
-  <!-- ★ BRAND FILM — 스토리 스파인 풀버전 -->
-  <section class="film" id="film" style="margin-top:58px;">
-    <figure class="film__bg">
-      <!-- fal 미가용 세션 — 흑백 스틸 + CSS 켄 번즈 폴백 (디렉션 허용 대체안) -->
-      <img src="assets/img/live/scene-hangang.jpg" alt="여름밤 한강 — 브랜드 필름 스틸" fetchpriority="high" />
-    </figure>
-    <div class="film__text reveal">
-      <p class="film__jp">何もしなかった夜ほど、忘れられない。</p>
-      <h1 class="film__line">가장 쓸모없던 시간이,<br />가장 잊히지 않는 시간이다.</h1>
-      <p class="film__body">
-        스무 살의 우리는 밤새 강변에 앉아 아무것도 하지 않았다.<br />
-        그 밤은 어디에도 기록되지 않았지만, 아직 어제처럼 선명하다.<br />
-        USÉLESS SEOUL은 그 시간의 공기를 병에 담는다.
-      </p>
-      <p class="film__en">The most useless hours are the ones we never forget.</p>
+  <section class="story-hero" aria-labelledby="story-title">
+    <img src="assets/img/canon/seoul-life-20260905.webp" alt="성수의 거리와 창가에 놓인 USÉLESS 디퓨저" fetchpriority="high">
+    <div class="story-hero__copy">
+      <p class="refine-kicker">STORIES / USÉLESS SEOUL</p>
+      <h1 id="story-title">좋아했던 순간을,<br>곁에 두는 방법.</h1>
+      <p>여행에서 만난 공기, 선물을 고르며 떠오른 얼굴,<br>귀여워서 책상에 데려온 작은 물건.<br>향을 갖고 싶은 마음은 그런 순간에서 시작됩니다.</p>
+      <a class="refine-link" href="#brand-stories">두 브랜드의 이야기 ↓</a>
     </div>
   </section>
 
-  <!-- 향 4종 = 청춘의 네 장면 -->
-  <section class="bk01sec reveal" aria-label="브랜드 마크">
-    <figure class="bk01sec__img"><img src="assets/img/live/hero-bk01.jpg" alt="USÉLESS SEOUL BK01 라벨 실물 목업" loading="lazy" /></figure>
-    <div class="bk01sec__text">
-      <img class="bk01sec__mark" src="assets/img/bk01.svg" alt="" width="86" height="86" loading="lazy" />
-      <h2 class="bk01sec__slogan">쓸모없어도 괜찮아.</h2>
-      <p class="bk01sec__sub">시침과 분침이 도는 자리 — 흘려보낸 시간이 우리의 로고가 됐다.</p>
+  <section class="story-intro" id="brand-stories" aria-labelledby="brand-stories-title">
+    <p class="refine-kicker">ONE BELIEF · TWO BRANDS</p>
+    <h2 id="brand-stories-title">기억하고 싶어서.<br>매일 보고 싶어서.</h2>
+    <p>유슬레스서울이 만든 두 향 브랜드. 좋은 향에 곁에 두고 싶은 형태와 이야기를 더해, 선택하고 선물할 이유를 만듭니다.</p>
+    <div class="story-branches">
+      <article>
+        <img src="assets/img/canon/studio-grid-20260905.webp" alt="검은 리드와 유리병의 USÉLESS 디퓨저" loading="lazy">
+        <div><p class="refine-kicker">SEOUL, BOTTLED.</p><h3>USÉLESS</h3><p>여행이 끝난 뒤에도 서울을 기억하고 싶을 때. 함께 걸었던 장면을 선물하고, 집과 카페의 분위기를 가꾸고 싶을 때.</p><a class="refine-link" href="useless.html">서울의 장면을 담는 향 ↗</a></div>
+      </article>
+      <article class="story-branches__pink">
+        <img src="assets/img/canon/crayon-desk-20260905.webp" alt="크레용과 노트 사이의 amaimü 디퓨저" loading="lazy">
+        <div><p class="refine-kicker">JUST FOR YOU.</p><h3>amaimü</h3><p>귀여워서 자꾸 눈길이 가는 것. 내 책상에 놓고, 친구에게도 선물하고 싶은 향. 매일 바라보는 자리에 작은 즐거움을 더합니다.</p><a class="refine-link" href="amaimu.html">내 곁에 두고 싶은 향 ↗</a></div>
+      </article>
     </div>
   </section>
 
   <section class="stories" id="stories">
     <header class="sect-head reveal">
-      <h2>Four Scenes</h2>
-      <p>향 하나마다, 청춘의 한 장면.</p>
+      <h2>USÉLESS의 다섯 장면</h2>
+      <p>떠올리고 싶은 장소와 시간을 따라 향을 골라보세요.</p>
     </header>
 
-    <article class="story reveal" id="s-hangang">
-      <figure class="story__img"><img src="assets/img/live/scene-hangang.jpg" alt="여름밤 한강 장면"  /></figure>
+    <article class="story reveal" id="s-seongsu">
+      <figure class="story__img"><img src="assets/img/canon/seoul-life-20260905.webp" alt="성수 거리와 창가의 디퓨저"  /></figure>
       <div class="story__text">
         <p class="story__no">01</p>
-        <h3 class="story__name">여름밤 한강</h3>
-        <p class="story__copy">밤 열한 시, 막차를 보내고 우리는 강변에 남았다.
-        편의점 봉지, 미지근한 바람, 다리 위의 불빛.
-        아무것도 하지 않았는데, 전부였다.</p>
-        <p class="story__sub">A night we did nothing. It was everything.</p>
-        <p class="story__notes">TOP 우디 · MID 머스크 · BASE 아쿠아</p>
-        <p style="margin-top:1.1rem;"><a href="product-hangang.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
+        <h3 class="story__name">성수 무화과</h3>
+        <p class="story__copy">계획은 없었다. 골목을 잘못 들었고,
+        공장을 고친 카페 창가에 무화과 나무가 있었다.
+        그날 한 일은 그게 전부. 그래서 좋았다.</p>
+        <p class="story__sub">A wrong turn, a fig tree, a whole afternoon.</p>
+        <p class="story__notes">200ml × 2병 세트 · Fig / Plum / Hinoki</p>
+        <p style="margin-top:1.1rem;"><a href="product-seongsu.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
       </div>
     </article>
 
@@ -108,113 +109,126 @@
         체크아웃까지 사십 분, 이불 속에서 버티는 중.
         여행에서 제일 기억에 남은 건 결국 이 순간이었다.</p>
         <p class="story__sub">Check-out at eleven. Not moving until ten fifty.</p>
-        <p class="story__notes">TOP 클린 · MID 라벤더 · BASE 머스크</p>
+        <p class="story__notes">500ml × 2병 세트 · Clean / Lavender / Musk</p>
         <p style="margin-top:1.1rem;"><a href="product-hotel.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
       </div>
     </article>
 
-    <article class="story reveal" id="s-seongsu">
+    <article class="story reveal" id="s-seoul-forest">
       <figure class="story__img"><img src="assets/img/live/scene-seongsu.jpg" alt="성수 무화과 장면"  /></figure>
       <div class="story__text">
         <p class="story__no">03</p>
-        <h3 class="story__name">성수 무화과</h3>
-        <p class="story__copy">계획은 없었다. 골목을 잘못 들었고,
-        공장을 고친 카페 창가에 무화과 나무가 있었다.
-        그날 한 일은 그게 전부. 그래서 좋았다.</p>
-        <p class="story__sub">A wrong turn, a fig tree, a whole afternoon.</p>
-        <p class="story__notes">TOP 과육 · MID 우디 · BASE 앰버</p>
-        <p style="margin-top:1.1rem;"><a href="product-seongsu.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
+        <h3 class="story__name">서울숲의 아침</h3>
+        <p class="story__copy">아직 붐비기 전의 길. 젖은 잎과 나무 냄새가
+        하루보다 먼저 올라온다.
+        산책은 짧았는데 방 안의 공기는 오래 남았다.</p>
+        <p class="story__sub">A quiet walk before the city wakes.</p>
+        <p class="story__notes">500ml × 2병 세트 · Green Leaf / Hinoki / Musk</p>
+        <p style="margin-top:1.1rem;"><a href="product-seoul-forest.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
       </div>
     </article>
 
-    <article class="story story--flip reveal" id="s-tea">
-      <figure class="story__img"><img src="assets/img/live/scene-tea.jpg" alt="애프터눈 티 장면"  /></figure>
+    <article class="story story--flip reveal" id="s-seokchon">
+      <figure class="story__img"><img src="assets/img/live/scene-hangang.jpg" alt="석촌 체리우드 장면"  /></figure>
       <div class="story__text">
         <p class="story__no">04</p>
-        <h3 class="story__name">애프터눈 티 <span class="mock">COMING SOON</span></h3>
+        <h3 class="story__name">석촌 체리우드</h3>
+        <p class="story__copy">호수 가장자리로 걸어가면 유난히 붉은 빛이 남는다.
+        달콤함보다 조금 더 마른, 체리와 우드 사이의 오후.</p>
+        <p class="story__sub">Cherry light, dry wood, a long walk around water.</p>
+        <p class="story__notes">500ml × 2병 세트 · Cherry / Cedarwood / Musk</p>
+        <p style="margin-top:1.1rem;"><a href="product-seokchon-cherrywood.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
+      </div>
+    </article>
+
+    <article class="story reveal" id="s-cafe-flower-tea">
+      <figure class="story__img"><img src="assets/img/live/scene-tea.jpg" alt="카페 플라워티 장면"  /></figure>
+      <div class="story__text">
+        <p class="story__no">05</p>
+        <h3 class="story__name">카페 플라워티</h3>
         <p class="story__copy">해가 긴 날이었다. 할 일을 미루고 홍차를 우렸다.
         김이 올라오는 동안 아무 생각도 하지 않았다.
         가장 비생산적인 시간이, 가장 좋은 시간이었다.</p>
         <p class="story__sub">The least productive hour. The best one.</p>
-        <p class="story__notes">TOP 베르가못 · MID 홍차 · BASE 머스크</p>
-        <p style="margin-top:1.1rem;"><a href="product-tea.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
+        <p class="story__notes">500ml × 2병 세트 · Bergamot / Floral Tea / White Musk</p>
+        <p style="margin-top:1.1rem;"><a href="product-cafe-flower-tea.html" style="font-size:0.8rem;letter-spacing:0.08em;border-bottom:1px solid var(--ink);">이 향 보러 가기</a></p>
       </div>
     </article>
   </section>
 
   <!-- ★ NEXT SCENTS — 다음 장면들 (티저, 판매 아님)
        소스(읽기만): 03_products 향 후보 문서 4종에서 톱 10 선별 — 근거는 IMPROVE_LOG iter4. -->
-  <section class="next" id="next">
+  <details class="story-notebook"><summary>다음 장면 아이디어 살펴보기</summary><section class="next" id="next">
     <header class="sect-head reveal">
-      <h2>Next Scents</h2>
-      <p>다음 장면들 — 출시를 기다리는 열 개의 시간. <span class="next__tag">TEASER · 판매 제품 아님</span></p>
+      <h2>아직 병에 담지 않은 장면</h2>
+      <p>다음 향을 상상하며 모아둔 장면들. 출시가 확정된 제품은 아닙니다. <span class="next__tag">TEASER · 판매 제품 아님</span></p>
     </header>
     <ol class="next__list">
       <li class="next__item reveal">
-        <span class="next__no">05</span>
+        <span class="next__no">06</span>
         <div>
           <h3 class="next__name">첫눈 <span>First Snow · 初雪</span></h3>
           <p class="next__mood">첫눈 내린 아침, 세상이 잠깐 조용해진다.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">06</span>
+        <span class="next__no">07</span>
         <div>
           <h3 class="next__name">새벽 택시 <span>Dawn Taxi</span></h3>
           <p class="next__mood">밤을 다 쓰고 돌아가는 길, 창밖으로 흐르던 불빛.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">07</span>
+        <span class="next__no">08</span>
         <div>
           <h3 class="next__name">볕 든 북촌 <span>Bukchon Light · 陽の差す北村</span></h3>
           <p class="next__mood">볕이 드는 한옥 마당, 종이와 햇살의 냄새.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">08</span>
+        <span class="next__no">09</span>
         <div>
           <h3 class="next__name">을지로 밤 <span>Euljiro Night</span></h3>
           <p class="next__mood">네온 아래 금속의 골목, 어른이 된 척하던 밤.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">09</span>
+        <span class="next__no">10</span>
         <div>
           <h3 class="next__name">남산 숲길 <span>Namsan Green</span></h3>
           <p class="next__mood">약속도 없이 오른 아침 숲길, 젖은 풀냄새.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">10</span>
+        <span class="next__no">11</span>
         <div>
           <h3 class="next__name">솔숲 <span>Pine Woods · 松林</span></h3>
           <p class="next__mood">아침 솔숲, 맑게 깨어나는 푸른 공기.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">11</span>
+        <span class="next__no">12</span>
         <div>
           <h3 class="next__name">감나무 그늘 <span>Persimmon Shade · 干し柿</span></h3>
           <p class="next__mood">처마 끝 곶감처럼, 천천히 익어가던 가을.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">12</span>
+        <span class="next__no">13</span>
         <div>
           <h3 class="next__name">연남 그린 <span>Yeonnam Green</span></h3>
           <p class="next__mood">잔디밭에 앉아 통째로 써버린 오후.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">13</span>
+        <span class="next__no">14</span>
         <div>
           <h3 class="next__name">언두 <span>Undo</span></h3>
           <p class="next__mood">되돌릴 수 없어서, 잊히지 않는 밤을 위해.</p>
         </div>
       </li>
       <li class="next__item reveal">
-        <span class="next__no">14</span>
+        <span class="next__no">15</span>
         <div>
           <h3 class="next__name">서울 애프터 <span>Seoul After</span></h3>
           <p class="next__mood">하루가 끝난 뒤에도 남아 있는 도시의 기분.</p>
@@ -222,27 +236,21 @@
       </li>
     </ol>
     <p class="next__note reveal">위 열 가지는 아직 병에 담기지 않은 장면입니다. 어떤 시간부터 담을지, 천천히 고르는 중.</p>
-  </section>
+  </section></details>
 
   <!-- BRAND PHILOSOPHY -->
   <section class="about" id="about">
     <div class="about__inner reveal">
-      <p class="about__mark">DO NOT DRINK!</p>
-      <h2 class="about__title">쓸모없어 보이는 것을<br /><em>아름답게.</em></h2>
-      <p class="about__body">
-        디퓨저는 마실 수도, 먹을 수도, 입을 수도 없습니다.
-        방 안의 공기를 아주 조금 바꿀 뿐입니다.
-        USÉLESS SEOUL은 그 "아주 조금"을 만듭니다 —
-        효율로는 설명되지 않는 감각, 기억, 장면 같은 것들.
-        서울을 병에 담아 방에 두는 일. 쓸모는 없지만, 버릴 수 없는 것.
-      </p>
+      <p class="about__mark">THINGS THAT MATTER</p>
+      <h2 class="about__title">쓸모없어 보이지만,<br /><em>버릴 수 없는 것들.</em></h2>
+      <p class="about__body">좋은 향은 기본입니다. 여기에 여행의 기억과 선물하는 마음, 귀여운 물건을 매일 바라보는 즐거움을 더합니다. 필수는 아니지만 삶의 온도와 감정을 바꾸는 것들. 유슬레스서울은 그 마음을 향과 오브제로 남깁니다.</p>
     </div>
   </section>
 
   <section class="buy">
     <div class="buy__inner reveal">
-      <p class="buy__lead">아무것도 하지 않는 시간을 위해.</p>
-      <h2 class="buy__title">지금은 네 장면부터.</h2>
+      <p class="buy__lead">나에게, 혹은 떠오르는 누군가에게.</p>
+      <h2 class="buy__title">곁에 두고 싶은 향을 골라보세요.</h2>
       <a class="btn btn--solid btn--lg" href="shop.html">SHOP 바로가기</a>
     </div>
   </section>
@@ -252,9 +260,11 @@
   <footer class="foot">
     <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
     <p class="foot__brand">USÉLESS SEOUL</p>
-    <p class="foot__line">쓸모없어도 괜찮아.</p>
+    <p class="foot__line">일상에 온기를 더하는 것들.</p>
     <div class="foot__links">
       <a href="shop.html">SHOP</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
       <a href="archive.html">ARCHIVE</a>

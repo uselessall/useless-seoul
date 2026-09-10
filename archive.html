@@ -1,25 +1,65 @@
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html><html lang="ko"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ARCHIVE — USÉLESS SEOUL</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/bk01.svg" />
-  <meta name="description" content="USÉLESS SEOUL 장면 아카이브 — 드래그해서 탐색." />
+  <meta name="description" content="서울의 장면과 나의 작은 일상. 두 향 브랜드의 이미지와 이야기를 모았습니다.">
+  <meta property="og:type" content="website" />
   <meta property="og:title" content="ARCHIVE — USÉLESS SEOUL" />
-  <meta property="og:description" content="서울의 쓸모없는 장면들 — 드래그해서 탐색." />
+  <meta property="og:description" content="서울의 장면과 나의 작은 일상에서 만나는 두 향 브랜드의 이미지 아카이브." />
+  <meta property="og:image" content="https://uselessseoul.com/assets/img/canon/seoul-life-20260905.webp" />
   <meta property="og:url" content="https://uselessseoul.com/archive.html" />
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
-</head>
-<body class="archive-body">
-  <div class="wall" data-wall aria-label="장면 아카이브 — 드래그해서 탐색"></div>
-
-  <header class="wall__bar">
-    <a href="index.html" class="wall__logo">USÉLESS SEOUL</a>
-    <p class="wall__hint">DRAG TO EXPLORE</p>
-    <a href="index.html" class="wall__close" aria-label="닫기">CLOSE ×</a>
-  </header>
-
-  <script src="assets/js/drag-grid.js?v=3" defer></script>
-</body>
-</html>
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23111111' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- 폰트 CSS 비동기 로드(렌더블로킹 해소) — JS off는 noscript 폴백 -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  </noscript>
+  <link rel="stylesheet" href="assets/css/clean.css?v=20260910-public" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/store.js?v=20260910-public" defer></script>
+  <script src="assets/js/site.js?v=20260910-public" defer></script>
+  <link rel="stylesheet" href="assets/css/site-refine-20260906.css?v=20260910-public">
+</head><body class="refined-store"><a class="skip" href="#main">본문 바로가기</a>  <header class="nav" id="nav">
+    <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
+    <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
+    <nav class="nav__menu" id="navMenu" aria-label="주요 내비게이션">
+      <a href="shop.html">SHOP</a>
+      <a href="company.html">ABOUT US</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
+      <a href="story.html">STORY</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav__right">
+      <a href="login.html" class="nav__auth" id="navAuth">LOGIN</a>
+      <a href="cart.html" class="nav__cart">CART <span class="cart-count" data-cart-count>0</span></a>
+      <label for="navToggle" class="nav__burger" aria-label="메뉴 열기"><span></span><span></span></label>
+    </div>
+  </header><main id="main" class="page archive-gallery"><header class="page-head"><p class="refine-kicker">SCENE ARCHIVE</p><h1>곁에 두고 싶은 장면들.</h1><p>서울에서 만난 순간과 나의 작은 일상. 마음이 가는 사진을 누르면 그 향과 브랜드 이야기로 이어집니다.</p></header><div class="archive-grid"><a class="archive-card" href="product-seongsu.html"><img src="assets/img/canon/seoul-life-20260905.webp" alt="USÉLESS · 성수의 오후" loading="lazy"><span>USÉLESS · 성수의 오후<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="useless.html"><img src="assets/img/canon/studio-grid-20260905.webp" alt="USÉLESS · 유리와 빛" loading="lazy"><span>USÉLESS · 유리와 빛<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="product-amaimu.html"><img src="assets/img/canon/crayon-desk-20260905.webp" alt="amaimü · 크레용이 놓인 책상" loading="lazy"><span>amaimü · 크레용이 놓인 책상<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="amaimu.html"><img src="assets/img/canon/amaimu-desk.jpg" alt="amaimü · 나의 작은 일상" loading="lazy"><span>amaimü · 나의 작은 일상<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="product-hotel.html"><img src="assets/img/live/scene-hotel.jpg" alt="호텔 블랭킷 · 쉬어가는 시간" loading="lazy"><span>호텔 블랭킷 · 쉬어가는 시간<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="product-seoul-forest.html"><img src="assets/img/live/scene-seongsu.jpg" alt="서울숲의 아침 · 걷고 싶은 길" loading="lazy"><span>서울숲의 아침 · 걷고 싶은 길<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="product-seokchon-cherrywood.html"><img src="assets/img/live/product-hangang.jpg" alt="석촌 체리우드 · 함께한 계절" loading="lazy"><span>석촌 체리우드 · 함께한 계절<b aria-hidden="true">↗</b></span></a><a class="archive-card" href="product-cafe-flower-tea.html"><img src="assets/img/live/scene-tea.jpg" alt="카페 플라워티 · 머물고 싶은 오후" loading="lazy"><span>카페 플라워티 · 머물고 싶은 오후<b aria-hidden="true">↗</b></span></a></div><a class="refine-link" href="story.html">이야기 이어 읽기 →</a></main>  <footer class="foot">
+    <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
+    <p class="foot__brand">USÉLESS SEOUL</p>
+    <p class="foot__line">일상에 온기를 더하는 것들.</p>
+    <div class="foot__links">
+      <a href="shop.html">SHOP</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
+      <a href="story.html">STORY</a>
+      <a href="faq.html">FAQ</a>
+      <a href="archive.html">ARCHIVE</a>
+      <a href="https://www.instagram.com/useless_seoul/" target="_blank" rel="noopener">@useless_seoul</a>
+    </div>
+    <div class="foot__biz">
+      <p>유슬레스서울 · 대표 백승준 · 사업자등록번호 150-19-02571</p>
+      <p>서울특별시 광진구 능동로3길 63, 201-S73호 (자양동) · ops@uselessseoul.com</p>
+      <p>통신판매업 신고: 절차 진행 중 (완료 시 게시) · <a href="terms.html">이용약관</a> · <a href="privacy.html">개인정보처리방침</a></p>
+    </div>
+    <p class="foot__legal">© 2026 USÉLESS SEOUL · 시제품 단계 — 표시된 가격·사양은 목업이며 변경될 수 있습니다.</p>
+  </footer></body></html>

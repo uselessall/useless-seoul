@@ -24,22 +24,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </noscript>
-  <link rel="stylesheet" href="assets/css/clean.css?v=55" />
+  <link rel="stylesheet" href="assets/css/clean.css?v=20260910-public" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/store.js?v=38" defer></script>
-  <script src="assets/js/site.js?v=38" defer></script>
+  <script src="assets/js/store.js?v=20260910-public" defer></script>
+  <script src="assets/js/site.js?v=20260910-public" defer></script>
+  <link rel="stylesheet" href="assets/css/site-refine-20260906.css?v=20260910-public">
 </head>
-<body>
+<body class="refined-store">
 
   <a class="skip" href="#main">본문 바로가기</a>
 
   <header class="nav" id="nav">
     <input type="checkbox" id="navToggle" class="nav__check" aria-label="메뉴 열기/닫기" />
     <a href="index.html" class="nav__brand">USÉLESS SEOUL</a>
-    <nav class="nav__menu" id="navMenu">
+    <nav class="nav__menu" id="navMenu" aria-label="주요 내비게이션">
       <a href="shop.html">SHOP</a>
+      <a href="company.html">ABOUT US</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
-      <a href="faq.html" class="on">FAQ</a>
+      <a href="faq.html" class="on" aria-current="page">FAQ</a>
     </nav>
     <div class="nav__right">
       <a href="login.html" class="nav__auth" id="navAuth">LOGIN</a>
@@ -51,14 +55,16 @@
   <main id="main" tabindex="-1" class="page page--narrow">
     <header class="page-head reveal">
       <h1>FAQ</h1>
-      <p>배송·교환·환불·사용법. 온라인 스토어는 오픈 준비 중이며, 아래 정책은 오픈 시 확정 안내됩니다.</p>
+      <p>두 브랜드의 차이부터 향을 고르는 방법, 제품 사용과 주문 안내까지. 궁금한 내용부터 확인해 보세요.</p>
     </header>
 
+    <nav class="help-nav" aria-label="도움말 주제"><a href="#choosing">향 고르기</a><a href="#delivery">배송</a><a href="#returns">교환·환불</a><a href="#use">사용법</a><a href="#payment">주문</a></nav>
     <div class="faq reveal" style="margin-top:0;max-width:none;padding:0;">
-      <h2 class="faq__title">배송</h2>
+      <h2 class="faq__title" id="choosing">브랜드 · 향 고르기</h2><details class="faq__item"><summary>USÉLESS와 amaimü는 어떻게 다른가요?</summary><p>유슬레스서울이 만든 서로 다른 두 향 브랜드입니다. USÉLESS는 서울 여행의 기억과 장소의 이야기를, amaimü는 귀여워서 곁에 두고 싶은 물건과 나의 작은 일상을 담습니다. <a href="story.html#brand-stories">두 브랜드 이야기 보기 →</a></p></details><details class="faq__item"><summary>둘 다 무화과 향인데, 무엇을 기준으로 고르면 좋을까요?</summary><p>서울의 장면을 기억하거나 이야기 있는 선물을 찾는다면 USÉLESS 성수 무화과를, 책상에 두는 작은 오브제와 나를 위한 선물을 찾는다면 amaimü Miss Fig를 살펴보세요. 브랜드의 분위기와 향 자체의 차이는 다를 수 있으니, 각 상품의 향 설명도 함께 확인해 주세요. <a href="product-seongsu.html">성수 무화과</a> · <a href="product-amaimu.html">Miss Fig</a></p></details><details class="faq__item"><summary>선물로 고르고 싶어요.</summary><p>서울을 함께 여행한 사람에게는 장소의 이야기를, 친구에게는 평소 좋아하는 색과 책상 분위기를 떠올려보세요. 선물 포장과 동봉 구성은 상품별 안내에서 확인해 주세요.</p></details><details class="faq__item"><summary>공간을 꾸미는 소품으로도 어울릴까요?</summary><p>USÉLESS는 투명 유리와 블랙의 단정한 인상, amaimü는 핑크·실버와 컬러 레터링의 즐거움을 제안합니다. 집의 선반, 카페의 한편, 내 책상에 놓인 모습을 각 브랜드 페이지에서 살펴보세요.</p></details><details class="faq__item"><summary>지금 실제로 구매할 수 있나요?</summary><p>현재 사이트는 판매 오픈 준비 중입니다. 표시된 가격과 주문 화면은 검토용이며 실제 결제·배송은 진행되지 않습니다. 판매 일정과 최종 구성은 확정 후 안내합니다.</p></details>
+      <h2 class="faq__title" id="delivery" style="margin-top:2.6rem;">배송</h2>
       <details class="faq__item">
         <summary>배송은 얼마나 걸리나요?</summary>
-        <p>스토어 오픈 후 결제일 기준 영업일 2–3일 내 출고 예정입니다. (오픈 준비 중 — 확정 시 안내)</p>
+        <p>현재 판매 오픈을 준비 중입니다. 출고 일정과 예상 배송 기간은 판매 시작 전에 안내합니다.</p>
       </details>
       <details class="faq__item">
         <summary>배송비는 얼마인가요?</summary>
@@ -73,10 +79,10 @@
         <p>출고 전이라면 변경 가능하도록 준비 중입니다. 출고 후에는 변경이 어렵습니다. 접수 창구는 스토어 오픈 시 안내합니다.</p>
       </details>
 
-      <h2 class="faq__title" style="margin-top:2.6rem;">교환 · 환불</h2>
+      <h2 class="faq__title" id="returns" style="margin-top:2.6rem;">교환 · 환불</h2>
       <details class="faq__item">
         <summary>교환·환불은 어떻게 하나요?</summary>
-        <p>미개봉 제품은 수령 후 관련 법령이 정한 기간 내 교환·환불이 가능하도록 준비 중입니다. 상세 절차와 왕복 배송비 기준은 스토어 오픈 시 확정해 안내합니다. (전문가 검토 필요 — 전자상거래법 기준)</p>
+        <p>미개봉 제품은 수령 후 관련 법령이 정한 기간 내 교환·환불이 가능하도록 준비 중입니다. 상세 절차와 왕복 배송비 기준은 스토어 오픈 시 확정해 안내합니다.</p>
       </details>
       <details class="faq__item">
         <summary>배송 중 파손됐어요.</summary>
@@ -84,17 +90,17 @@
       </details>
       <details class="faq__item">
         <summary>개봉했는데 향이 기대와 달라요. 환불되나요?</summary>
-        <p>향 제품 특성상 개봉·사용 후에는 단순 변심에 의한 교환·환불이 제한될 수 있습니다. 구체적 기준은 관련 법령에 맞춰 스토어 오픈 시 확정해 안내합니다. (전문가 검토 필요 — 전자상거래법 기준)</p>
+        <p>향 제품 특성상 개봉·사용 후에는 단순 변심에 의한 교환·환불이 제한될 수 있습니다. 구체적 기준은 관련 법령에 맞춰 스토어 오픈 시 확정해 안내합니다.</p>
       </details>
       <details class="faq__item">
         <summary>환불은 언제 입금되나요?</summary>
-        <p>[확인필요] — 무통장입금 주문의 환불 처리 기한과 절차는 스토어 오픈 시 확정해 안내합니다.</p>
+        <p>환불 처리 기한과 절차는 판매 시작 전에 안내합니다. 현재는 결제와 입금을 받지 않습니다.</p>
       </details>
 
-      <h2 class="faq__title" style="margin-top:2.6rem;">제품 · 사용법</h2>
+      <h2 class="faq__title" id="use" style="margin-top:2.6rem;">제품 · 사용법</h2>
       <details class="faq__item">
         <summary>발향 기간은 얼마나 가나요?</summary>
-        <p>200ml 기준 [확인필요]. 시제품 테스트 후 확정해 안내합니다.</p>
+        <p>발향 지속 기간은 제품별 테스트를 거쳐 판매 시작 전에 안내합니다.</p>
       </details>
       <details class="faq__item">
         <summary>향을 더 진하게 / 약하게 조절할 수 있나요?</summary>
@@ -102,11 +108,11 @@
       </details>
       <details class="faq__item">
         <summary>리드 스틱은 몇 개 들어있나요?</summary>
-        <p>블랙 리드 스틱 8가닥이 기본 구성으로 포함됩니다.</p>
+        <p>리드의 색상과 개수는 브랜드·제품별로 다를 수 있습니다. 선택한 상품 페이지의 최종 구성 안내를 확인해 주세요.</p>
       </details>
       <details class="faq__item">
         <summary>어떤 공간에 두면 좋나요?</summary>
-        <p>전 제품 200ml — 침실·현관·책상 같은 가까운 공간에 권합니다. 권장 발향 면적 수치는 [확인필요] — 시제품 테스트 후 확정해 안내합니다.</p>
+        <p>선반·테이블·책상처럼 향과 오브제를 즐기고 싶은 자리를 떠올려보세요. 용량은 제품별로 다르며, 권장 사용 공간과 발향 정보는 각 상품의 최종 안내를 확인해 주세요.</p>
       </details>
       <details class="faq__item">
         <summary>보관할 때 주의할 점이 있나요?</summary>
@@ -121,28 +127,31 @@
         <p>네. 병이 아무리 마실 것처럼 보여도 안 됩니다. 그래서 라벨에 크게 적어뒀습니다 — DO NOT DRINK. 어린이와 반려동물의 손이 닿지 않는 곳에 두세요.</p>
       </details>
 
-      <h2 class="faq__title" style="margin-top:2.6rem;">주문 · 결제</h2>
+      <h2 class="faq__title" id="payment" style="margin-top:2.6rem;">주문 · 결제</h2>
       <details class="faq__item">
         <summary>지금 주문하면 실제로 결제되나요?</summary>
-        <p>아니요. 현재 이 사이트의 장바구니·주문은 목업(데모)입니다. 결제는 오픈 준비 중이며, 실제 판매 시작 시 공지합니다.</p>
+        <p>아니요. 주문서를 저장해도 실제 결제와 배송은 진행되지 않습니다. 입력한 회원·주문 정보는 저장될 수 있으며, 판매 시작 시 별도로 안내합니다.</p>
       </details>
       <details class="faq__item">
         <summary>결제 수단은 무엇을 지원하나요?</summary>
-        <p>오픈 초기에는 무통장입금으로 시작할 예정입니다. 입금 계좌는 우리은행 1002-454-250728 예금주 백승준입니다. 카드 등 다른 결제 수단은 순차 도입 예정입니다.</p>
+        <p>결제 수단은 판매 오픈 시 안내합니다. 현재는 입금을 받지 않으며, 사이트에서 실제 결제되지 않습니다.</p>
       </details>
       <details class="faq__item">
         <summary>회원가입 없이 주문할 수 있나요?</summary>
-        <p>현재는 주문 조회를 위해 로그인 후 주문하는 구조입니다. 회원 정보는 Supabase Auth에, 주문자·배송 정보는 주문 조회와 입금 확인을 위해 Supabase DB에 저장됩니다.</p>
+        <p>현재 주문서 저장과 주문 내역 조회에는 로그인이 필요합니다. 회원·주문 정보의 처리 내용은 <a href="privacy.html">개인정보처리방침</a>에서 확인해 주세요.</p>
       </details>
     </div>
+    <section class="help-contact"><h2>찾는 답이 없나요?</h2><p>제품 선택이나 브랜드에 관해 궁금한 내용을 알려주세요.</p><a class="refine-link" href="company.html#contact">문의하기 ↗</a></section>
   </main>
 
   <footer class="foot">
     <img class="foot__mark" src="assets/img/bk01.svg" alt="" width="54" height="54" loading="lazy" />
     <p class="foot__brand">USÉLESS SEOUL</p>
-    <p class="foot__line">쓸모없어도 괜찮아.</p>
+    <p class="foot__line">일상에 온기를 더하는 것들.</p>
     <div class="foot__links">
       <a href="shop.html">SHOP</a>
+      <a href="useless.html">USÉLESS</a>
+      <a href="amaimu.html">amaimü</a>
       <a href="story.html">STORY</a>
       <a href="faq.html">FAQ</a>
       <a href="archive.html">ARCHIVE</a>
