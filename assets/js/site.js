@@ -1,6 +1,6 @@
 /* USÉLESS SEOUL — 공통 스크립트 (내비 + reveal + 장바구니 + 회원/주문 UI)
    데이터 접근은 전부 window.Store 어댑터 경유 (assets/js/store.js — 현재 StoreSupabase 구현체).
-   실결제 없음 — 무통장입금 mock. 가격은 전부 표시용. */
+   실결제 없음 — 무통장입금 mock. 가격은 전부 참고 가격. */
 
 let PRODUCT_MAP = {}; // Store.getProducts() 캐시 (id → product)
 const priceNumber = (v) => {
@@ -104,7 +104,7 @@ function renderProductGrids(products) {
         <p class="product__hook">${esc(p.hook)}</p>
         <p class="product__notes">${esc(p.notes)}</p>
         <p class="product__spec">${esc(p.spec)}</p>
-        <p class="product__price">${onSale ? `${won(p.price)} <span class="mock">표시용</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
+        <p class="product__price">${onSale ? `${won(p.price)} <span class="mock">참고 가격</span>` : `출시 예정 <span class="mock">COMING SOON</span>`}</p>
         ${detailUrl
           ? `<a class="product__add product__detail" href="${esc(detailUrl)}">${esc(p.detailCta || "상세페이지 바로가기")}</a>`
           : onSale
@@ -174,7 +174,7 @@ function hydrateProductPage() {
   set("spec", p.spec);
   const priceEl = root.querySelector('[data-pd="price"]');
   if (priceEl) priceEl.innerHTML = onSale
-    ? `${won(p.price)} <span class="mock">표시용</span>`
+    ? `${won(p.price)} <span class="mock">참고 가격</span>`
     : `출시 예정 <span class="mock">COMING SOON</span>`;
   if (!onSale) {
     /* 출시 예정 상품: 담기·바로구매 전부 비활성 (이 카드만 예외적으로 허용되는 비활성) */
@@ -244,7 +244,7 @@ function renderCartPage() {
         <p class="cart__code">${esc(p.brandLabel || p.brand)} · ${esc(p.code)}</p>
         <a class="cart__name" href="${url}">${esc(p.name)}</a>
         <p class="cart__spec">${esc(p.spec)}</p>
-        <p class="cart__unit">${won(p.price)} <span class="mock">표시용</span></p>
+        <p class="cart__unit">${won(p.price)} <span class="mock">참고 가격</span></p>
       </div>
       <div class="cart__qty">
       <button type="button" data-dec="${esc(it.id)}" aria-label="수량 줄이기">−</button>

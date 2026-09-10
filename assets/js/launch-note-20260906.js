@@ -36,7 +36,7 @@
   const ready = typeof config.endpoint === 'string' && /^https:\/\//.test(config.endpoint) && config.turnstileSiteKey;
   if (!ready) return; // Closed until a real receiver is configured; never simulate a signup.
   button.innerHTML = '제품 출시 알림 받기 <span aria-hidden="true">↗</span>';
-  message('신청 연결 확인 중…');
+  message('잠시만 기다려 주세요…');
   const resetCaptcha = () => {
     token = ''; button.disabled = true;
     if (widget !== undefined) window.turnstile?.reset(widget);
