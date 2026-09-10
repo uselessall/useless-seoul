@@ -67,3 +67,6 @@
  .refined-store { scroll-behavior: auto; }
  .refined-store * { animation: none !important; transition: none !important; }
 }
+
+/* Story photographs retain the color of each Seoul scene. */
+#stories .story__img img { filter: none; }
